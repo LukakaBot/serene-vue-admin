@@ -1,0 +1,33 @@
+/*---滚动条默认显示样式--*/
+::-webkit-scrollbar-thumb {
+    background-color: #00000040;
+    border-radius: 8px;
+}
+
+/*---鼠标点击滚动条显示样式--*/
+::-webkit-scrollbar-thumb:hover {
+    background-color: #00000080;
+    border-radius: 8px;
+}
+
+/* --处理滚动条左右都存在的时候滚动到底部右下角出现白色小块的问题---- */
+::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0);
+}
+
+/*---滚动条大小--*/
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/*---滚动框背景样式--*/
+::-webkit-scrollbar-track-piece {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: e6e6e6 transparent;
+}
