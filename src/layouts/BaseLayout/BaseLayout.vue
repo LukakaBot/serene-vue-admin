@@ -18,5 +18,4 @@ import BaseBreadcrumb from './components/BaseBreadcrumb.vue';
 import BaseContent from './components/BaseContent.vue';
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

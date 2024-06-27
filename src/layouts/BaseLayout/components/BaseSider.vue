@@ -4,11 +4,12 @@
     <div class="logo">
       <span v-show="!collapsed">Naive admin</span>
     </div>
-
+    <n-menu :options="menus" />
   </n-layout-sider>
 </template>
 
 <script setup lang="ts">
+import type { MenuOption } from 'naive-ui';
 import { RouteRecordRaw } from 'vue-router';
 import router from '@/router/index';
 import { useRouteStore } from '@/store';
@@ -18,11 +19,6 @@ const routeStore = useRouteStore();
 
 /** 侧边栏折叠状态 */
 const collapsed = ref(false);
-
-/** 菜单点击事件 */
-function handleClickMenuItem(path: string) {
-  router.push(path);
-}
 
 /** 切换侧边栏 */
 function handleUpdateCollapsed(value: boolean) {
@@ -38,11 +34,27 @@ function filterRoute(route: RouteRecordRaw) {
   return true;
 }
 
+/** 渲染菜单 */
+function renderMenu(route: RouteRecordRaw): MenuOption {
+  const { path, name, meta, children } = route as Route.RouteItem;
+  return {
+    key: path,
+    label: name,
+    icon: meta?.icon ? () => h() : undefined,
+    children: children?.map(renderMenu)
+  };
+}
+
 /** 过滤后的路由列表 */
-const filterRouteList = computed(() => routeStore.routes.filter(filterRoute));
+const filterRoutes = computed(() => routeStore.routes.filter(filterRoute));
 
 /** 当前路由 */
 const currentRoute = computed(() => routeStore.currentRoute);
+
+const menus = computed(() => {
+  console.log(routeStore.routes)
+  // const routes
+})
 </script>
 
 <style scoped>

@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/pages/login/index.vue'),
+    component: () => import('@/views/login/index.vue'),
     meta: { hidden: true },
   },
 ];
@@ -25,7 +25,7 @@ const router = createRouter({
     return { top: 0 };
   },
 });
-console.log(router)
+
 export async function mountRoute(app: App) {
   app.use(router);
   await initRouteGuard(router, title);

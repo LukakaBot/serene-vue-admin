@@ -27,12 +27,12 @@ const useRouteStore = defineStore('route-store', {
             {
               path: '/component/button',
               name: 'button',
-              component: () => import('@/pages/component/button/index.vue'),
+              component: () => import('@/views/component/button/index.vue'),
             },
             {
               path: '/component/table',
               name: 'table',
-              component: () => import('@/pages/component/table/index.vue'),
+              component: () => import('@/views/component/table/index.vue'),
             },
           ]
         }

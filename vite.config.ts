@@ -4,6 +4,8 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig((({ mode }) => {
@@ -33,6 +35,10 @@ export default defineConfig((({ mode }) => {
         dts: 'src/types/components.d.ts',
         resolvers: [NaiveUiResolver()],
       }),
+      createSvgIconsPlugin({
+        iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
+        symbolId: 'svg-[name]',
+      })
     ],
     resolve: {
       alias: {
