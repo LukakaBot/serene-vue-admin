@@ -1,9 +1,9 @@
 <template>
-  <n-layout-content>
+  <RouterView v-slot="{ Component }">
     <Transition name="slide-fade" mode="out-in">
-      <router-view />
+      <component :is="Component" />
     </Transition>
-  </n-layout-content>
+  </RouterView>
 </template>
 
 <script setup lang="ts">
@@ -12,11 +12,11 @@
 
 <style scoped>
 .slide-fade-enter-active {
-  transition: all 0.8s ease-out;
+  transition: all 0.4s ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,

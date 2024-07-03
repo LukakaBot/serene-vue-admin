@@ -23,16 +23,31 @@ const useRouteStore = defineStore('route-store', {
           name: '组件',
           component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
           redirect: '/component/button',
+          meta: { icon: 'streamline:module-puzzle-3' },
           children: [
             {
               path: '/component/button',
-              name: 'button',
+              name: '按钮',
               component: () => import('@/views/component/button/index.vue'),
             },
             {
               path: '/component/table',
-              name: 'table',
+              name: '表格',
               component: () => import('@/views/component/table/index.vue'),
+            },
+          ]
+        },
+        {
+          path: '/form',
+          name: '表单',
+          component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
+          redirect: '/form/modalForm',
+          meta: { icon: 'ep:list' },
+          children: [
+            {
+              path: '/form/modalForm',
+              name: '弹窗表单',
+              component: () => import('@/views/form/modalForm/index.vue'),
             },
           ]
         }
@@ -42,6 +57,8 @@ const useRouteStore = defineStore('route-store', {
     /** 将路由数组添加到路由实例中 */
     handleAddDynamicRoute(routes: RouteRecordRaw[]): void {
       routes.forEach(route => router.addRoute(route));
+      console.log(routes);
+
       this.authRoutes = routes;
       this.hasAuthRoute = true;
       this.routes = [...router.options.routes, ...routes];

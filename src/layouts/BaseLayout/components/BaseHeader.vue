@@ -6,28 +6,46 @@
         <template #checked> dark </template>
         <template #unchecked> light </template>
       </n-switch>
-
-      <n-popover position="bottom" trigger="click">
-        <template #trigger>
+      <n-dropdown trigger="hover" @select="avatarSelect" :options="avatarOptions">
+        <div class="flex items-center">
           <n-avatar :style="{ backgroundColor: '#14a9f8' }">Naive</n-avatar>
-        </template>
-        <n-button text @click="handleLogout">退出登录</n-button>
-      </n-popover>
+        </div>
+      </n-dropdown>
+      <BaseIcon icon="ep:setting" :size="20" />
     </n-space>
   </n-layout-header>
 </template>
 
 <script setup lang="ts">
-import { darkTheme } from 'naive-ui';
 import router from '@/router';
+import { useThemeStore } from '@/store';
+
+/** 主题商店 */
+const themeStore = useThemeStore();
 
 const isDark = ref(false);
 
+const avatarOptions = [
+  { key: '1', label: '个人设置', },
+  { key: '2', label: '退出登录', },
+];
+
 function handleUpdateSwitch(value: boolean) {
-  console.log(value);
-  console.log(darkTheme);
-  // value ? document.body.setAttribute('arco-theme', 'dark') : document.body.removeAttribute('arco-theme');
+  themeStore.setDarkTheme(value);
 }
+
+function avatarSelect(key: string) {
+  switch (key) {
+    case '1': {
+      router.push({ name: 'Setting' });
+      break;
+    }
+    case '2': {
+      handleLogout();
+      break;
+    }
+  }
+};
 
 /** 退出登录事件 */
 function handleLogout() {

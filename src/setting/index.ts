@@ -2,8 +2,10 @@ import { createDiscreteApi } from 'naive-ui'
 
 /** 全局属性挂载 */
 export function mountSetting() {
-  const { message } = createDiscreteApi(['message']);
+  const { message, loadingBar } = createDiscreteApi(['message', 'loadingBar']);
 
-  /** 全局挂载消息提示 */
+  // 消息提示
   window.$message = message;
+  // 加载条
+  window.$loadingBar = loadingBar;
 }
