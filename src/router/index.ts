@@ -16,6 +16,18 @@ const routes = [
     component: () => import('@/views/login/index.vue'),
     meta: { hidden: true },
   },
+  {
+    path: '/403',
+    name: '403',
+    component: () => import('@/views/exception/403/index.vue'),
+    meta: { hidden: true },
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/exception/404/index.vue'),
+    meta: { hidden: true },
+  },
 ];
 
 const router = createRouter({
@@ -28,7 +40,7 @@ const router = createRouter({
 
 export async function mountRoute(app: App) {
   app.use(router);
-  await initRouteGuard(router, title);
+  initRouteGuard(router, title);
   await router.isReady();
 }
 

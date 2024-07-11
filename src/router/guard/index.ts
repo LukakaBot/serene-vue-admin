@@ -7,6 +7,7 @@ async function checkRouteAuth(to: RouteLocationNormalized, _from: RouteLocationN
   const { hasAuthRoute, initAuthRoute } = useRouteStore();
   const { routeConfig } = appConfig;
   const isLogin = true;
+
   // 检测是否存在权限路由
   if (!hasAuthRoute) {
     // 没有权限路由，则进行登录检测
@@ -38,6 +39,8 @@ export function initRouteGuard(router: Router, title: string) {
 
   /** 路由前置守卫 */
   router.beforeEach(async (to, from, next) => {
+    // 打开加载条
+    window.$loadingBar?.start();
     // 路由前置守卫权限处理
     // 检测是否在白名单中
     const { routeWhitelist } = appConfig;
@@ -56,5 +59,7 @@ export function initRouteGuard(router: Router, title: string) {
     useTitle(`${to.name as string} - ${title}`);
     // 记录当前路由
     setCurrentRoute();
+    // 关闭加载条
+    window.$loadingBar?.finish();
   });
 }

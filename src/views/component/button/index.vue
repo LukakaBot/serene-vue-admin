@@ -1,12 +1,11 @@
 <template>
-  <div>button
-    <BaseIcon icon="material-symbols-light:10mp-sharp" color="#f87171" />
-    <BaseIcon icon="icon-bx-game"  />
+  <div class="base-container">
+    <NormalBtn />
   </div>
 </template>
 
 <script setup lang="ts">
-
+import NormalBtn from './components/NormalBtn.vue';
 </script>
 
 <style scoped></style>

@@ -54,7 +54,7 @@ async function handleSubmit() {
 function resetFormData() {
   formData.value = {
     username: 'admin',
-    password: '12345'
+    password: '123456'
   };
 }
 
