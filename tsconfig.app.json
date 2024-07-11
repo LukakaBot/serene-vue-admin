@@ -43,5 +43,5 @@
     },
     "typeRoots": ["./node_modules/@types/", "./node_modules", "src/types"] // 指定包含类型声明的文件或文件夹
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"]
 }
