@@ -1,12 +1,12 @@
 <template>
   <div>
     <template v-if="isLocalIcon">
-      <svg :width="size" :height="size" aria-hidden="true">
-        <use :xlink:href="iconName" :fill="color" />
+      <svg :style="iconStyle" :width="size" :height="size" aria-hidden="true">
+        <use :xlink:href="iconName" fill="currentColor" />
       </svg>
     </template>
     <template v-else>
-      <Icon :icon="icon" :width="size" :height="size" />
+      <Icon :icon="icon" :width="size" :height="size" :color="color" />
     </template>
   </div>
 </template>
@@ -29,6 +29,12 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const iconName = computed(() => `#svg-${props.icon}`);
+
+const iconStyle = computed(() => {
+  return {
+    color: props.color,
+  };
+});
 
 /** 是否渲染本地图标 */
 const isLocalIcon = computed(() => props.icon.startsWith('icon-'));

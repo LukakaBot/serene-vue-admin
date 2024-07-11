@@ -4,7 +4,7 @@ import './styles/index'
 import store from '@/store/index'
 import { mountSetting } from '@/setting'
 import { mountRoute } from '@/router'
-
+import 'virtual:svg-icons-register'
 
 async function mountApp() {
   const app = createApp(App);
