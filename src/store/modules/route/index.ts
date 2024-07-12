@@ -19,11 +19,26 @@ const useRouteStore = defineStore('route-store', {
     async initDynamicRoute(): Promise<void> {
       const dynamicRoutes = [
         {
+          path: '/dashboard',
+          name: 'Dashboard',
+          component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
+          redirect: '/dashboard/console',
+          meta: { icon: 'ant-design:dashboard-outlined' },
+          // meta: { icon: 'tabler:dashboard' },
+          children: [
+            {
+              path: '/dashboard/console',
+              name: '主控台',
+              component: () => import('@/views/dashboard/console/index.vue'),
+            },
+          ]
+        },
+        {
           path: '/component',
           name: '组件',
           component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
           redirect: '/component/button',
-          meta: { icon: 'streamline:module-puzzle-3' },
+          meta: { icon: 'bxs:component' },
           children: [
             {
               path: '/component/button',

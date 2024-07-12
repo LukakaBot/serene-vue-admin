@@ -1,5 +1,5 @@
 <template>
-  <n-breadcrumb class="px-24px py-16px bg-red">
+  <n-breadcrumb class="p-10px">
     <n-breadcrumb-item v-for="(item, index) in pathList" :key="index">
       {{ item }}
     </n-breadcrumb-item>
@@ -7,14 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRouteStore } from '@/store';
+import router from '@/router';
 
-const routeStore = useRouteStore();
-
-const pathList = computed(() => {
-  let path = routeStore.currentRoute.fullPath.slice(1);
-  return path.split('/');
-});
+const pathList = computed(() => router.currentRoute.value.matched.map(route => route.name));
 </script>
 
 <style scoped></style>

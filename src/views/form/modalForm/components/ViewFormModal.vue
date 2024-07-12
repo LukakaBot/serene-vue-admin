@@ -1,10 +1,7 @@
 <template>
   <BaseModal :show="show" title="查看表单" @close="closeModal">
     <n-descriptions label-placement="left" bordered>
-      <n-descriptions-item>
-        <template #label>
-          Breakfast
-        </template>
+      <n-descriptions-item label="早餐">
         苹果
       </n-descriptions-item>
       <n-descriptions-item label="午餐">
