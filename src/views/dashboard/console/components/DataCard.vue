@@ -165,7 +165,7 @@ const saleroom = ref<any>({});
 
 const orderLarge = ref<any>({});
 
-const volume = ref(<any>{});
+const volume = ref<any>({});
 
 function fetchData(): Promise<DataCardItem> {
   const data = {

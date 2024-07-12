@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-container overflow-y-scroll">
+  <div class="custom-container">
     <DataCard />
     <NavigationCard />
     <ChartCard />
@@ -20,5 +20,6 @@ import ChartCard from './components/ChartCard.vue';
   padding: 8px 12px;
   height: calc(100% - 20px);
   border-radius: 4px;
+  overflow-y: scroll;
 }
 </style>
