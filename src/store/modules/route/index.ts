@@ -65,14 +65,32 @@ const useRouteStore = defineStore('route-store', {
               component: () => import('@/views/form/modalForm/index.vue'),
             },
           ]
-        }
+        },
+        {
+          path: '/map',
+          name: '地图',
+          component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
+          redirect: '/map/amap',
+          meta: { icon: 'ep:map-location' },
+          children: [
+            {
+              path: '/map/amap',
+              name: '高德地图',
+              component: () => import('@/views/map/amap/index.vue'),
+            },
+            {
+              path: '/map/tmap',
+              name: '腾讯地图',
+              component: () => import('@/views/map/tmap/index.vue'),
+            },
+          ]
+        },
       ];
       this.handleAddDynamicRoute(dynamicRoutes);
     },
     /** 将路由数组添加到路由实例中 */
     handleAddDynamicRoute(routes: RouteRecordRaw[]): void {
       routes.forEach(route => router.addRoute(route));
-      console.log(routes);
 
       this.authRoutes = routes;
       this.hasAuthRoute = true;

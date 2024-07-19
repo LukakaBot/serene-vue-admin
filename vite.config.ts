@@ -40,7 +40,7 @@ export default defineConfig((({ mode }) => {
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
         symbolId: 'svg-[name]',
       }),
-      // vueDevTools(),
+      vueDevTools(),
     ],
     resolve: {
       alias: {

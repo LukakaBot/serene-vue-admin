@@ -10,8 +10,8 @@
 type Props = {
   prefix?: string;
   suffix?: string;
-  size: string;
-  showSeparator: boolean;
+  size?: string;
+  showSeparator?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {

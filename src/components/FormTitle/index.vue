@@ -7,7 +7,7 @@ type Props = {
   /** 标题 */
   title: string;
   /** 标题样式 */
-  titleStyle: Record<string, string>;
+  titleStyle?: Record<string, string>;
 };
 
 withDefaults(defineProps<Props>(), {

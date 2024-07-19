@@ -15,8 +15,8 @@ import TrendChart from './TrendChart.vue';
 import VisitsChart from './VisitsChart.vue';
 
 const tabList = ref([
-  { name: 'trend', tab: '流量趋势', component: TrendChart },
-  { name: 'visits', tab: '访问量', component: VisitsChart },
+  { name: 'trend', tab: '流量趋势', component: shallowRef(TrendChart) },
+  { name: 'visits', tab: '访问量', component: shallowRef(VisitsChart) },
 ]);
 </script>
 

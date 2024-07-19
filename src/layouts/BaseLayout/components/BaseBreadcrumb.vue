@@ -1,5 +1,5 @@
 <template>
-  <n-breadcrumb class="p-10px">
+  <n-breadcrumb class="mx-10px py-10px border-b-1px border-solid border-#b8b8b8">
     <n-breadcrumb-item v-for="(item, index) in pathList" :key="index">
       {{ item }}
     </n-breadcrumb-item>

@@ -9,9 +9,9 @@ import { useECharts } from '@/hooks/echarts/useECharts';
 
 type Props = {
   /** 图表宽度 */
-  width: string;
+  width?: string;
   /** 图表高度 */
-  height: string;
+  height?: string;
 };
 
 withDefaults(defineProps<Props>(), {

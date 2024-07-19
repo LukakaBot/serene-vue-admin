@@ -8,7 +8,7 @@
           </template>
           <div class="flex justify-between px-1 py-1">
             <n-skeleton v-if="loading" :width="100" size="medium" />
-            <NumberAnimation size="30px" :from="1" :to="visits.dayVisits" v-else />
+            <NumberAnimation :from="1" :to="visits.dayVisits" size="30px" v-else />
           </div>
           <div class="flex justify-between px-1 py-1">
             <div class="flex items-center gap-x-4px">
@@ -34,7 +34,6 @@
               <template v-else>
                 <div class="flex items-center gap-x-4px"> 总访问量： </div>
                 <div class="flex items-center gap-x-4px">
-                  <!-- <NumberAnimation :from="1" :to="visits.amount" /> -->
                   <NumberAnimation :from="1" :to="visits.amount" />
                 </div>
               </template>
@@ -49,7 +48,7 @@
           </template>
           <div class="flex justify-between px-1 py-1">
             <n-skeleton v-if="loading" :width="100" size="medium" />
-            <NumberAnimation size="30px" prefix="￥" :from="1" :to="saleroom.weekSaleroom" v-else />
+            <NumberAnimation :from="1" :to="saleroom.weekSaleroom" size="30px" prefix="￥" v-else />
           </div>
           <div class="flex justify-between px-2 py-2">
             <div class="flex-1 flex items-center gap-x-4px">
@@ -62,7 +61,7 @@
               <template v-else>
                 <div class="flex items-center gap-x-4px"> 总销售额： </div>
                 <div class="flex items-center gap-x-4px">
-                  <NumberAnimation prefix="￥" :from="1" :to="saleroom.amount" />
+                  <NumberAnimation :from="1" :to="saleroom.amount" prefix="￥" />
                 </div>
               </template>
             </div>
@@ -76,14 +75,14 @@
           </template>
           <div class="flex justify-between px-1 py-1">
             <n-skeleton v-if="loading" :width="100" size="medium" />
-            <NumberAnimation size="30px" :from="1" :to="orderLarge.weekLarge" v-else />
+            <NumberAnimation :from="1" :to="orderLarge.weekLarge" size="30px" v-else />
           </div>
           <div class="flex justify-between px-1 py-1">
             <div class="flex items-center gap-x-4px">
               <n-skeleton v-if="loading" :width="100" size="medium" />
               <template v-else>
                 日同比
-                <NumberAnimation :from="1" suffix="%" :to="orderLarge.rise" />
+                <NumberAnimation :from="1" :to="orderLarge.rise" suffix="%" />
                 <BaseIcon icon="ep:caret-top" color="#00ff6f" :size="14" />
               </template>
             </div>
@@ -91,7 +90,7 @@
               <n-skeleton v-if="loading" :width="100" size="medium" />
               <template v-else>
                 周同比
-                <NumberAnimation :from="1" suffix="%" :to="orderLarge.decline" />
+                <NumberAnimation :from="1" :to="orderLarge.decline" suffix="%" />
                 <BaseIcon icon="ep:caret-bottom" color="#ffde66" :size="14" />
               </template>
             </div>
@@ -102,7 +101,7 @@
               <template v-else>
                 <div class="flex items-center gap-x-4px"> 转化率： </div>
                 <div class="flex items-center gap-x-4px">
-                  <NumberAnimation :from="1" suffix="%" :to="orderLarge.amount" />
+                  <NumberAnimation :from="1" :to="orderLarge.amount" suffix="%" />
                 </div>
               </template>
             </div>
@@ -116,14 +115,14 @@
           </template>
           <div class="flex justify-between px-1 py-1">
             <n-skeleton v-if="loading" :width="100" size="medium" />
-            <NumberAnimation size="30px" prefix="￥" :from="1" :to="volume.weekLarge" v-else />
+            <NumberAnimation :from="1" :to="volume.weekLarge" size="30px" prefix="￥" v-else />
           </div>
           <div class="flex justify-between px-1 py-1">
             <div class="flex items-center gap-x-4px">
               <n-skeleton v-if="loading" :width="100" size="medium" />
               <template v-else>
                 日同比
-                <NumberAnimation :from="1" suffix="%" :to="volume.rise" />
+                <NumberAnimation :from="1" :to="volume.rise" suffix="%" />
                 <BaseIcon icon="ep:caret-top" color="#00ff6f" :size="14" />
               </template>
             </div>
@@ -131,7 +130,7 @@
               <n-skeleton v-if="loading" :width="100" size="medium" />
               <template v-else>
                 月同比
-                <NumberAnimation :from="1" suffix="%" :to="volume.decline" />
+                <NumberAnimation :from="1" :to="volume.decline" suffix="%" />
                 <BaseIcon icon="ep:caret-bottom" color="#ffde66" :size="14" />
               </template>
             </div>
@@ -142,7 +141,7 @@
               <template v-else>
                 <div class="flex items-center gap-x-4px"> 总成交额： </div>
                 <div class="flex items-center gap-x-4px">
-                  <NumberAnimation prefix="￥" :from="1" :to="volume.amount" />
+                  <NumberAnimation :from="1" :to="volume.amount" prefix="￥" />
                 </div>
               </template>
             </div>
