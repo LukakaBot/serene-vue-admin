@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :show="show" title="查看表单" @close="closeModal">
+  <BaseModal :show="show" title="查看表单" :show-submit="false" @close="closeModal">
     <n-descriptions label-placement="left" bordered>
       <n-descriptions-item label="早餐">
         苹果

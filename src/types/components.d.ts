@@ -7,7 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BaseAMap: typeof import('./../components/BaseAMap/index.vue')['default']
     BaseIcon: typeof import('./../components/BaseIcon/index.vue')['default']
+    BaseMap: typeof import('./../components/BaseMap/index.vue')['default']
     BaseModal: typeof import('./../components/BaseModal/index.vue')['default']
     BaseSearch: typeof import('./../components/BaseSearch/index.vue')['default']
     FormTitle: typeof import('./../components/FormTitle/index.vue')['default']
@@ -35,6 +37,8 @@ declare module 'vue' {
     NModal: typeof import('naive-ui')['NModal']
     NNumberAnimation: typeof import('naive-ui')['NNumberAnimation']
     NProgress: typeof import('naive-ui')['NProgress']
+    NRadioButton: typeof import('naive-ui')['NRadioButton']
+    NRadioGroup: typeof import('naive-ui')['NRadioGroup']
     NSkeleton: typeof import('naive-ui')['NSkeleton']
     NSpace: typeof import('naive-ui')['NSpace']
     NTabPane: typeof import('naive-ui')['NTabPane']

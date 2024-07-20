@@ -24,7 +24,6 @@ const useRouteStore = defineStore('route-store', {
           component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
           redirect: '/dashboard/console',
           meta: { icon: 'ant-design:dashboard-outlined' },
-          // meta: { icon: 'tabler:dashboard' },
           children: [
             {
               path: '/dashboard/console',
@@ -46,23 +45,14 @@ const useRouteStore = defineStore('route-store', {
               component: () => import('@/views/component/button/index.vue'),
             },
             {
+              path: '/component/form',
+              name: '表单',
+              component: () => import('@/views/component/form/index.vue'),
+            },
+            {
               path: '/component/table',
               name: '表格',
               component: () => import('@/views/component/table/index.vue'),
-            },
-          ]
-        },
-        {
-          path: '/form',
-          name: '表单',
-          component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
-          redirect: '/form/modalForm',
-          meta: { icon: 'ep:list' },
-          children: [
-            {
-              path: '/form/modalForm',
-              name: '弹窗表单',
-              component: () => import('@/views/form/modalForm/index.vue'),
             },
           ]
         },

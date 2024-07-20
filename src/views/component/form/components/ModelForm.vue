@@ -1,5 +1,5 @@
 <template>
-  <div class="base-container">
+  <div>
     <FormTitle title="弹窗表单" />
     <n-space>
       <n-button @click="addFormModalRef?.openModal">新增表单弹窗</n-button>
@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import AddFormModal from "./components/AddFormModal.vue";
-import ViewFormModal from "./components/ViewFormModal.vue";
+import AddFormModal from "./AddFormModal.vue";
+import ViewFormModal from "./ViewFormModal.vue";
 
 const addFormModalRef = ref<InstanceType<typeof AddFormModal>>();
 const viewFormModalRef = ref<InstanceType<typeof ViewFormModal>>();

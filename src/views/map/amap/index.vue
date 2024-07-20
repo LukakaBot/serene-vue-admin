@@ -1,6 +1,6 @@
 <template>
   <div class="base-container">
-    高德地图
+    <BaseAMap />
   </div>
 </template>
 
