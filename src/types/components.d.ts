@@ -12,6 +12,7 @@ declare module 'vue' {
     BaseMap: typeof import('./../components/BaseMap/index.vue')['default']
     BaseModal: typeof import('./../components/BaseModal/index.vue')['default']
     BaseSearch: typeof import('./../components/BaseSearch/index.vue')['default']
+    BaseTable: typeof import('./../components/BaseTable/index.vue')['default']
     FormTitle: typeof import('./../components/FormTitle/index.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
