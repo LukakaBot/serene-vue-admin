@@ -26,17 +26,17 @@ type Props = {
   /** 是否展示 Modal */
   show: boolean;
   /** 标题 */
-  title: string;
+  title?: string;
   /** 尺寸 */
-  size: 'small' | 'medium' | 'large' | 'huge';
+  size?: 'small' | 'medium' | 'large' | 'huge';
   /** 弹窗样式 */
-  bodyStyle: Record<string, string>;
+  bodyStyle?: Record<string, string>;
   /** 显示底部 */
-  showFooter: boolean;
+  showFooter?: boolean;
   /** 显示提交按钮 */
-  showSubmit: boolean;
+  showSubmit?: boolean;
   /** 提交按钮加载中 */
-  loading: boolean;
+  loading?: boolean;
 };
 
 withDefaults(defineProps<Props>(), {

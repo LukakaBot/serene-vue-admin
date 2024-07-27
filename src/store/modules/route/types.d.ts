@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 
 export type RouteState = {
-  /** 是否初始化了权限路由 */
+  /** 是否有权限路由 */
   hasAuthRoute: boolean;
   /** 当前路由 */
   currentRoute: RouteLocationNormalizedLoaded;

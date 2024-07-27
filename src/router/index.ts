@@ -1,7 +1,7 @@
 import { App } from 'vue';
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 import appConfig from '@/config';
-import { initRouteGuard } from './guard/index';
+import { createRouteGuard } from './guard/index';
 
 const { routeConfig, title } = appConfig;
 
@@ -40,7 +40,7 @@ const router = createRouter({
 
 export async function mountRoute(app: App) {
   app.use(router);
-  initRouteGuard(router, title);
+  createRouteGuard(router, title);
   await router.isReady();
 }
 

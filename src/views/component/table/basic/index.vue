@@ -1,5 +1,7 @@
 <template>
-  <div class="base-container">table</div>
+  <div class="base-container">
+    表格
+  </div>
 </template>
 
 <script setup lang="ts">

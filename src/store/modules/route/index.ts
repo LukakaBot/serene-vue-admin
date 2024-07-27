@@ -3,7 +3,8 @@ import { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import type { RouteState } from './types';
 import router from '@/router';
 
-const useRouteStore = defineStore('route-store', {
+export const useRouteStore = defineStore({
+  id: 'route-store',
   state: (): RouteState => ({
     hasAuthRoute: false,
     currentRoute: {} as RouteLocationNormalizedLoaded,
@@ -52,7 +53,13 @@ const useRouteStore = defineStore('route-store', {
             {
               path: '/component/table',
               name: '表格',
-              component: () => import('@/views/component/table/index.vue'),
+              children: [
+                {
+                  path: '/component/table/basic',
+                  name: '基础表格',
+                  component: () => import('@/views/component/table/basic/index.vue'),
+                }
+              ]
             },
           ]
         },
@@ -76,21 +83,19 @@ const useRouteStore = defineStore('route-store', {
           ]
         },
       ];
-      this.handleAddDynamicRoute(dynamicRoutes);
+      this.setRoutes(dynamicRoutes);
     },
-    /** 将路由数组添加到路由实例中 */
-    handleAddDynamicRoute(routes: RouteRecordRaw[]): void {
+    /** 将路由添加到路由实例中 */
+    setRoutes(routes: RouteRecordRaw[]): void {
+      const staticRoutes = router.options.routes;
       routes.forEach(route => router.addRoute(route));
-
       this.authRoutes = routes;
+      this.routes = staticRoutes.concat(routes);
       this.hasAuthRoute = true;
-      this.routes = [...router.options.routes, ...routes];
     },
     /** 设置当前路由 */
     setCurrentRoute(): void {
       this.currentRoute = router.currentRoute.value;
     },
   }
-})
-
-export default useRouteStore;
+});

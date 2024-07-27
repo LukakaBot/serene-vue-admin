@@ -1,6 +1,6 @@
 import type { AppConfig } from './types';
 
-/** 全局配置项 */
+/** 全局配置 */
 const appConfig: AppConfig = {
   title: 'naive-admin',
   routeConfig: {
