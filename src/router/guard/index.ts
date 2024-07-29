@@ -18,9 +18,8 @@ async function checkRouteAuth(to: RouteLocationNormalized, _from: RouteLocationN
     // 初始化路由
     await initAuthRoute();
 
-    // 处理动态路由没有加载导致的问题，等待路由加载好了再回到之前的页面
-    // next({ path: to.fullPath, replace: true, query: to.query, hash: to.hash });
-    // return false;
+    next({ ...to, replace: true });
+    return false;
   } else {
     // 403/404 页面
     if (to.matched.length <= 0) {

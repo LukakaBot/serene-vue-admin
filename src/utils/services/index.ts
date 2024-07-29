@@ -22,14 +22,14 @@ request.interceptors.request.use(
 // 响应拦截器
 request.interceptors.response.use(
   (response: AxiosResponse<ResponseContent>) => {
-    const res = response.data;
+    const res = response.data;    
     // 下面是针对不同响应状态码的处理逻辑
-    if (res.code === 0) {
-      return res.value;
+    if (res.code === 200) {
+      return res.result;
     } else {
-      window.$message?.error(res.msg);
+      window.$message?.error(res.message);
     }
-    return Promise.reject(res.msg);
+    return Promise.reject(res.message);
   },
   (error) => {
     window.$message?.error(error);

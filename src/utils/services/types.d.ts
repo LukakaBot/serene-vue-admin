@@ -3,7 +3,9 @@ export type ResponseContent<T = any> = {
   /** 响应状态码 */
   code: number;
   /** 响应状态信息 */
-  msg: string;
+  message: string;
   /** 响应内容 */
-  value: T;
+  result: T;
+  /** 响应类型 */
+  type: string;
 };
