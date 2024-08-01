@@ -8,13 +8,13 @@
     </n-radio-group>
     <n-form ref="formRef" inline :label-width="80" :model="formData" :rules="rules" :size="size">
       <n-form-item label="姓名" path="name">
-        <n-input v-model:value="formData.name" placeholder="输入姓名" />
+        <n-input v-model:value="formData.name" placeholder="请输入姓名" />
       </n-form-item>
       <n-form-item label="年龄" path="age">
-        <n-input-number v-model:value="formData.age" placeholder="输入年龄" />
+        <n-input-number v-model:value="formData.age" placeholder="请输入年龄" />
       </n-form-item>
       <n-form-item label="电话号码" path="phone">
-        <n-input v-model:value="formData.phone" placeholder="电话号码" />
+        <n-input v-model:value="formData.phone" placeholder="请输入电话号码" />
       </n-form-item>
       <n-form-item>
         <n-button attr-type="button" :loading="loading" @click="handleValidateClick">
@@ -26,16 +26,16 @@
 </template>
 
 <script setup lang="ts">
-import { NForm } from 'naive-ui';
+import { FormInst, FormRules } from 'naive-ui';
 import { useLoading } from '@/hooks/loading/index';
 
 type FormData = {
   name: string;
-  age: number;
+  age: number | null;
   phone: string;
 };
 
-const formRef = ref<InstanceType<typeof NForm>>() // 表单实例
+const formRef = ref<FormInst>();
 
 const { loading, setLoading } = useLoading();
 
@@ -43,10 +43,18 @@ const size = ref<'small' | 'medium' | 'large'>('medium');
 
 const formData = ref<FormData>({} as FormData);
 
-const rules = {
+const rules: FormRules = {
   name: { required: true, message: '请输入姓名', trigger: 'blur' },
-  age: { required: true, message: '请输入年龄', trigger: ['input', 'blur'] },
+  age: { required: true, type: 'number', message: '请输入年龄', trigger: ['input', 'blur'] },
   phone: { required: true, message: '请输入电话号码', trigger: ['input'] }
+};
+
+function resetFormData() {
+  formData.value = {
+    name: '',
+    age: null,
+    phone: ''
+  };
 }
 
 async function handleValidateClick(e: MouseEvent) {
@@ -54,7 +62,8 @@ async function handleValidateClick(e: MouseEvent) {
   try {
     setLoading(true);
     await formRef.value?.validate();
-    window.$message?.success('验证成功');
+    window.$message?.success('提交成功');
+    resetFormData();
   } finally {
     setLoading(false);
   }

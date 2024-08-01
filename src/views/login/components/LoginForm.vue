@@ -43,7 +43,9 @@ async function handleSubmit() {
 
   if (formData.value.username === 'admin' && formData.value.password === '123456') {
     window.$message?.success('登录成功', {
-      onAfterLeave: () => router.replace({ path: '/dashboard/console' })
+      onAfterLeave: () => {
+        router.replace({ path: '/dashboard/console' })
+      }
     });
   } else {
     window.$message?.error('用户名或密码错误');
