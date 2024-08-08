@@ -1,10 +1,11 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import './styles/index'
-import { mountStore } from '@/store/index'
-import { mountSetting } from '@/setting'
-import { mountRoute } from '@/router'
-import 'virtual:svg-icons-register'
+import { createApp } from 'vue';
+import App from './App.vue';
+import './styles/index';
+import { mountStore } from '@/store/index';
+import { mountSetting } from '@/setting';
+import { mountRoute } from '@/router';
+import 'virtual:uno.css';
+import 'virtual:svg-icons-register';
 import TlbsMap from 'tlbs-map-vue';
 
 async function mountApp() {
