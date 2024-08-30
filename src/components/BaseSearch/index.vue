@@ -36,31 +36,36 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const emits = defineEmits(['update:clearSearch', 'update:paramsSearch']);
+const emits = defineEmits(['update:search']);
 
-/** 搜索清空事件 */
-function handleClear() {
-  props.list.forEach(item => item.value = ['select', 'date', 'dateRange'].includes(item.type) ? null : '');
+/** 表单类型排除 */
+const formTypeExcludes = ['select', 'date', 'dateRange'];
 
-  const params = props.list.reduce((accumulator, current) => {
-    accumulator[current.key] = '';
-    return accumulator;
-  }, {} as Record<string, string | null | number>);
-
-  emits('update:clearSearch', params);
+function resetParams(type: string) {
+  return formTypeExcludes.includes(type) ? null : '';
 }
 
 /** 搜索查询事件 */
 function handleSearch() {
   const params = props.list.reduce((accumulator, current) => {
-    accumulator[current.key] = current.value;
-    return accumulator;
+    return { ...accumulator, [current.key]: current.value };
   }, {} as Record<string, string | null | number | string[]>);
 
-  emits('update:paramsSearch', params);
+  emits('update:search', params);
 }
 
-defineExpose({ handleClear, handleSearch });
+/** 搜索清空事件 */
+function handleClear() {
+  props.list.forEach(item => item.value = resetParams(item.type));
+
+  const params = props.list.reduce((accumulator, current) => {
+    return { ...accumulator, [current.key]: resetParams(current.type) };
+  }, {} as Record<string, string | null | number>);
+
+  emits('update:search', params);
+}
+
+defineExpose({ handleSearch, handleClear });
 </script>
 
 <style scoped>
