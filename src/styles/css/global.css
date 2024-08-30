@@ -1,5 +1,6 @@
 html,
 body,
-#app {
-    height: 100%;
+#app,
+#app-loading {
+	height: 100%;
 }
