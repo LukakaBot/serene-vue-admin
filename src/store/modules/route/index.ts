@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-import { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
-import type { RouteState } from './types';
-import  { fetchUserInfo } from '@/api/users';
-// import { useUserStore } from "../users";
+import { RouteComponent, RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
+import type { RouteState, RouteModule } from './types';
+import { fetchUserInfo } from '@/api/users/index';
 import router from '@/router';
+import appConfig from "@/config";
 
 export const useRouteStore = defineStore({
   id: 'route-store',
@@ -11,117 +11,42 @@ export const useRouteStore = defineStore({
     hasAuthRoute: false,
     currentRoute: {} as RouteLocationNormalizedLoaded,
     routes: [],
-    authRoutes: []
+    authRoutes: [],
+    cacheRoutes: [],
+    isRouteLoaded: true,
   }),
   actions: {
     /** 初始化路由 */
     async initAuthRoute() {
-      // const userStore = useUserStore();
-      // console.log(1);
-      // console.log(userStore.userInfo);
-      // console.log(2);
-      // await this.initDynamicRoute();
+      await this.initDynamicRoute();
+    },
+    /** 导入路由组件 */
+    importRouteComponent(componentPath?: RouteComponent | null) {
+      const routeModules: RouteModule = import.meta.glob(
+        ['/src/layouts/**/*.vue', '/src/views/**/*.vue'],
+        { eager: true }
+      );
+
+      const routeModule = routeModules[`/src${componentPath}`]?.default;
+      return routeModule;
+    },
+    /** 处理菜单 */
+    processMenu(menu: RouteRecordRaw): RouteRecordRaw {
+      if (menu?.children?.length) {
+        menu.children = menu.children.map(this.processMenu);
+      }
+      menu.component = this.importRouteComponent(menu.component);
+
+      return menu;
     },
     /** 初始化动态路由 */
     async initDynamicRoute() {
-      // const dynamicRoutes = [
-      //   {
-      //     path: '/dashboard',
-      //     name: 'Dashboard',
-      //     component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
-      //     redirect: '/dashboard/console',
-      //     meta: { icon: 'ant-design:dashboard-outlined' },
-      //     children: [
-      //       {
-      //         path: '/dashboard/console',
-      //         name: '主控台',
-      //         component: () => import('@/views/dashboard/console/index.vue'),
-      //         meta: { icon: 'mdi:console' }
-      //       },
-      //     ]
-      //   },
-      //   {
-      //     path: '/component',
-      //     name: '组件',
-      //     component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
-      //     redirect: '/component/button',
-      //     meta: { icon: 'bxs:component' },
-      //     children: [
-      //       {
-      //         path: '/component/button',
-      //         name: '按钮',
-      //         component: () => import('@/views/component/button/index.vue'),
-      //         meta: { icon: 'material-symbols:buttons-alt-outline-rounded' }
-      //       },
-      //       {
-      //         path: '/component/form',
-      //         name: '表单',
-      //         component: () => import('@/views/component/form/index.vue'),
-      //         meta: { icon: 'ant-design:form-outlined' }
-      //       },
-      //       {
-      //         path: '/component/table',
-      //         name: '表格',
-      //         meta: { icon: 'material-symbols:table' },
-      //         children: [
-      //           {
-      //             path: '/component/table/basic',
-      //             name: '基础表格',
-      //             component: () => import('@/views/component/table/basic/index.vue'),
-      //           }
-      //         ]
-      //       },
-      //     ]
-      //   },
-      //   {
-      //     path: '/map',
-      //     name: '地图',
-      //     component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
-      //     redirect: '/map/amap',
-      //     meta: { icon: 'ep:map-location' },
-      //     children: [
-      //       {
-      //         path: '/map/amap',
-      //         name: '高德地图',
-      //         component: () => import('@/views/map/amap/index.vue'),
-      //         meta: { icon: 'ant-design:environment-outlined' }
-      //       },
-      //       {
-      //         path: '/map/tmap',
-      //         name: '腾讯地图',
-      //         component: () => import('@/views/map/tmap/index.vue'),
-      //         meta: { icon: 'ant-design:environment-outlined' }
-      //       },
-      //     ]
-      //   },
-      //   {
-      //     path: '/system',
-      //     name: '系统管理',
-      //     component: () => import('@/layouts/BaseLayout/BaseLayout.vue'),
-      //     redirect: '/system/users',
-      //     meta: { icon: 'ant-design:setting-outlined' },
-      //     children: [
-      //       {
-      //         path: '/system/users',
-      //         name: '用户管理',
-      //         component: () => import('@/views/system/users/index.vue'),
-      //         meta: { icon: 'ant-design:user-outlined', roles: ['admin'] }
-      //       },
-      //       {
-      //         path: '/system/roles',
-      //         name: '角色管理',
-      //         component: () => import('@/views/system/roles/index.vue'),
-      //         meta: { icon: 'ant-design:team-outlined', roles: ['admin'] }
-      //       },
-      //     ]
-      //   }
-      // ];
-
-
-      const res = await fetchUserInfo();
-      console.log(res);
-      
-      // this.setRoutes(dynamicRoutes);
+      const { defaultRoutePath } = appConfig;
+      const { menus } = await fetchUserInfo();
+      const routes = menus.map(this.processMenu);
+      const defaultRoute: RouteRecordRaw[] = [{ path: '/', redirect: defaultRoutePath }];
+      const dynamicRoutes = [...defaultRoute, ...routes];
+      this.setRoutes(dynamicRoutes);
     },
     /** 将路由添加到路由实例中 */
     setRoutes(routes: RouteRecordRaw[]): void {
@@ -134,6 +59,25 @@ export const useRouteStore = defineStore({
     /** 设置当前路由 */
     setCurrentRoute(): void {
       this.currentRoute = router.currentRoute.value;
+    },
+    /** 添加缓存路由 */
+    addCacheRoute(route: RouteLocationNormalizedLoaded) {
+      const { name } = route;
+      const hasExist = this.cacheRoutes.find(
+        (cacheRoute: RouteLocationNormalizedLoaded) => cacheRoute.name === name
+      );
+
+      if (name && !hasExist) this.cacheRoutes.push(route);
+    },
+    /** 重新加载页面 */
+    async reloadPage(route: RouteLocationNormalizedLoaded) {
+      if (route.fullPath === this.currentRoute.fullPath) {
+        this.isRouteLoaded = false;
+        await nextTick();
+        setTimeout(() => {
+          this.isRouteLoaded = true;
+        }, 400); // 这 400ms 是为了等待 router-view 动画播放完毕，不然会看到页面闪动
+      }
     },
   }
 });

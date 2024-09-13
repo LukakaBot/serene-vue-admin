@@ -41,7 +41,8 @@ const emits = defineEmits(['update:search']);
 /** 表单类型排除 */
 const formTypeExcludes = ['select', 'date', 'dateRange'];
 
-function resetParams(type: string) {
+/** 重置表单值 */
+function resetFormData(type: string) {
   return formTypeExcludes.includes(type) ? null : '';
 }
 
@@ -56,10 +57,10 @@ function handleSearch() {
 
 /** 搜索清空事件 */
 function handleClear() {
-  props.list.forEach(item => item.value = resetParams(item.type));
+  props.list.forEach(item => item.value = resetFormData(item.type));
 
   const params = props.list.reduce((accumulator, current) => {
-    return { ...accumulator, [current.key]: resetParams(current.type) };
+    return { ...accumulator, [current.key]: resetFormData(current.type) };
   }, {} as Record<string, string | null | number>);
 
   emits('update:search', params);

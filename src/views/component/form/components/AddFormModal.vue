@@ -30,9 +30,9 @@ const bodyStyle = {
   width: '500px',
 };
 
-const { show, openModal, closeModal } = useShow();
+const [show, openModal, closeModal] = useShow();
 
-const { loading, setLoading } = useLoading();
+const [loading, setLoading] = useLoading();
 
 const formRef = ref<FormInst>();
 

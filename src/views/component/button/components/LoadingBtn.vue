@@ -16,7 +16,7 @@
 import { useLoading } from '@/hooks/loading/index';
 import BaseIcon from '@/components/BaseIcon/index.vue';
 
-const { loading, setLoading } = useLoading();
+const [loading, setLoading] = useLoading();
 
 function handleClick() {
   setLoading(true);

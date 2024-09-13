@@ -1,13 +1,13 @@
 import type { AppConfig } from './types';
 
-/** 全局配置 */
+/** 应用全局配置 */
 const appConfig: AppConfig = {
   title: 'naive-admin',
   routeConfig: {
     mode: "hash",
-    dynamic: true,
   },
-  routeWhitelist: ['/login', '/middleware'],
+  routeWhitelist: ['/login'],
+  defaultRoutePath: '/dashboard/console',
 };
 
 export default appConfig;

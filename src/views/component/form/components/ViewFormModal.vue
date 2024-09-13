@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { useShow } from "@/hooks/show";
 
-const { show, openModal, closeModal } = useShow();
+const [show, openModal, closeModal] = useShow();
 
 defineExpose({ openModal, closeModal });
 </script>

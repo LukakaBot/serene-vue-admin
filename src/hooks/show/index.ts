@@ -1,4 +1,4 @@
-export function useShow(initValue: boolean = false) {
+export function useShow(initValue: boolean = false): [Ref<boolean>, () => void, () => void, () => void] {
   const show = ref(initValue);
 
   function openModal() {
@@ -13,5 +13,5 @@ export function useShow(initValue: boolean = false) {
     show.value = !show.value;
   }
 
-  return { show, openModal, closeModal, toggleModal };
+  return [show, openModal, closeModal, toggleModal];
 }

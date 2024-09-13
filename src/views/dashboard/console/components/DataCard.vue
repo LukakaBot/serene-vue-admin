@@ -156,7 +156,7 @@
 import { useLoading } from '@/hooks/loading';
 import type { DataCardItem } from '../types';
 
-const { loading, setLoading } = useLoading();
+const [loading, setLoading] = useLoading();
 
 const visits = ref<any>({});
 

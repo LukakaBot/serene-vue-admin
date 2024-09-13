@@ -37,7 +37,7 @@ type FormData = {
 
 const formRef = ref<FormInst>();
 
-const { loading, setLoading } = useLoading();
+const [loading, setLoading] = useLoading();
 
 const size = ref<'small' | 'medium' | 'large'>('medium');
 

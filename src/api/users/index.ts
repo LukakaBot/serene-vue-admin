@@ -1,7 +1,17 @@
 import request from "@/utils/services";
-import type { UserInfo } from "./types";
+import type { UserTokenAccountParams, UserInfo, UserDetails } from "./types";
 
-export function fetchUserInfo(): Promise<UserInfo> {
+/** 账号密码登录 */
+export function fetchUserTokenByAccount(params: UserTokenAccountParams): Promise<UserInfo> {
+  return request({
+    url: '/user/account/token',
+    method: 'GET',
+    params
+  });
+}
+
+/** 获取用户信息 */
+export function fetchUserInfo(): Promise<UserDetails> {
   return request({
     url: '/user/info',
     method: 'GET',

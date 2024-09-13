@@ -1,4 +1,4 @@
-export function useLoading(initValue: boolean = false) {
+export function useLoading(initValue: boolean = false): [Ref<boolean>, (value: boolean) => void, () => void] {
   const loading = ref(initValue);
 
   function setLoading(value: boolean) {
@@ -9,5 +9,5 @@ export function useLoading(initValue: boolean = false) {
     loading.value = !loading.value;
   }
 
-  return { loading, setLoading, toggleLoading };
+  return [loading, setLoading, toggleLoading];
 }

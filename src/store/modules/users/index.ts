@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import type { UserState } from './types';
 import type { UserInfo } from "@/api/users/types";
-import { fetchUserInfo } from "@/api/users";
+import { fetchUserTokenByAccount } from "@/api/users";
+import { useStorage } from "@/hooks/useStorage";
 
 export const useUserStore = defineStore({
   id: 'user-store',
@@ -9,8 +10,10 @@ export const useUserStore = defineStore({
     userInfo: {} as UserInfo
   }),
   actions: {
-    async getUserInfo() {
-      this.userInfo = await fetchUserInfo();
-    }
+    async getUserTokenByAccount(params: { username: string, password: string }) {
+      this.userInfo = await fetchUserTokenByAccount(params);
+      const { setCache: setTokenCache } = useStorage('localStorage', 'token');
+      setTokenCache(this.userInfo.token);
+    },
   }
 })

@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { useLoading } from '@/hooks/loading';
 
-const { loading, setLoading } = useLoading();
+const [loading, setLoading] = useLoading();
 
 const iconList = [
   {

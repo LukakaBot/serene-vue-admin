@@ -4,9 +4,11 @@ export type AppConfig = {
   title: string;
   /** 路由配置 */
   routeConfig: {
+    /** 路由模式 */
     mode: 'hash' | 'history';
-    dynamic: boolean;
   };
   /** 路由白名单 */
   routeWhitelist: string[];
+  /** 默认路由路径 */
+  defaultRoutePath: string;
 };

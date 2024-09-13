@@ -11,7 +11,7 @@ import type { BaseTableColumn } from '@/components/BaseTable/types';
 import { fetchTableDataPage } from '@/api/table/index.ts';
 import { useLoading } from '@/hooks/loading';
 
-const { loading, setLoading } = useLoading();
+const [loading, setLoading] = useLoading();
 
 const searchParams = ref({
   page: 1,
