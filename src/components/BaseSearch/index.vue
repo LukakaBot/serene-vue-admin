@@ -1,30 +1,27 @@
-
-import { emit } from 'process';
 <template>
-  <div class="search-container">
-    <div class="search-wrap">
-      <div class="search-item" v-for="(item, index) in list" :key="index">
-        <span class="search-item__label">{{ item.label }}</span>
-        <div class="search-item__value">
-          <!-- 文本输入框 -->
-          <n-input v-model:value="item.value" :placeholder="`请输入${item.label}`" clearable v-if="item.type === 'text'" />
-          <!-- 文本域输入框 -->
-          <n-input v-model:value="item.value" :placeholder="`请输入${item.label}`" clearable type="textarea"
-            :show-count="true" v-if="item.type === 'textarea'" />
-          <!-- 下拉选择 -->
-          <n-select v-model:value="item.value" :placeholder="`请选择${item.label}`" :options="item.options"
-            v-if="item.type === 'select'" :value-field="item.valueField" :label-field="item.labelField" clearable />
-          <!-- 日期时间选择 -->
-          <n-date-picker class="w-full" v-model:formatted-value="item.value" :placeholder="`请选择${item.label}`" clearable
-            value-format="yyyy-MM-dd" type="date" v-if="item.type === 'date'" />
+  <Transition mode="out-in">
+    <div class="search-container" :class="{ expand: !isCollapse }">
+      <div class="search-wrap">
+        <n-form-item label-placement="left" :label="item.label" v-for="(item, index) in list" :key="index">
+          <n-input v-model:value="item.value" clearable :placeholder="`请输入${item.label}`" v-if="item.type === 'text'" />
+          <n-select v-model:value="item.value" clearable :options="item.options" :placeholder="`请选择${item.label}`"
+            :label-field="item.labelField || 'label'" :value-field="item.valueField || 'value'"
+            v-if="item.type === 'select'" />
+          <n-date-picker class="w-full" v-model:formatted-value="item.value" value-format="yyyy-MM-dd" type="date"
+            v-if="item.type === 'date'" />
+          <n-date-picker class="w-full" v-model:formatted-value="item.value" value-format="yyyy-MM-dd" type="daterange"
+            v-if="item.type === 'daterange'" />
+        </n-form-item>
+        <div class="btn-wrap">
+          <n-button strong type="primary" @click="handleSearch">查询</n-button>
+          <n-button strong secondary @click="handleClear">重置</n-button>
+          <n-button tertiary v-if="list.length > 4" @click="isCollapse = !isCollapse">
+            <BaseIcon class="arrow" :class="{ 'arrow__up': !isCollapse }" name="ep:arrow-down-bold" />
+          </n-button>
         </div>
       </div>
     </div>
-    <div class="btn-wrap">
-      <el-button size="mini" class="wh-fr" type="primary" @click="handleSearch">查询</el-button>
-      <el-button size="mini" :style="{ 'margin-right': '10px' }" class="wh-fr" @click="handleClear">重置</el-button>
-    </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -40,6 +37,8 @@ const emits = defineEmits(['update:search']);
 
 /** 表单类型排除 */
 const formTypeExcludes = ['select', 'date', 'dateRange'];
+
+const isCollapse = ref(false);
 
 /** 重置表单值 */
 function resetFormData(type: string) {
@@ -66,46 +65,54 @@ function handleClear() {
   emits('update:search', params);
 }
 
+/** 搜索容器展开状态的高度 */
+const expandSearchHeight = computed(() => {
+  const searchContainerEle = document.querySelector('.search-container') as HTMLElement;
+
+  if (!searchContainerEle) return '58px';
+  searchContainerEle.style.height = 'auto';
+  const height = searchContainerEle.offsetHeight;
+  searchContainerEle.style.height = '';
+
+  return `${height}px`;
+});
+
 defineExpose({ handleSearch, handleClear });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .search-container {
-  display: flex;
-  align-items: center;
   position: relative;
-  /* height: 46px; */
+  overflow: hidden;
+  height: 58px;
+  transition: height 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+
+  &.expand {
+    height: v-bind(expandSearchHeight);
+  }
 }
 
 .search-wrap {
   display: grid;
-  grid-template-columns: repeat(5, 19.33%);
+  grid-template-columns: repeat(4, 19.33%);
   row-gap: 10px;
   column-gap: 10px;
-  width: 90%;
-  height: 100%;
-}
-
-.search-item {
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-
-.search-item__label {
-  white-space: nowrap;
-  overflow: hidden;
-  padding-right: 10px;
-}
-
-.search-item__value {
-  flex: 1;
+  position: relative;
 }
 
 .btn-wrap {
+  display: flex;
+  column-gap: 10px;
   position: absolute;
-  top: 4px;
+  top: 0;
   right: 0;
-  width: 160px;
+}
+
+.arrow {
+  transition: transform 0.3s ease-in-out;
+
+  &.arrow__up {
+    transform: rotate(180deg);
+  }
 }
 </style>
