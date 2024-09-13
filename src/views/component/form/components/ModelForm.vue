@@ -1,10 +1,10 @@
 <template>
   <div>
     <FormTitle title="弹窗表单" />
-    <n-space>
+    <n-flex>
       <n-button @click="addFormModalRef?.openModal">新增表单弹窗</n-button>
       <n-button @click="viewFormModalRef?.openModal">查看表单弹窗</n-button>
-    </n-space>
+    </n-flex>
     <AddFormModal ref="addFormModalRef" />
     <ViewFormModal ref="viewFormModalRef" />
   </div>

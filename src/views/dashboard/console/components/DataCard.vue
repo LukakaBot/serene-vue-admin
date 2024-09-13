@@ -16,7 +16,7 @@
               <template v-else>
                 日同比
                 <NumberAnimation :from="1" :to="visits.rise" suffix="%" />
-                <BaseIcon icon="ep:caret-top" color="#00ff6f" :size="14" />
+                <BaseIcon name="ep:caret-top" color="#00ff6f" :size="14" />
               </template>
             </div>
             <div class="flex items-center gap-x-4px">
@@ -24,7 +24,7 @@
               <template v-else>
                 周同比
                 <NumberAnimation :from="1" :to="visits.decline" suffix="%" />
-                <BaseIcon icon="ep:caret-bottom" color="#ffde66" :size="14" />
+                <BaseIcon name="ep:caret-bottom" color="#ffde66" :size="14" />
               </template>
             </div>
           </div>
@@ -83,7 +83,7 @@
               <template v-else>
                 日同比
                 <NumberAnimation :from="1" :to="orderLarge.rise" suffix="%" />
-                <BaseIcon icon="ep:caret-top" color="#00ff6f" :size="14" />
+                <BaseIcon name="ep:caret-top" color="#00ff6f" :size="14" />
               </template>
             </div>
             <div class="flex items-center gap-x-4px">
@@ -91,7 +91,7 @@
               <template v-else>
                 周同比
                 <NumberAnimation :from="1" :to="orderLarge.decline" suffix="%" />
-                <BaseIcon icon="ep:caret-bottom" color="#ffde66" :size="14" />
+                <BaseIcon name="ep:caret-bottom" color="#ffde66" :size="14" />
               </template>
             </div>
           </div>
@@ -123,7 +123,7 @@
               <template v-else>
                 日同比
                 <NumberAnimation :from="1" :to="volume.rise" suffix="%" />
-                <BaseIcon icon="ep:caret-top" color="#00ff6f" :size="14" />
+                <BaseIcon name="ep:caret-top" color="#00ff6f" :size="14" />
               </template>
             </div>
             <div class="flex items-center gap-x-4px">
@@ -131,7 +131,7 @@
               <template v-else>
                 月同比
                 <NumberAnimation :from="1" :to="volume.decline" suffix="%" />
-                <BaseIcon icon="ep:caret-bottom" color="#ffde66" :size="14" />
+                <BaseIcon name="ep:caret-bottom" color="#ffde66" :size="14" />
               </template>
             </div>
           </div>

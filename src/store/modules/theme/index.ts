@@ -3,7 +3,7 @@ import type { GlobalThemeOverrides } from 'naive-ui';
 import type { ThemeState } from './types';
 import { lighten } from '@/utils/tools';
 
-const useThemeStore = defineStore({
+export const useThemeStore = defineStore({
     id: 'theme-store',
     state: (): ThemeState => {
         const appTheme = '#2d8cf0';
@@ -39,5 +39,3 @@ const useThemeStore = defineStore({
         }
     }
 });
-
-export default useThemeStore;

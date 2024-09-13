@@ -3,7 +3,7 @@
     :on-after-enter="handleAfterSiderEnter" @update:collapsed="handleUpdateCollapsed">
     <div class="flex justify-center items-center gap-x-5px m-8px h-32px bg-#ccc overflow-hidden">
       <span class="whitespace-nowrap break-all" v-if="isRenderTitle">Naive admin</span>
-      <BaseIcon icon="logos:vue" :size="22" v-else />
+      <BaseIcon name="logos:vue" :size="22" v-else />
     </div>
     <n-menu :value="currentRoute" :default-value="currentRoute" :options="menus" :collapsed="collapsed"
       :collapsed-width="64" />
@@ -12,7 +12,8 @@
 
 <script setup lang="ts">
 import type { MenuOption } from 'naive-ui';
-import { RouteRecordRaw, RouterLink } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { useRouteStore } from '@/store';
 import BaseIcon from '@/components/BaseIcon/index.vue';
 
@@ -48,7 +49,7 @@ function renderMenu(route: RouteRecordRaw): MenuOption {
   const { path, name, meta, children } = route as Route.RouteItem;
 
   const link = () => h(RouterLink, { to: path }, () => `${name}`);
-  const icon = meta?.icon ? () => h(BaseIcon, { icon: meta.icon, size: 22 }) : undefined;
+  const icon = meta?.icon ? () => h(BaseIcon, { name: meta.icon, size: 22 }) : undefined;
 
   return {
     key: path,

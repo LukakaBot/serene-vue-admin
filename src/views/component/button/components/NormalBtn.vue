@@ -1,7 +1,7 @@
 <template>
     <div>
         <FormTitle title="基础" />
-        <n-space>
+        <n-flex>
             <n-button>Default</n-button>
             <n-button type="tertiary">
                 Tertiary
@@ -21,7 +21,7 @@
             <n-button type="error">
                 Error
             </n-button>
-        </n-space>
+        </n-flex>
     </div>
 </template>
 

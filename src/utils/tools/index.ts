@@ -1,3 +1,4 @@
+import type { BaseIconProps } from '@/components/BaseIcon/types';
 import BaseIcon from '@/components/BaseIcon/index.vue';
 
 /**
@@ -30,6 +31,6 @@ export function lighten(color: string, amount: number) {
 /**
  * render 图标
  * */
-export function renderIcon(icon: string) {
-  return () => h(BaseIcon, { icon });
+export function renderIcon(attrs: BaseIconProps) {
+  return () => h(BaseIcon, attrs);
 }

@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
 /** [账号密码登录] - 请求参数 */
 export type UserTokenAccountParams = {

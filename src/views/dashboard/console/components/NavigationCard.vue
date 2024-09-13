@@ -11,7 +11,7 @@
                   <!-- <n-icon :size="item.size" class="flex-1" :color="item.color">
                     <component :is="item.icon" v-on="item.event || {}" />
                   </n-icon> -->
-                  <BaseIcon :icon="item.icon" :color="item.color" :size="item.size" />
+                  <BaseIcon :name="item.icon" :color="item.color" :size="item.size" />
                 </span>
               </p>
               <p class="flex justify-center"><span>{{ item.title }}</span></p>

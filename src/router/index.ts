@@ -1,6 +1,6 @@
 import { App } from 'vue';
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
-import appConfig from '@/config';
+import appConfig from '@/config/app/index';
 import { createRouteGuard } from './guard/index';
 
 const { routeConfig, title } = appConfig;

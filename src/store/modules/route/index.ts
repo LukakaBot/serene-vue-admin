@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-import { RouteComponent, RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
+import type { RouteComponent, RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import type { RouteState, RouteModule } from './types';
 import { fetchUserInfo } from '@/api/users/index';
 import router from '@/router';
-import appConfig from "@/config";
+import appConfig from '@/config/app/index';
 
 export const useRouteStore = defineStore({
   id: 'route-store',

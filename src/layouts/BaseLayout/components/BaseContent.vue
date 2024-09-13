@@ -1,13 +1,15 @@
 <template>
-  <RouterView v-slot="{ Component }">
-    <Transition name="slide-fade" mode="out-in">
-      <component :is="Component" />
+  <RouterView v-slot="{ Component, route }">
+    <Transition name="slide-fade" mode="out-in" appear>
+      <component :is="Component" :key="route.fullPath" v-if="routeStore.isRouteLoaded" />
     </Transition>
   </RouterView>
 </template>
 
 <script setup lang="ts">
+import { useRouteStore } from '@/store';
 
+const routeStore = useRouteStore();
 </script>
 
 <style scoped>

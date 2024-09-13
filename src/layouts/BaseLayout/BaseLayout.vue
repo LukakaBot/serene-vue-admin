@@ -6,8 +6,7 @@
         <BaseHeader />
         <n-layout-content :class="{ 'layout-default-background': getDarkTheme === false }">
           <div class="flex flex-col h-full overflow-hidden">
-            <!-- <BaseBreadcrumb /> -->
-            <!-- <BaseTabs :collapsed="false" /> -->
+            <BaseTab />
             <BaseContent />
           </div>
         </n-layout-content>
@@ -20,8 +19,7 @@
 import { useThemeStore } from '@/store';
 import BaseHeader from './components/BaseHeader.vue';
 import BaseSider from './components/BaseSider.vue';
-// import BaseBreadcrumb from './components/BaseBreadcrumb.vue';
-// import BaseTabs from './components/BaseTabs.vue';
+import BaseTab from './components/BaseTab.vue';
 import BaseContent from './components/BaseContent.vue';
 
 const themeStore = useThemeStore();
