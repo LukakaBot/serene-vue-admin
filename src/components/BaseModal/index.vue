@@ -50,18 +50,18 @@ withDefaults(defineProps<Props>(), {
   loading: false,
 });
 
-const emits = defineEmits(['close', 'closed', 'submit']);
+const emit = defineEmits(['close', 'closed', 'submit']);
 
 function handleClose() {
-  emits('close');
+  emit('close');
 }
 
 function handleAfterLeave() {
-  emits('closed');
+  emit('closed');
 }
 
 function handleSubmit() {
-  emits('submit');
+  emit('submit');
 }
 </script>
 

@@ -1,12 +1,13 @@
 <template>
-  <n-data-table class="flex-1" :columns="columns" :data="data" :pagination="renderPagination" :bordered="false"
-    :loading="loading" flex-height remote @update:page="handleUpdatePage" @update:page-size="handleUpdatePageSize" />
+  <n-data-table class="flex-1" :columns="columns" :data="data" :scroll-x="scrollX" :pagination="renderPagination"
+    :bordered="false" :single-line="false" :loading="loading" flex-height remote @update:page="handleUpdatePage"
+    @update:page-size="handleUpdatePageSize" />
 </template>
 
 <script setup lang="ts">
 import type { PaginationProps } from 'naive-ui';
 import type { RowData } from 'naive-ui/lib/data-table/src/interface';
-import type { BaseTableColumn, SearchParams } from './types.d.ts';
+import type { Operation, BaseTableColumn, SearchParams } from './types.d.ts';
 
 type Props = {
   /** 查询参数 */
@@ -19,23 +20,31 @@ type Props = {
   showPagination?: boolean;
   /** 是否显示 loading 状态 */
   loading?: boolean;
+  /** 表格操作按钮 */
+  operation?: Operation[];
+};
+
+type Emits = {
+  (e: 'update:page', page: number): void;
+  (e: 'update:page-size', size: number): void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   showPagination: true,
   loading: false,
+  operation: () => []
 });
 
-const emits = defineEmits(['update:page', 'update:size']);
+const emit = defineEmits<Emits>();
 
 /** 分页更新事件 */
 function handleUpdatePage(page: number) {
-  emits('update:page', page);
+  emit('update:page', page);
 }
 
 /** 分页大小更新事件 */
 function handleUpdatePageSize(size: number) {
-  emits('update:size', size);
+  emit('update:page-size', size);
 }
 
 /** 分页 */
@@ -58,6 +67,38 @@ const paginationOptions = computed((): PaginationProps => {
 
 /** 渲染分页 */
 const renderPagination = computed(() => props.showPagination ? paginationOptions.value : false);
+
+/** 计算表格宽度 */
+function computedTableWidth(acc: number, cur: any): number {
+  if (cur.children) {
+    return acc + computedTableWidth(acc, cur.children);
+  }
+  return acc + (+cur?.width || 0);
+}
+
+/** 表格操作列宽度 */
+const operationColumnWidth = computed(() => {
+  const length = props.operation.length;
+  const width = length < 3
+    ? props.operation.reduce((acc, cur) => {
+      const hanziLength = cur.label.length;
+      return acc + hanziLength * 50;
+    }, 0)
+    : 116;
+
+  return width;
+});
+
+/** 表格内容的横向宽度 */
+const scrollX = computed(() => {
+  if (props.columns.length === 0) return 0;
+  const columnsWidth = props.columns.reduce(computedTableWidth, 0);
+  // const fixedLeftColumnsWidth = props.columns.reduce((acc, cur) => acc + (cur.fixed === 'left' ? cur.width || 0 : 0), 0);
+  const fixedRightColumnsWidth = operationColumnWidth.value;
+
+  return columnsWidth + fixedRightColumnsWidth;
+  // return columnsWidth + fixedLeftColumnsWidth + fixedRightColumnsWidth;
+});
 </script>
 
 <style scoped></style>

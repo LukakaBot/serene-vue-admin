@@ -1,5 +1,7 @@
 import type { SelectOption } from 'naive-ui';
 
+type SearchParams = Record<string, string | null | number>;
+
 export type SearchItem = {
   /** 搜索类型 */
   type: string;
@@ -16,4 +18,4 @@ export type SearchItem = {
   labelField?: string;
   /** 选项 value 的字段名 */
   valueField?: string;
-}
+};

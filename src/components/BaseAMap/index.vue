@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   showLogo: true,
 });
 
-const emits = defineEmits(['complete', 'locate']);
+const emit = defineEmits(['complete', 'locate']);
 
 /** 地图实例 */
 let map: AMap.Map | null = null;
@@ -53,7 +53,7 @@ function initMap() {
         zoom: props.zoom,
       });
       map?.on('complete', function () {
-        emits('complete', map);
+        emit('complete', map);
       });
     }).catch((err) => {
       console.log(err);

@@ -4,9 +4,9 @@
       <div class="search-wrap">
         <n-form-item label-placement="left" :label="item.label" v-for="(item, index) in list" :key="index">
           <n-input v-model:value="item.value" clearable :placeholder="`请输入${item.label}`" v-if="item.type === 'text'" />
-          <n-select v-model:value="item.value" clearable :options="item.options" :placeholder="`请选择${item.label}`"
+          <!-- <n-select v-model:value="item.value" clearable :options="item.options!" :placeholder="`请选择${item.label}`"
             :label-field="item.labelField || 'label'" :value-field="item.valueField || 'value'"
-            v-if="item.type === 'select'" />
+            v-if="item.type === 'select'" /> -->
           <n-date-picker class="w-full" v-model:formatted-value="item.value" value-format="yyyy-MM-dd" type="date"
             v-if="item.type === 'date'" />
           <n-date-picker class="w-full" v-model:formatted-value="item.value" value-format="yyyy-MM-dd" type="daterange"
@@ -25,20 +25,25 @@
 </template>
 
 <script setup lang="ts">
-import type { SearchItem } from './types.d.ts';
+import type { SearchParams, SearchItem } from './types.d.ts';
 
 type Props = {
   list: SearchItem[];
 };
 
+type Emits = {
+  (event: 'update:search', params: SearchParams): void;
+};
+
 const props = defineProps<Props>();
 
-const emits = defineEmits(['update:search']);
+const emit = defineEmits<Emits>();
 
 /** 表单类型排除 */
 const formTypeExcludes = ['select', 'date', 'dateRange'];
 
-const isCollapse = ref(false);
+/** 是否折叠 */
+const isCollapse = ref(true);
 
 /** 重置表单值 */
 function resetFormData(type: string) {
@@ -49,9 +54,9 @@ function resetFormData(type: string) {
 function handleSearch() {
   const params = props.list.reduce((accumulator, current) => {
     return { ...accumulator, [current.key]: current.value };
-  }, {} as Record<string, string | null | number | string[]>);
+  }, {} as SearchParams);
 
-  emits('update:search', params);
+  emit('update:search', params);
 }
 
 /** 搜索清空事件 */
@@ -60,9 +65,9 @@ function handleClear() {
 
   const params = props.list.reduce((accumulator, current) => {
     return { ...accumulator, [current.key]: resetFormData(current.type) };
-  }, {} as Record<string, string | null | number>);
+  }, {} as SearchParams);
 
-  emits('update:search', params);
+  emit('update:search', params);
 }
 
 /** 搜索容器展开状态的高度 */

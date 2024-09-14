@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import { resultSuccess, resultError } from '../_util';
+import { doCustomTimes, resultSuccess, resultError, resultPageSuccess } from '../_util';
 import type { UserTokenAccountParams } from '../../src/api/users/types';
 
 const { Random } = Mock;
@@ -95,7 +95,31 @@ const menus = [
       },
     ]
   }
-]
+];
+
+function userTableList(pageSize) {
+  const result: any[] = [];
+  doCustomTimes(pageSize, () => {
+    result.push({
+      id: '@integer(10,999999)',
+      beginTime: '@datetime',
+      endTime: '@datetime',
+      address: '@county(true)',
+      name: '@cname()',
+      avatar: Random.image(
+        '400x400',
+        Random.color(),
+        Random.color(),
+        Random.first()
+      ),
+      date: `@date('yyyy-MM-dd')`,
+      time: `@time('HH:mm')`,
+      'no|100000-10000000': 100000,
+      'status|1': [true, false],
+    });
+  });
+  return result;
+}
 
 export default [
   {
@@ -133,4 +157,14 @@ export default [
       });
     },
   },
+  {
+    url: '/api/user/page',
+    method: 'GET',
+    response: ({ query }) => {
+      const { page = 1, pageSize = 10 } = query;
+      const list = userTableList(100);
+
+      return resultPageSuccess(Number(page), Number(pageSize), list);
+    }
+  }
 ];

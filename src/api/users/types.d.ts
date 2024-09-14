@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
+import type { RequestContent } from '../common/types';
 
 /** [账号密码登录] - 请求参数 */
 export type UserTokenAccountParams = {
@@ -38,4 +39,19 @@ export type UserDetails = {
   organizeId: string;
   /** 组织名 */
   organizeName: string;
+};
+
+export type UserPageParams = RequestContent;
+
+export type UserPageContent = {
+  id: number,
+  beginTime: string,
+  endTime: string,
+  address: string,
+  name: string,
+  avatar: string,
+  date: string,
+  time: string,
+  no: number,
+  status: boolean;
 };
