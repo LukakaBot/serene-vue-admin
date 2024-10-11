@@ -58,10 +58,7 @@ const isCurrentRoute = ref(false);
 /** 右键选中菜单 */
 const rightClickMenu = ref<RouteLocationNormalizedLoaded | null>(null);
 
-const sideMenuPosition = reactive({
-  x: 0,
-  y: 0,
-});
+const sideMenuPosition = reactive({ x: 0, y: 0 });
 
 /** 跳转页面 */
 function handleSkipPage(_route: RouteLocationNormalizedLoaded) {
@@ -95,17 +92,17 @@ function handleSelectMenu(key: string) {
     }
     // 关闭
     case '2': {
-      tabStore.closeCurrentTab(route);
+      tabStore.closeCurrentTab(rightClickMenu.value!);
       break;
     }
     // 关闭其他
     case '3': {
-      tabStore.closeOtherTab(route);
+      tabStore.closeOtherTab(rightClickMenu.value!);
       break;
     }
     // 关闭所有
     case '4': {
-      tabStore.closeAllTab(route);
+      tabStore.closeAllTab(rightClickMenu.value!);
       break;
     }
   }

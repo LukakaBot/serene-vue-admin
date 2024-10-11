@@ -1,5 +1,5 @@
 /** 全局配置项 */
-export type AppConfig = {
+export type GlobalConfig = {
   /** 页面标题 */
   title: string;
   /** 路由配置 */

@@ -1,12 +1,12 @@
 import type { Router, RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
 import { useTitle } from '@vueuse/core';
 import { useRouteStore } from '@/store';
-import appConfig from '@/config/app/index';
 import { useStorage } from '@/hooks/useStorage';
+import globalConfig from '@/config/app/index';
 
 async function checkPermissions(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
   const routeStore = useRouteStore();
-  const { routeWhitelist } = appConfig;
+  const { routeWhitelist } = globalConfig;
   const { getCache } = useStorage('localStorage', 'token');
   const token = getCache();
 
@@ -21,7 +21,7 @@ async function checkPermissions(to: RouteLocationNormalized, from: RouteLocation
     return next({ path: '/login', replace: true });
   }
 
-  // 如果还没有初始化权限路由，则先进行初始化，然后重定向到目标路由
+  // 如果还没有初始化路由，则先进行初始化，然后重定向到目标路由
   if (!routeStore.hasAuthRoute) {
     await routeStore.initAuthRoute();
     return next({ path: to.fullPath, replace: true });
@@ -32,19 +32,20 @@ async function checkPermissions(to: RouteLocationNormalized, from: RouteLocation
     return next({ path: from.fullPath });
   }
 
-  // 如果没有匹配到任何路由，跳转到403页面
+  // 如果没有匹配到任何路由，则跳转到403页面
   if (to.matched.length <= 0) {
     return next({ path: '/403' });
   }
 
-  // 如果检查都通过，继续导航到目标路由
+  // 如果检查都通过，则继续导航到目标路由
   next();
 }
 
+/** 创建路由守卫 */
 export function createRouteGuard(router: Router, title: string) {
   const routeStore = useRouteStore();
 
-  /** 路由前置守卫 */
+  // 路由前置守卫
   router.beforeEach(async (to, from, next) => {
     // 打开加载条
     window.$loadingBar?.start();
@@ -52,7 +53,7 @@ export function createRouteGuard(router: Router, title: string) {
     await checkPermissions(to, from, next);
   });
 
-  /** 路由后置守卫 */
+  // 路由后置守卫
   router.afterEach(to => {
     // 设置页面标题
     useTitle(`${to.name as string} - ${title}`);

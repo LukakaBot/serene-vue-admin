@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormTitle title="行内表单" />
+    <BaseTitle title="行内表单" />
     <n-radio-group v-model:value="size" name="left-size" style="margin-bottom: 12px">
       <n-radio-button value="small"> 小 </n-radio-button>
       <n-radio-button value="medium"> 中 </n-radio-button>

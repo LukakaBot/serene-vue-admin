@@ -6,7 +6,7 @@ import AppLoading from './layouts/AppLoading/AppLoading.vue';
 import './styles/index';
 import { mountStore } from '@/store/index';
 import { mountSetting } from '@/setting';
-import { mountRoute } from '@/router';
+import { setupRoute } from '@/router';
 
 async function mountApp() {
   const appLoading = createApp(AppLoading);
@@ -17,7 +17,7 @@ async function mountApp() {
 
   mountStore(app);
 
-  await mountRoute(app);
+  await setupRoute(app);
 
   mountSetting();
 

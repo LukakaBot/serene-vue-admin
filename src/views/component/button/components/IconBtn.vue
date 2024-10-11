@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormTitle title="图标" />
+    <BaseTitle title="图标" />
     <n-flex>
       <n-button secondary strong :render-icon="renderIcon">
         +100 元

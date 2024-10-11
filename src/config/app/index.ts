@@ -1,7 +1,7 @@
-import type { AppConfig } from './types';
+import type { GlobalConfig } from './types';
 
-/** 应用全局配置 */
-const appConfig: AppConfig = {
+/** 全局配置 */
+const globalConfig: GlobalConfig = {
   title: 'naive-admin',
   routeConfig: {
     mode: "hash",
@@ -10,4 +10,4 @@ const appConfig: AppConfig = {
   defaultRoutePath: '/dashboard/console',
 };
 
-export default appConfig;
+export default globalConfig;

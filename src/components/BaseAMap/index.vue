@@ -1,8 +1,5 @@
 <template>
-  <!-- <div class="h-full relative"> -->
-  <div id="container" class="relative" :class="renderMapClassName" :style="renderMapStyle">
-  </div>
-  <!-- </div> -->
+  <div id="container" class="relative" :class="hiddenMapLogoClassName" :style="renderMapStyle"></div>
 </template>
 
 <script setup lang="ts">
@@ -37,11 +34,11 @@ let map: AMap.Map | null = null;
 
 function initMap() {
   window._AMapSecurityConfig = {
-    securityJsCode: '0276d35344dc1e257cfe00fcd08e4e3c',
+    securityJsCode: import.meta.env.VITE_MAP_SECURITY_JS_CODE,
   };
 
   const options = {
-    key: '62966e0c9f4fa51a1cee397aa2b77198',
+    key: import.meta.env.VITE_MAP_KEY,
     version: "2.0",
   };
 
@@ -66,7 +63,7 @@ function init() {
 
 const renderMapStyle = computed(() => ({ width: props.width, height: props.height }));
 
-const renderMapClassName = computed(() => ({
+const hiddenMapLogoClassName = computed(() => ({
   'amap-logo-hidden': !props.showLogo
 }));
 

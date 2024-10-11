@@ -1,6 +1,6 @@
 <template>
     <div>
-        <FormTitle title="基础" />
+        <BaseTitle title="基础" />
         <n-flex>
             <n-button>Default</n-button>
             <n-button type="tertiary">

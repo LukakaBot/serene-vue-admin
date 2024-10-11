@@ -1,7 +1,9 @@
 import type { RouteLocationNormalized } from 'vue-router';
 import { defineStore } from 'pinia';
 import type { TabState } from './types';
-import appConfig from '@/config/app/index';
+import { useRouteStore } from '@/store/modules/route';
+import globalConfig from '@/config/app/index';
+import router from '@/router';
 
 export const useTabStore = defineStore({
 	id: 'tab-store',
@@ -15,7 +17,7 @@ export const useTabStore = defineStore({
 		},
 		/** 添加标签页 */
 		addTab(route: RouteLocationNormalized) {
-			const { routeWhitelist } = appConfig;
+			const { routeWhitelist } = globalConfig;
 
 			if (routeWhitelist.includes(route.name as string)) return false;
 			const isExists = this.tabList.some(
@@ -24,7 +26,7 @@ export const useTabStore = defineStore({
 			if (!isExists) this.tabList.push(route);
 			return true;
 		},
-		/** 关闭左侧 */
+		/** 关闭左侧标签 */
 		closeLeftTab(route: RouteLocationNormalized) {
 			const index = this.tabList.findIndex(
 				(item) => item.fullPath == route.fullPath
@@ -33,7 +35,7 @@ export const useTabStore = defineStore({
 				(item, i) => i >= index || (item?.meta?.affix ?? false)
 			);
 		},
-		/** 关闭右侧标签页 */
+		/** 关闭右侧标签 */
 		closeRightTab(route: RouteLocationNormalized) {
 			const index = this.tabList.findIndex(
 				(item) => item.fullPath == route.fullPath
@@ -42,14 +44,7 @@ export const useTabStore = defineStore({
 				(item, i) => i <= index || (item?.meta?.affix ?? false)
 			);
 		},
-		/** 关闭其他标签页 */
-		closeOtherTab(route: RouteLocationNormalized) {
-			this.tabList = this.tabList.filter(
-				(item) =>
-					item.fullPath == route.fullPath || (item?.meta?.affix ?? false)
-			);
-		},
-		/** 关闭当前标签页 */
+		/** 关闭当前标签 */
 		closeCurrentTab(route: RouteLocationNormalized) {
 			const index = this.tabList.findIndex(
 				(item) => item.fullPath === route.fullPath
@@ -57,8 +52,27 @@ export const useTabStore = defineStore({
 
 			if (index !== -1) this.tabList.splice(index, 1);
 		},
-		/** 关闭全部标签页 */
+		/** 关闭其他标签 */
+		closeOtherTab(route: RouteLocationNormalized) {
+			const routeStore = useRouteStore();
+			const isCurrentRoute =
+				routeStore.currentRoute.fullPath === route.fullPath;
+
+			!isCurrentRoute && router.push(route.fullPath);
+
+			this.tabList = this.tabList.filter(
+				(item) =>
+					item.fullPath == route.fullPath || (item?.meta?.affix ?? false)
+			);
+		},
+		/** 关闭全部标签 */
 		closeAllTab(route: RouteLocationNormalized) {
+			const routeStore = useRouteStore();
+			const isCurrentRoute =
+				routeStore.currentRoute.fullPath === route.fullPath;
+
+			!isCurrentRoute && router.push(route.fullPath);
+
 			this.tabList = this.tabList.filter((item) =>
 				item?.meta?.affix || item.fullPath === route.fullPath ? true : false
 			);

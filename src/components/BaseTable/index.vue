@@ -1,5 +1,5 @@
 <template>
-  <n-data-table class="flex-1" :columns="columns" :data="data" :scroll-x="scrollX" :pagination="renderPagination"
+  <n-data-table class="flex-1" :columns="columns" :data="data" :scroll-x="scrollX" :pagination="pagination"
     :bordered="false" :single-line="false" :loading="loading" flex-height remote @update:page="handleUpdatePage"
     @update:page-size="handleUpdatePageSize" />
 </template>
@@ -32,7 +32,7 @@ type Emits = {
 const props = withDefaults(defineProps<Props>(), {
   showPagination: true,
   loading: false,
-  operation: () => []
+  operation: () => [],
 });
 
 const emit = defineEmits<Emits>();
@@ -57,7 +57,6 @@ const paginationOptions = computed((): PaginationProps => {
     page,
     pageSize,
     itemCount,
-    // pageCount: 0,
     pageSizes: [10, 20, 30, 40, 50],
     showQuickJumper: true,
     showSizePicker: true,
@@ -66,14 +65,15 @@ const paginationOptions = computed((): PaginationProps => {
 });
 
 /** 渲染分页 */
-const renderPagination = computed(() => props.showPagination ? paginationOptions.value : false);
+const pagination = computed(() => props.showPagination ? paginationOptions.value : false);
 
 /** 计算表格宽度 */
-function computedTableWidth(acc: number, cur: any): number {
+function calculateTableWidth(acc: number, cur: BaseTableColumn): number {
   if (cur.children) {
-    return acc + computedTableWidth(acc, cur.children);
+    // return acc + calculateTableWidth(acc, cur.children);
+    return cur.children.reduce(calculateTableWidth, 0);
   }
-  return acc + (+cur?.width || 0);
+  return acc + (cur.width ? Number(cur.width) : 0);
 }
 
 /** 表格操作列宽度 */
@@ -92,12 +92,11 @@ const operationColumnWidth = computed(() => {
 /** 表格内容的横向宽度 */
 const scrollX = computed(() => {
   if (props.columns.length === 0) return 0;
-  const columnsWidth = props.columns.reduce(computedTableWidth, 0);
-  // const fixedLeftColumnsWidth = props.columns.reduce((acc, cur) => acc + (cur.fixed === 'left' ? cur.width || 0 : 0), 0);
+  const columnsWidth = props.columns.reduce(calculateTableWidth, 0);
+  const fixedLeftColumnsWidth = props.columns.reduce((acc, cur) => acc + (cur.fixed === 'left' ? (cur.width ? Number(cur.width) : 0) : 0), 0);
   const fixedRightColumnsWidth = operationColumnWidth.value;
 
-  return columnsWidth + fixedRightColumnsWidth;
-  // return columnsWidth + fixedLeftColumnsWidth + fixedRightColumnsWidth;
+  return columnsWidth + fixedLeftColumnsWidth + fixedRightColumnsWidth;
 });
 </script>
 

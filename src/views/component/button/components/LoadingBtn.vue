@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormTitle title="加载中" />
+    <BaseTitle title="加载中" />
     <n-flex>
       <n-button :loading="loading" :render-icon="renderIcon" @click="handleClick">
         点我

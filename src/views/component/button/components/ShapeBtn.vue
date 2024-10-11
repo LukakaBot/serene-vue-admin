@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormTitle title="形状" />
+    <BaseTitle title="形状" />
     <n-flex>
       <n-button circle :render-icon="renderIcon"></n-button>
       <n-button round>圆角</n-button>
