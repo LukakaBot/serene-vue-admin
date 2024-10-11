@@ -12,7 +12,7 @@ import type { SearchParams } from '@/components/BaseSearch/types';
 import type { BaseTableColumn } from '@/components/BaseTable/types.d.ts';
 import type { UserPageContent } from '@/api/users/types';
 import { fetchUserPage } from '@/api/users/index';
-import { useLoading } from '@/hooks/loading/index';
+import { useLoading } from '@/hooks/useLoading';
 
 const [loading, setLoading] = useLoading();
 

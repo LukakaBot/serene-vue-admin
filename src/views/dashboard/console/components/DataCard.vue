@@ -153,7 +153,7 @@
 </template>
 
 <script setup lang="ts">
-import { useLoading } from '@/hooks/loading';
+import { useLoading } from '@/hooks/useLoading';
 import type { DataCardItem } from '../types';
 
 const [loading, setLoading] = useLoading();

@@ -20,7 +20,7 @@
 import type { UserTokenAccountParams } from '@/api/users/types';
 import { FormInst } from 'naive-ui';
 import { useUserStore } from '@/store/index';
-import { useLoading } from '@/hooks/loading';
+import { useLoading } from '@/hooks/useLoading';
 import router from '@/router';
 
 /** 用户信息商店 */

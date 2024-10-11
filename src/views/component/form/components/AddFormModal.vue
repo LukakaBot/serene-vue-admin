@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import { FormInst, FormRules } from "naive-ui";
-import { useShow } from "@/hooks/show";
-import { useLoading } from '@/hooks/loading';
+import { useVisible } from "@/hooks/useVisible";
+import { useLoading } from '@/hooks/useLoading';
 
 type FormData = {
   name: string;
@@ -30,7 +30,7 @@ const bodyStyle = {
   width: '500px',
 };
 
-const [show, openModal, closeModal] = useShow();
+const [show, openModal, closeModal] = useVisible();
 
 const [loading, setLoading] = useLoading();
 

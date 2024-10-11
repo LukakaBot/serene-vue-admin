@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import { useShow } from "@/hooks/show";
+import { useVisible } from "@/hooks/useVisible";
 
-const [show, openModal, closeModal] = useShow();
+const [show, openModal, closeModal] = useVisible();
 
 defineExpose({ openModal, closeModal });
 </script>

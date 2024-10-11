@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useLoading } from '@/hooks/loading/index';
+import { useLoading } from '@/hooks/useLoading';
 import BaseIcon from '@/components/BaseIcon/index.vue';
 
 const [loading, setLoading] = useLoading();

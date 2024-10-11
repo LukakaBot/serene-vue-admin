@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { useLoading } from '@/hooks/loading';
+import { useLoading } from '@/hooks/useLoading';
 
 const [loading, setLoading] = useLoading();
 

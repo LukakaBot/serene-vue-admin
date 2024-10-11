@@ -9,7 +9,7 @@
 import { NAvatar } from 'naive-ui';
 import type { BaseTableColumn } from '@/components/BaseTable/types';
 import { fetchTableDataPage } from '@/api/table/index.ts';
-import { useLoading } from '@/hooks/loading';
+import { useLoading } from '@/hooks/useLoading';
 
 const [loading, setLoading] = useLoading();
 
