@@ -3,12 +3,12 @@
     <div class="search-container" :class="{ expand: !isCollapse }">
       <div class="search-wrap">
         <n-form-item label-placement="left" :label="item.label" v-for="(item, index) in list" :key="index">
+          <!-- 文本输入框 -->
           <n-input v-model:value="item.value" clearable :placeholder="`请输入${item.label}`" v-if="item.type === 'text'" />
-          <!-- <n-select v-model:value="item.value" clearable :options="item.options!" :placeholder="`请选择${item.label}`"
-            :label-field="item.labelField || 'label'" :value-field="item.valueField || 'value'"
-            v-if="item.type === 'select'" /> -->
+          <!-- 日期选择器 -->
           <n-date-picker class="w-full" v-model:formatted-value="item.value" value-format="yyyy-MM-dd" type="date"
             v-if="item.type === 'date'" />
+          <!-- 日期范围选择器 -->
           <n-date-picker class="w-full" v-model:formatted-value="item.value" value-format="yyyy-MM-dd" type="daterange"
             v-if="item.type === 'daterange'" />
         </n-form-item>

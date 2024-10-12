@@ -1,5 +1,6 @@
-import type { TableColumn, InternalRowData } from 'naive-ui/lib/data-table/src/interface';
 import { VNode } from 'vue';
+import type { TableColumn, InternalRowData, RowData } from 'naive-ui/lib/data-table/src/interface';
+import type { Type } from 'naive-ui/es/button/src/interface';
 
 export type SearchParams = {
   page?: number;
@@ -9,8 +10,8 @@ export type SearchParams = {
 
 export type Operation = {
   label: string;
-  type?: 'primary' | 'info' | 'success' | 'warning' | 'danger';
-  disabled?: boolean;
+  type?: Type;
+  disabled?: (row: RowData) => boolean;
   icon?: string | (() => VNode);
 };
 

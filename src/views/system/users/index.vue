@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-// import { NAvatar, NTag } from 'naive-ui';
 import type { SearchParams } from '@/components/BaseSearch/types';
 import type { BaseTableColumn } from '@/components/BaseTable/types.d.ts';
 import type { UserPageContent } from '@/api/users/types';
