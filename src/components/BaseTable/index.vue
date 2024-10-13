@@ -1,5 +1,5 @@
 <template>
-  <n-data-table class="flex-1" :bordered="false" :columns="tableColumns" :checked-row-keys="checkedRowKeys" :data="data"
+  <n-data-table class="flex-1" :columns="tableColumns" :checked-row-keys="checkedRowKeys" :data="data"
     :scroll-x="scrollX" :pagination="pagination" :single-line="false" :loading="loading" flex-height remote
     :row-key="rowKey" @update:checked-row-keys="handleUpdateCheckedRowKeys" @update:page="handleUpdatePage"
     @update:page-size="handleUpdatePageSize" />
@@ -27,7 +27,7 @@ type Props = {
   /** 表格操作按钮 */
   operations?: Operation[];
   /** 表格行的 key */
-  rowKey: (rowData: RowData) => (number | string);
+  rowKey?: (rowData: RowData) => (number | string);
 };
 
 type Emits = {

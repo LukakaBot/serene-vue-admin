@@ -102,8 +102,6 @@ function userTableList(pageSize) {
   doCustomTimes(pageSize, () => {
     result.push({
       id: '@integer(10,999999)',
-      beginTime: '@datetime',
-      endTime: '@datetime',
       address: '@county(true)',
       name: '@cname()',
       avatar: Random.image(
@@ -112,8 +110,9 @@ function userTableList(pageSize) {
         Random.color(),
         Random.first()
       ),
-      date: `@date('yyyy-MM-dd')`,
-      time: `@time('HH:mm')`,
+      phone: /^1[3-9]\d{9}$/,
+      'roleName|1': Mock.Random.pick(['超级管理员', '管理员', '普通角色', '通用角色']),
+      createTime: '@datetime',
       'no|100000-10000000': 100000,
       'status|1': [true, false],
     });

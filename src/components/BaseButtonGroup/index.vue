@@ -1,6 +1,6 @@
 <template>
   <n-flex>
-    <n-button :type="btn.type" v-for="(btn, index) in list" :key="index" :render-icon="renderIconName"
+    <n-button v-for="(btn, index) in list" :key="index" :type="btn.type" :render-icon="renderIconName(btn.icon!)" strong
       @click="handleClick(btn.text)">
       {{ btn.text }}
     </n-button>

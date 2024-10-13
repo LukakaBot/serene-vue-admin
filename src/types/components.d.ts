@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BaseAMap: typeof import('./../components/BaseAMap/index.vue')['default']
+    BaseButtonGroup: typeof import('./../components/BaseButtonGroup/index.vue')['default']
+    BaseDescriptions: typeof import('./../components/BaseDescriptions/index.vue')['default']
     BaseIcon: typeof import('./../components/BaseIcon/index.vue')['default']
     BaseModal: typeof import('./../components/BaseModal/index.vue')['default']
     BaseSearch: typeof import('./../components/BaseSearch/index.vue')['default']
@@ -46,6 +48,7 @@ declare module 'vue' {
     NTabs: typeof import('naive-ui')['NTabs']
     NTag: typeof import('naive-ui')['NTag']
     NumberAnimation: typeof import('./../components/NumberAnimation/index.vue')['default']
+    RenderDescription: typeof import('./../components/BaseDescriptions/components/RenderDescription.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
