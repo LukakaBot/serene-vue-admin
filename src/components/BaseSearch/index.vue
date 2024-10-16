@@ -12,13 +12,13 @@
           <n-date-picker class="w-full" v-model:formatted-value="item.value" value-format="yyyy-MM-dd" type="daterange"
             v-if="item.type === 'daterange'" />
         </n-form-item>
-        <div class="btn-wrap">
+        <n-flex class="absolute top-0 right-0">
           <n-button strong type="primary" @click="handleSearch">查询</n-button>
           <n-button strong secondary @click="handleClear">重置</n-button>
           <n-button tertiary v-if="list.length > 4" @click="isCollapse = !isCollapse">
             <BaseIcon class="arrow" :class="{ 'arrow__up': !isCollapse }" name="ep:arrow-down-bold" />
           </n-button>
-        </div>
+        </n-flex>
       </div>
     </div>
   </Transition>
@@ -103,14 +103,6 @@ defineExpose({ handleSearch, handleClear });
   row-gap: 10px;
   column-gap: 10px;
   position: relative;
-}
-
-.btn-wrap {
-  display: flex;
-  column-gap: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 
 .arrow {

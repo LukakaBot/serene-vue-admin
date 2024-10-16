@@ -82,7 +82,6 @@ const paginationOptions = computed((): PaginationProps => {
 /** 计算表格宽度 */
 function calculateTableWidth(acc: number, cur: BaseTableColumn): number {
   if (cur.children) {
-    // return acc + calculateTableWidth(acc, cur.children);
     return cur.children.reduce(calculateTableWidth, 0);
   }
   return acc + (cur.width ? Number(cur.width) : 0);
