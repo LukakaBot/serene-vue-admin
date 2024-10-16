@@ -17,11 +17,6 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   title: '我是标题',
   titleStyle: () => ({}),
-  // titleStyle: () => ({
-  //   'margin': '12px 0',
-  //   'fontSize': '20px',
-  //   'fontWeight': 'bold',
-  // }),
   showTag: true,
   tagDirection: 'bottom',
 });

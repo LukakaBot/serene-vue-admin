@@ -4,3 +4,46 @@ body,
 #app-loading {
 	height: 100%;
 }
+
+.left-tag-title {
+	position: relative;
+	z-index: 0;
+	margin-bottom: 1rem; /* 16px */
+	display: inline-block;
+	font-size: 1.5rem; /* 24px */
+	line-height: 2rem; /* 32px */
+	font-weight: 700;
+}
+
+.left-tag-title::after {
+	position: absolute;
+	left: 0;
+	z-index: -1;
+	height: 100%;
+	width: 0.5rem; /* 8px */
+	--un-bg-opacity: 1;
+	background-color: rgb(74 222 128 / var(--un-bg-opacity)) /* #4ade80 */;
+	content: '';
+}
+
+.bottom-tag-title {
+	position: relative;
+	z-index: 0;
+	margin-bottom: 1rem; /* 16px */
+	display: inline-block;
+	font-size: 1.5rem; /* 24px */
+	line-height: 2rem; /* 32px */
+	font-weight: 700;
+}
+
+.bottom-tag-title::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	height: 0.5rem; /* 8px */
+	width: 100%;
+	--un-bg-opacity: 1;
+	background-color: rgb(74 222 128 / var(--un-bg-opacity)) /* #4ade80 */;
+	content: '';
+}
