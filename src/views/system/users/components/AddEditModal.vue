@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :show="show" :title="modalTitle" @close="closeModal" @submit="handleSubmit">
+  <BaseModal :show="show" :title="modalTitle" draggable @close="closeModal" @submit="handleSubmit">
 
   </BaseModal>
 </template>
