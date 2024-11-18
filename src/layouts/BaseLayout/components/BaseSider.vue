@@ -2,7 +2,7 @@
   <n-layout-sider collapse-mode="width" :collapsed="collapsed" :collapsed-width="64" :width="240" show-trigger
     :on-after-enter="handleAfterSiderEnter" @update:collapsed="handleUpdateCollapsed">
     <div class="flex justify-center items-center gap-x-5px m-8px h-32px bg-#ccc overflow-hidden">
-      <span class="whitespace-nowrap break-all" v-if="isRenderTitle">Naive admin</span>
+      <span class="whitespace-nowrap break-all" v-if="isRenderTitle">Serene Admin</span>
       <BaseIcon name="logos:vue" :size="22" v-else />
     </div>
     <n-menu :value="currentRoute" :default-value="currentRoute" :options="menus" :collapsed="collapsed"

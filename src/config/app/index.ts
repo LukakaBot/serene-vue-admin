@@ -2,7 +2,7 @@ import type { GlobalConfig } from './types';
 
 /** 全局配置 */
 const globalConfig: GlobalConfig = {
-  title: 'naive-admin',
+  title: 'serene-admin',
   routeConfig: {
     mode: "hash",
   },

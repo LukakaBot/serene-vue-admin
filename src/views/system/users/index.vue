@@ -5,6 +5,7 @@
     <BaseTable :search-params="searchParams" :columns="columns" :data="tableData" :loading="loading"
       :checked-row-keys="checkedRowKeys" @update:checked-row-keys="handleUpdateCheckedRowKeys"
       @update:page="handleUpdatePage" @update:page-size="handleUpdatePageSize" />
+    <AddEditModal ref="addEditModalRef" :select-row="selectRow" />
   </div>
 </template>
 
@@ -16,8 +17,11 @@ import type { UserPageContent } from '@/api/users/types';
 import type { BaseButtonGroup } from '@/components/BaseButtonGroup/types';
 import { fetchUserPage } from '@/api/users/index';
 import { useLoading } from '@/hooks/useLoading';
+import AddEditModal from './components/AddEditModal.vue';
 
 const [loading, setLoading] = useLoading();
+
+const addEditModalRef = ref<InstanceType<typeof AddEditModal>>();
 
 const searchParams = ref({
   page: 1,
@@ -30,36 +34,20 @@ const searchList = ref([
   { type: 'text', label: '手机号码', key: 'phone', value: '' },
 ]);
 
-const btnList: BaseButtonGroup[] = [
-  { text: '新增', icon: 'ep:plus', type: 'primary' },
-  { text: '批量删除', icon: 'ep:delete', type: 'error' },
-];
-
-const checkedRowKeys = ref<Array<string | number>>([]);
-
-const tableData = ref<UserPageContent[]>([]);
-
-const columns: BaseTableColumn[] = [
-  { type: 'selection', key: 'selection', fixed: 'left' },
-  { title: '序号', align: "center", key: "index", width: 60, fixed: "left", render: (_, index) => `${index + 1}` },
-  { title: '名称', key: 'name', width: 100, align: 'center', ellipsis: { tooltip: true } },
-  { title: '手机号码', key: 'phone', width: 120, align: 'center', ellipsis: { tooltip: true } },
-  { title: '地址', key: 'address', width: 200, align: 'center', ellipsis: { tooltip: true } },
-  { title: '头像', key: 'avatar', width: 80, align: 'center', ellipsis: { tooltip: true }, render: (row) => h(NAvatar, { size: 48, src: row.avatar + '', }) },
-  { title: '角色', key: 'roleName', width: 120, align: 'center', ellipsis: { tooltip: true } },
-  { title: '状态', key: 'status', width: 80, align: 'center', ellipsis: { tooltip: true }, render: row => h(NTag, { type: row.status === true ? 'success' : 'error' }, { default: () => row.status === true ? '启用' : '禁用' }) },
-  { title: '创建时间', key: 'createTime', width: 180, align: 'center', ellipsis: { tooltip: true } },
-];
-
 function handleSearch(params: SearchParams) {
   Object.assign(searchParams.value, params);
   getTableData();
 }
 
+const btnList: BaseButtonGroup[] = [
+  { text: '新增', icon: 'ep:plus', type: 'primary' },
+  { text: '批量删除', icon: 'ep:delete', type: 'error' },
+];
+
 function handleClickButtonGroup(text: string) {
   switch (text) {
     case '新增': {
-      console.log('新增');
+      addEditModalRef.value?.openModal();
       break;
     }
     case '批量删除': {
@@ -82,6 +70,24 @@ function handleDelete(ids: Array<string | number>) {
   window.$message?.success('操作成功');
   getTableData();
 }
+
+const selectRow = ref<UserPageContent | null>(null);
+
+const checkedRowKeys = ref<Array<string | number>>([]);
+
+const tableData = ref<UserPageContent[]>([]);
+
+const columns: BaseTableColumn[] = [
+  { type: 'selection', key: 'selection', fixed: 'left' },
+  { title: '序号', align: "center", key: "index", width: 60, fixed: "left", render: (_, index) => `${index + 1}` },
+  { title: '名称', key: 'name', width: 100, align: 'center', ellipsis: { tooltip: true } },
+  { title: '手机号码', key: 'phone', width: 120, align: 'center', ellipsis: { tooltip: true } },
+  { title: '地址', key: 'address', width: 200, align: 'center', ellipsis: { tooltip: true } },
+  { title: '头像', key: 'avatar', width: 80, align: 'center', ellipsis: { tooltip: true }, render: (row) => h(NAvatar, { size: 48, src: row.avatar + '', }) },
+  { title: '角色', key: 'roleName', width: 120, align: 'center', ellipsis: { tooltip: true } },
+  { title: '状态', key: 'status', width: 80, align: 'center', ellipsis: { tooltip: true }, render: row => h(NTag, { type: row.status === true ? 'success' : 'error' }, { default: () => row.status === true ? '启用' : '禁用' }) },
+  { title: '创建时间', key: 'createTime', width: 180, align: 'center', ellipsis: { tooltip: true } },
+];
 
 async function getTableData() {
   try {
