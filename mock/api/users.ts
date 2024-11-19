@@ -25,31 +25,31 @@ const menus = [
     name: '组件',
     component: '/layouts/BaseLayout/BaseLayout.vue',
     redirect: '/component/button',
-    meta: { icon: 'bxs:component' },
+    meta: { icon: 'mdi:widgets-outline' },
     children: [
       {
         path: '/component/button',
         name: '按钮',
         component: '/views/component/button/index.vue',
-        meta: { icon: 'material-symbols:buttons-alt-outline-rounded' }
+        meta: { icon: 'lucide:mouse-pointer-click' }
       },
       {
         path: '/component/form',
         name: '表单',
         component: '/views/component/form/index.vue',
-        meta: { icon: 'ant-design:form-outlined' }
+        meta: { icon: 'lucide:text-cursor-input' }
       },
       {
         path: '/component/table',
         name: '表格',
         component: '/views/component/table/index.vue',
-        meta: { icon: 'mdi:table' },
+        meta: { icon: 'lucide:table' },
       },
       {
         path: '/component/carousel',
         name: '轮播图',
         component: '/views/component/carousel/index.vue',
-        meta: { icon: 'mdi:carousel' },
+        meta: { icon: 'lucide:images' },
       }
     ]
   },
