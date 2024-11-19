@@ -4,7 +4,6 @@ export default defineConfig({
   presets: [
     presetUno(),
   ],
-  safelist: ['left-tag-title', 'bottom-tag-title'],
   transformers: [
     transformerVariantGroup(),
     transformerDirectives(),

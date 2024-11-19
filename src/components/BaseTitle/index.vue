@@ -21,7 +21,14 @@ const props = withDefaults(defineProps<Props>(), {
   tagDirection: 'bottom',
 });
 
-const tagClassName = computed(() => `${props.tagDirection}-tag-title`);
+const tagClassName = computed(() => {
+  if (props.tagDirection === 'left') {
+    return 'left-tag-title'
+  }
+  else {
+    return 'bottom-tag-title'
+  }
+});
 </script>
 
 <style scoped></style>

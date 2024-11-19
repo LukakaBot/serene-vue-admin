@@ -22,35 +22,35 @@ const menus = [
   },
   {
     path: '/component',
-    name: '组件示例',
+    name: '组件',
     component: '/layouts/BaseLayout/BaseLayout.vue',
     redirect: '/component/button',
     meta: { icon: 'bxs:component' },
     children: [
       {
         path: '/component/button',
-        name: '按钮组件',
+        name: '按钮',
         component: '/views/component/button/index.vue',
         meta: { icon: 'material-symbols:buttons-alt-outline-rounded' }
       },
       {
         path: '/component/form',
-        name: '表单组件',
+        name: '表单',
         component: '/views/component/form/index.vue',
         meta: { icon: 'ant-design:form-outlined' }
       },
       {
         path: '/component/table',
-        name: '表格组件',
-        meta: { icon: 'material-symbols:table' },
-        children: [
-          {
-            path: '/component/table/basic',
-            name: '基础表格',
-            component: '/views/component/table/basic/index.vue',
-          }
-        ]
+        name: '表格',
+        component: '/views/component/table/index.vue',
+        meta: { icon: 'mdi:table' },
       },
+      {
+        path: '/component/carousel',
+        name: '轮播图',
+        component: '/views/component/carousel/index.vue',
+        meta: { icon: 'mdi:carousel' },
+      }
     ]
   },
   {
