@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import { CSSProperties } from 'vue';
 import { NModal } from 'naive-ui';
 
 type Props = {
@@ -30,7 +31,7 @@ type Props = {
   /** 标题 */
   title?: string;
   /** 弹窗样式 */
-  bodyStyle?: Record<string, string>;
+  bodyStyle?: CSSProperties;
   /** 显示底部 */
   showFooter?: boolean;
   /** 显示提交按钮 */

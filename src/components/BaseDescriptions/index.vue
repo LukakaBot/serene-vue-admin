@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue';
 import type { BaseDescription, DescriptionData } from './types';
 import RenderDescription from './components/RenderDescription.vue';
 
@@ -18,9 +19,9 @@ type Props = {
   /** 数据 */
   data: DescriptionData;
   /** 标签样式 */
-  itemLabelStyle: Record<string, string>;
+  itemLabelStyle: CSSProperties;
   /** 内容样式 */
-  itemContentStyle: Record<string, string>;
+  itemContentStyle: CSSProperties;
 };
 
 withDefaults(defineProps<Props>(), {
