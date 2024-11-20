@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<Props>(), {
   draggable: false,
 });
 
-const emit = defineEmits(['close', 'closed', 'submit']);
+const emits = defineEmits(['close', 'closed', 'submit']);
 
 const attrs = useAttrs();
 
@@ -64,15 +64,15 @@ const headerRef = ref<HTMLElement | null>(null);
 let transform = { offsetX: 0, offsetY: 0 };
 
 function handleClose() {
-  emit('close');
+  emits('close');
 }
 
 function handleAfterLeave() {
-  emit('closed');
+  emits('closed');
 }
 
 function handleSubmit() {
-  emit('submit');
+  emits('submit');
 }
 
 function onMousedown(e: MouseEvent) {

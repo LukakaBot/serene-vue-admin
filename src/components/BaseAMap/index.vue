@@ -6,7 +6,9 @@
 import AMapLoader from "@amap/amap-jsapi-loader";
 
 type Props = {
+  /** 宽度 */
   width?: string;
+  /** 高度 */
   height?: string;
   /** 中心纬度 */
   latitude?: number;
@@ -27,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
   showLogo: true,
 });
 
-const emit = defineEmits(['complete', 'locate']);
+const emits = defineEmits(['complete', 'locate']);
 
 /** 地图实例 */
 let map: AMap.Map | null = null;
@@ -50,7 +52,7 @@ function initMap() {
         zoom: props.zoom,
       });
       map?.on('complete', function () {
-        emit('complete', map);
+        emits('complete', map);
       });
     }).catch((err) => {
       console.log(err);

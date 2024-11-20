@@ -45,21 +45,21 @@ const props = withDefaults(defineProps<Props>(), {
   rowKey: (row: RowData) => row.id,
 });
 
-const emit = defineEmits<Emits>();
+const emits = defineEmits<Emits>();
 
 /** checked-row-keys 值更新事件 */
 function handleUpdateCheckedRowKeys(keys: Array<number | string>) {
-  emit('update:checked-row-keys', keys);
+  emits('update:checked-row-keys', keys);
 }
 
 /** 分页更新事件 */
 function handleUpdatePage(page: number) {
-  emit('update:page', page);
+  emits('update:page', page);
 }
 
 /** 分页大小更新事件 */
 function handleUpdatePageSize(size: number) {
-  emit('update:page-size', size);
+  emits('update:page-size', size);
 }
 
 /** 分页 */
@@ -94,7 +94,7 @@ function renderOperationColumnButtons(operations: Operation[], row: RowData) {
     type: operation.type,
     disabled: operation?.disabled ? operation.disabled(row) : false,
     renderIcon: renderIcon({ name: operation.icon as string }),
-    onClick: () => emit('operate', operation.label, row)
+    onClick: () => emits('operate', operation.label, row)
   }, () => operation.label));
 }
 

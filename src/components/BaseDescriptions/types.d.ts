@@ -1,12 +1,15 @@
+import type { VNodeChild } from 'vue';
 import type { InternalRowData } from 'naive-ui/lib/data-table/src/interface';
-import { VNodeChild } from 'vue';
+
+export type BaseDescriptionRender = (data: BaseDescriptionData, field: string) => VNodeChild;
 
 export type BaseDescription = {
   /** 描述文本 */
   text: string;
   /** 描述字段 */
   field: string;
-  render?: (data: DescriptionData) => VNodeChild
+  /** 渲染函数 */
+  render?: BaseDescriptionRender;
 };
 
-export type DescriptionData<T = InternalRowData> = T;
+export type BaseDescriptionData<T = InternalRowData> = T;

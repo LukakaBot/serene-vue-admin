@@ -23,10 +23,10 @@ withDefaults(defineProps<Props>(), {
   list: () => []
 });
 
-const emit = defineEmits<Emits>();
+const emits = defineEmits<Emits>();
 
 function handleClick(text: string) {
-  emit('click', text);
+  emits('click', text);
 }
 
 function renderIconName(name: string) {

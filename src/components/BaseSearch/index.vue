@@ -37,7 +37,7 @@ type Emits = {
 
 const props = defineProps<Props>();
 
-const emit = defineEmits<Emits>();
+const emits = defineEmits<Emits>();
 
 /** 表单类型排除 */
 const formTypeExcludes = ['select', 'date', 'dateRange'];
@@ -56,7 +56,7 @@ function handleSearch() {
     return { ...accumulator, [current.key]: current.value };
   }, {} as SearchParams);
 
-  emit('update:search', params);
+  emits('update:search', params);
 }
 
 /** 搜索清空事件 */
@@ -67,7 +67,7 @@ function handleClear() {
     return { ...accumulator, [current.key]: resetFormData(current.type) };
   }, {} as SearchParams);
 
-  emit('update:search', params);
+  emits('update:search', params);
 }
 
 /** 搜索容器展开状态的高度 */
