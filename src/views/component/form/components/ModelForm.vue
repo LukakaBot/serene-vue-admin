@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <n-card>
     <BaseTitle title="弹窗表单" />
     <n-flex>
       <n-button @click="addFormModalRef?.openModal">新增表单弹窗</n-button>
@@ -7,7 +7,7 @@
     </n-flex>
     <AddFormModal ref="addFormModalRef" />
     <ViewFormModal ref="viewFormModalRef" />
-  </div>
+  </n-card>
 </template>
 
 <script setup lang="ts">

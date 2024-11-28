@@ -4,7 +4,7 @@
     <n-layout>
       <main class="flex flex-col h-full overflow-hidden">
         <BaseHeader />
-        <n-layout-content :class="{ 'layout-default-background': getDarkTheme === false }">
+        <n-layout-content :class="{ 'layout-default-background': isDarkMode }">
           <div class="flex flex-col h-full overflow-hidden">
             <BaseTab />
             <BaseContent />
@@ -12,19 +12,22 @@
         </n-layout-content>
       </main>
     </n-layout>
+    <n-watermark v-if="showWatermark" />
   </n-layout>
 </template>
 
 <script lang="ts" setup>
-import { useThemeStore } from '@/store';
-import BaseHeader from './components/BaseHeader.vue';
+import { useConfigStore } from '@/store';
+import BaseHeader from './components/BaseHeader/index.vue';
 import BaseSider from './components/BaseSider.vue';
 import BaseTab from './components/BaseTab.vue';
 import BaseContent from './components/BaseContent.vue';
 
-const themeStore = useThemeStore();
+const configStore = useConfigStore();
 
-const getDarkTheme = computed(() => themeStore.darkTheme);
+const showWatermark = computed(() => configStore.showWatermark);
+
+const isDarkMode = computed(() => configStore.isDarkMode);
 </script>
 
 <style lang="scss" scoped>

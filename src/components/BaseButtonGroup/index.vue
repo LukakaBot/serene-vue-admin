@@ -31,7 +31,7 @@ function handleClick(text: string) {
 
 function renderIconName(name: string) {
   if (!name) return undefined;
-  return renderIcon({ name });
+  return () => renderIcon({ name });
 }
 </script>
 

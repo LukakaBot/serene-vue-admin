@@ -15,9 +15,7 @@
     </div>
     <div class="tab-close">
       <n-dropdown trigger="click" @select="handleSelectMenu" placement="bottom-end" :options="menuOptions">
-        <div class="p-3px">
-          <BaseIcon name="ep:arrow-down" :size="20" />
-        </div>
+        <n-button quaternary :render-icon="() => renderIcon({ name: 'gravity-ui:face-smile', size: 20 })" />
       </n-dropdown>
     </div>
     <n-dropdown :show="showSideMenu" :x="sideMenuPosition.x" :y="sideMenuPosition.y" @clickoutside="handleCloseSideMenu"
@@ -153,10 +151,10 @@ const menuOptions = computed((): DropdownOption[] => {
   const isDisabled = tabList.value.length <= 1;
 
   return [
-    { key: '1', label: '刷新当前', icon: renderIcon({ name: 'ep-refresh-right', size: 16 }), },
-    { key: '2', label: `关闭当前`, disabled: isCurrentRoute.value || isDisabled, icon: renderIcon({ name: 'ep-close' }), },
-    { key: '3', label: '关闭其他', disabled: isDisabled, icon: renderIcon({ name: 'hugeicons:arrow-left-right' }), },
-    { key: '4', label: '关闭全部', disabled: isDisabled, icon: renderIcon({ name: 'bi:dash' }), },
+    { key: '1', label: '刷新当前', icon: () => renderIcon({ name: 'ep-refresh-right', size: 16 }), },
+    { key: '2', label: `关闭当前`, disabled: isCurrentRoute.value || isDisabled, icon: () => renderIcon({ name: 'ep-close' }), },
+    { key: '3', label: '关闭其他', disabled: isDisabled, icon: () => renderIcon({ name: 'hugeicons:arrow-left-right' }), },
+    { key: '4', label: '关闭全部', disabled: isDisabled, icon: () => renderIcon({ name: 'bi:dash' }), },
   ];
 });
 </script>

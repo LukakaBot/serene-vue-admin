@@ -1,8 +1,8 @@
-import { NButton } from 'naive-ui';
+import { Slot } from 'vue';
 import type { ButtonProps } from 'naive-ui';
+import { NButton } from 'naive-ui';
 import type { BaseIconProps } from '@/components/BaseIcon/types';
 import BaseIcon from '@/components/BaseIcon/index.vue';
-import { Slot } from 'vue';
 
 /**
  * Sums the passed percentage to the R, G or B of a HEX color
@@ -33,9 +33,9 @@ export function lighten(color: string, amount: number) {
 
 
 export function renderIcon(props: BaseIconProps) {
-  return () => h(BaseIcon, props);
+  return h(BaseIcon, props);
 }
 
 export function renderButton(props: ButtonProps, slot: Slot | (() => string) | string) {
-  return () => h(NButton, props, slot);
+  return h(NButton, props, slot);
 }

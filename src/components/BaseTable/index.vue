@@ -93,7 +93,7 @@ function renderOperationColumnButtons(operations: Operation[], row: RowData) {
     size: 'small',
     type: operation.type,
     disabled: operation?.disabled ? operation.disabled(row) : false,
-    renderIcon: renderIcon({ name: operation.icon as string }),
+    renderIcon: () => renderIcon({ name: operation.icon as string }),
     onClick: () => emits('operate', operation.label, row)
   }, () => operation.label));
 }
@@ -107,7 +107,7 @@ function renderOperationColumn(operations: Operation[]): BaseTableColumn[] {
   newOperationColumn.render = (row) => {
     if (operations.length > 2) {
       return h(NPopover, { trigger: 'hover', placement: 'bottom' }, {
-        trigger: () => renderButton({ type: 'info', size: 'small', iconPlacement: 'right', renderIcon: renderIcon({ name: 'ep:arrow-down' }) }, () => '更多'),
+        trigger: () => renderButton({ type: 'info', size: 'small', iconPlacement: 'right', renderIcon: () => renderIcon({ name: 'ep:arrow-down' }) }, () => '更多'),
         default: () => h(NFlex, { vertical: true, justify: 'center' }, () => renderOperationColumnButtons(operations, row))
       });
     }

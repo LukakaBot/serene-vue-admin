@@ -2,7 +2,7 @@
   <n-card>
     <BaseTitle title="形状" />
     <n-flex>
-      <n-button circle :render-icon="renderIcon"></n-button>
+      <n-button circle :render-icon="renderButtonIcon"></n-button>
       <n-button round>圆角</n-button>
       <n-button>方</n-button>
     </n-flex>
@@ -10,10 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from '@/components/BaseIcon/index.vue';
+import { renderIcon } from '@/utils/tools';
 
-function renderIcon() {
-  return h(BaseIcon, { name: 'carbon:money' });
+function renderButtonIcon() {
+  return renderIcon({ name: 'carbon:money' });
 } 
 </script>
 

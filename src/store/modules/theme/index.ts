@@ -10,7 +10,6 @@ export const useThemeStore = defineStore({
         const lightenStr = lighten(appTheme, 6);
 
         return {
-            darkTheme: false,
             appTheme: {
                 common: {
                     primaryColor: appTheme,
@@ -25,14 +24,6 @@ export const useThemeStore = defineStore({
         }
     },
     actions: {
-        /** 获取深色主题 */
-        getDarkTheme(): boolean {
-            return this.darkTheme;
-        },
-        /** 设置深色主题 */
-        setDarkTheme(isDark: boolean) {
-            this.darkTheme = isDark;
-        },
         /** 获取应用主题 */
         getAppTheme(): GlobalThemeOverrides {
             return this.appTheme;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <n-card>
     <BaseTitle title="行内表单" />
     <div>
       <n-radio-group v-model:value="size" name="left-size" style="margin-bottom: 12px">
@@ -24,7 +24,7 @@
         </n-form-item>
       </n-form>
     </div>
-  </div>
+  </n-card>
 </template>
 
 <script setup lang="ts">
