@@ -12,7 +12,6 @@
         </n-layout-content>
       </main>
     </n-layout>
-    <n-watermark v-if="showWatermark" />
   </n-layout>
 </template>
 
@@ -24,8 +23,6 @@ import BaseTab from './components/BaseTab.vue';
 import BaseContent from './components/BaseContent.vue';
 
 const configStore = useConfigStore();
-
-const showWatermark = computed(() => configStore.showWatermark);
 
 const isDarkMode = computed(() => configStore.isDarkMode);
 </script>
