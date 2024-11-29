@@ -1,10 +1,14 @@
 <template>
   <n-drawer v-model:show="show">
-    <n-drawer-content title="斯通纳">
-      《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
-      <n-divider> 虚线 </n-divider>
+    <n-drawer-content title="系统配置">
+      <n-divider> 主题风格 </n-divider>
       <n-switch :default-value="isDarkMode" @update:value="handleUpdateSwitch">
-        <template #icon> 🤔 </template>
+        <template #checked-icon>
+          <component :is="renderIcon({ name: 'mage:moon' })" />
+        </template>
+        <template #unchecked-icon>
+          <component :is="renderIcon({ name: 'mage:sun' })" />
+        </template>
         <template #checked> dark </template>
         <template #unchecked> light </template>
       </n-switch>
@@ -14,6 +18,7 @@
 
 <script setup lang="ts">
 import { useConfigStore } from '@/store';
+import { renderIcon } from '@/utils/tools';
 
 const configStore = useConfigStore();
 

@@ -4,18 +4,19 @@
       <div class="tab-card-scroll">
         <VueDraggable ref="el" class="tab-card-scroll" v-model="tabStore.tabList">
           <div class="tab-card-scroll-item"
-            :class="[{ 'active-item': activeRoutePath === tab.fullPath }, `text-${getBaseColor}`, `bg-${getCardColor}`]"
+            :class="[{ 'active-item': activeRoutePath === tab.fullPath }, `text-${baseColor}`, `bg-${cardColor}`]"
             v-for="tab in tabList" :key="tab.fullPath" @click="handleSkipPage(tab)"
             @contextmenu="handleContextMenu($event, tab)">
             <span>{{ tab.name }}</span>
-            <BaseIcon name="ep:close" :size="14" @click="closeTab($event, tab)" />
+            <BaseIcon name="mdi:close" :size="14" @click="closeTab($event, tab)" />
           </div>
         </VueDraggable>
       </div>
     </div>
     <div class="tab-close">
       <n-dropdown trigger="click" @select="handleSelectMenu" placement="bottom-end" :options="menuOptions">
-        <n-button quaternary :render-icon="() => renderIcon({ name: 'gravity-ui:face-smile', size: 20 })" />
+        <n-button quaternary
+          :render-icon="() => renderIcon({ name: 'fluent-emoji-high-contrast:partying-face', size: 20 })" />
       </n-dropdown>
     </div>
     <n-dropdown :show="showSideMenu" :x="sideMenuPosition.x" :y="sideMenuPosition.y" @clickoutside="handleCloseSideMenu"
@@ -81,29 +82,20 @@ function closeTab(e: Event, route: RouteLocationNormalizedLoaded) {
 }
 
 function handleSelectMenu(key: string) {
-  switch (key) {
-    // 刷新
-    case '1': {
-      const _route = rightClickMenu.value || route;
-      routeStore.reloadPage(_route);
-      break;
-    }
-    // 关闭
-    case '2': {
-      tabStore.closeCurrentTab(rightClickMenu.value!);
-      break;
-    }
-    // 关闭其他
-    case '3': {
-      tabStore.closeOtherTab(rightClickMenu.value!);
-      break;
-    }
-    // 关闭所有
-    case '4': {
-      tabStore.closeAllTab(rightClickMenu.value!);
-      break;
-    }
+  const _route = rightClickMenu.value || route;
+  const actions: Record<string, (() => void | Promise<void>)> = {
+    '1': () => routeStore.reloadPage(_route), // 刷新
+    '2': () => tabStore.closeCurrentTab(_route), // 关闭
+    '3': () => tabStore.closeOtherTab(_route), // 关闭其他
+    '4': () => tabStore.closeAllTab(_route), // 关闭所有
+  };
+
+  const action = actions[key];
+  if (!action) {
+    throw new Error('Unknown operation');
   }
+
+  action(); // 执行对应的操作
   handleCloseSideMenu();
 }
 
@@ -139,9 +131,9 @@ watch(
   { immediate: true, deep: true }
 )
 
-const getCardColor = computed(() => themeVars.value.cardColor);
+const cardColor = computed(() => themeVars.value.cardColor);
 
-const getBaseColor = computed(() => themeVars.value.textColor1);
+const baseColor = computed(() => themeVars.value.textColor1);
 
 /** 标签页渲染列表 */
 const tabList = computed(() => tabStore.tabList);
@@ -151,10 +143,10 @@ const menuOptions = computed((): DropdownOption[] => {
   const isDisabled = tabList.value.length <= 1;
 
   return [
-    { key: '1', label: '刷新当前', icon: () => renderIcon({ name: 'ep-refresh-right', size: 16 }), },
-    { key: '2', label: `关闭当前`, disabled: isCurrentRoute.value || isDisabled, icon: () => renderIcon({ name: 'ep-close' }), },
-    { key: '3', label: '关闭其他', disabled: isDisabled, icon: () => renderIcon({ name: 'hugeicons:arrow-left-right' }), },
-    { key: '4', label: '关闭全部', disabled: isDisabled, icon: () => renderIcon({ name: 'bi:dash' }), },
+    { key: '1', label: '刷新当前', icon: () => renderIcon({ name: 'mdi:refresh', size: 20 }), },
+    { key: '2', label: `关闭当前`, disabled: isCurrentRoute.value || isDisabled, icon: () => renderIcon({ name: 'mdi:close', size: 20 }), },
+    { key: '3', label: '关闭其他', disabled: isDisabled, icon: () => renderIcon({ name: 'material-symbols:swap-horiz-rounded', size: 20 }), },
+    { key: '4', label: '关闭全部', disabled: isDisabled, icon: () => renderIcon({ name: 'material-symbols:eco-outline-rounded', size: 20 }), },
   ];
 });
 </script>

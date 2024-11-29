@@ -4,7 +4,7 @@
     <n-layout>
       <main class="flex flex-col h-full overflow-hidden">
         <BaseHeader />
-        <n-layout-content :class="{ 'layout-default-background': isDarkMode }">
+        <n-layout-content :class="{ 'bg-#eceef0': !isDarkMode }">
           <div class="flex flex-col h-full overflow-hidden">
             <BaseTab />
             <BaseContent />
@@ -30,8 +30,4 @@ const showWatermark = computed(() => configStore.showWatermark);
 const isDarkMode = computed(() => configStore.isDarkMode);
 </script>
 
-<style lang="scss" scoped>
-.layout-default-background {
-  background: #eceef0;
-}
-</style>
+<style lang="scss" scoped></style>
