@@ -23,6 +23,7 @@ svg {
   width: 100%;
   height: 100vh;
   background: #fee440;
+  z-index: -1;
 }
 
 @keyframes rotate {

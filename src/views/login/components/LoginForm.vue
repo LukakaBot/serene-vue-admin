@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute top-50% left-50% -translate-50% p-20px bg-#fff rounded-3">
+  <div>
     <div class="mb-20px text-26px font-bold text-center">账号密码登录</div>
     <n-form ref="formRef" :model="accountFormData" :rules="rules" :label-width="70" label-placement="left"
       require-mark-placement="left" size="large">
@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import type { UserTokenAccountParams } from '@/api/users/types';
+import type { FormRules } from 'naive-ui';
 import { FormInst } from 'naive-ui';
 import { useUserStore } from '@/store/index';
 import { useLoading } from '@/hooks/useLoading';
@@ -35,7 +36,7 @@ const formRef = ref<FormInst>();
 const accountFormData = ref<UserTokenAccountParams>({} as UserTokenAccountParams);
 
 /** 表单校验规则 */
-const rules = {
+const rules: FormRules = {
   'username': [{ required: true, message: '请输入用户名' }],
   'password': [{ required: true, message: '请输入密码' }],
 };
