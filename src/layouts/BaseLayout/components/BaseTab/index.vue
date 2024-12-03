@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-view">
+  <!-- <div class="tab-view">
     <div ref="navWrap" class="tab-card">
       <div class="tab-card-scroll">
         <VueDraggable ref="el" class="tab-card-scroll" v-model="tabStore.tabList">
@@ -20,7 +20,33 @@
     </div>
     <n-dropdown :show="showSideMenu" :x="sideMenuPosition.x" :y="sideMenuPosition.y" @clickoutside="handleCloseSideMenu"
       placement="bottom-start" @select="handleSelectMenu" :options="menuOptions" />
-  </div>
+  </div> -->
+
+  <n-el class="tab-view">
+    <n-scrollbar ref="scrollbarRef" x-scrollable>
+      <n-el>
+        <VueDraggable ref="el" class="tab-card-scroll" v-model="tabStore.tabList">
+          <n-flex>
+            <n-button :color="activeRoutePath === tab.fullPath ? '#18a058' : themeVars.cardColor"
+              :text-color="activeRoutePath === tab.fullPath ? themeVars.cardColor : themeVars.textColor1"
+              icon-placement="right" v-for="tab in tabList" :key="tab.fullPath" @click="handleSkipPage(tab)"
+              @contextmenu="handleContextMenu($event, tab)">
+              {{ tab.name }}
+              <template #icon>
+                <component :is="renderIcon({ name: 'mdi:close', size: 18 })" @click.stop="closeTab($event, tab)" />
+              </template>
+            </n-button>
+          </n-flex>
+        </VueDraggable>
+      </n-el>
+    </n-scrollbar>
+    <n-dropdown trigger="click" @select="handleSelectMenu" placement="bottom-end" :options="menuOptions">
+      <n-button quaternary
+        :render-icon="() => renderIcon({ name: 'fluent-emoji-high-contrast:partying-face', size: 20 })" />
+    </n-dropdown>
+    <n-dropdown :show="showSideMenu" :x="sideMenuPosition.x" :y="sideMenuPosition.y" @clickoutside="handleCloseSideMenu"
+      placement="bottom-start" @select="handleSelectMenu" :options="menuOptions" />
+  </n-el>
 </template>
 
 <script setup lang="ts">
@@ -116,17 +142,6 @@ function handleContextMenu(e: MouseEvent, menu: RouteLocationNormalizedLoaded) {
     sideMenuPosition.y = e.clientY;
   });
 }
-
-function setTabCardScrollItemStyle(route: RouteLocationNormalizedLoaded) {
-  return {
-    backgroundColor: cardColor.value,
-    color: activeRoutePath.value !== route.fullPath ? baseColor.value : '#18a058',
-  };
-}
-
-const cardColor = computed(() => themeVars.value.cardColor);
-
-const baseColor = computed(() => themeVars.value.textColor1);
 
 /** 标签页渲染列表 */
 const tabList = computed(() => tabStore.tabList);

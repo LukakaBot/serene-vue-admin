@@ -46,18 +46,22 @@ export const useTabStore = defineStore({
 		},
 		/** 关闭当前标签 */
 		closeCurrentTab(route: RouteLocationNormalized) {
+			const routeStore = useRouteStore();
+			const isCurrentRoute = routeStore.currentRoute.fullPath === route.fullPath;
 			const index = this.tabList.findIndex(
 				(item) => item.fullPath === route.fullPath
 			);
 
 			if (index !== -1) this.tabList.splice(index, 1);
+			if (isCurrentRoute) {
+				const redirect = index ? this.tabList[index - 1]!.fullPath : this.tabList[index]!.fullPath;
+				redirect && router.push(redirect);
+			}
 		},
 		/** 关闭其他标签 */
 		closeOtherTab(route: RouteLocationNormalized) {
 			const routeStore = useRouteStore();
-			const isCurrentRoute =
-				routeStore.currentRoute.fullPath === route.fullPath;
-
+			const isCurrentRoute = routeStore.currentRoute.fullPath === route.fullPath;
 			!isCurrentRoute && router.push(route.fullPath);
 
 			this.tabList = this.tabList.filter(
