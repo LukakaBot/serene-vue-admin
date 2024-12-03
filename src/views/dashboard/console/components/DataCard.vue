@@ -2,7 +2,7 @@
   <div class="mb-10px">
     <n-grid cols="1 s:2 m:3 l:4 xl:4 2xl:4" responsive="screen" :x-gap="12" :y-gap="8">
       <n-grid-item>
-        <NCard title="访问量" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
+        <n-card title="访问量" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="success">日</n-tag>
           </template>
@@ -39,10 +39,10 @@
               </template>
             </div>
           </template>
-        </NCard>
+        </n-card>
       </n-grid-item>
       <n-grid-item>
-        <NCard title="销售额" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
+        <n-card title="销售额" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="info">周</n-tag>
           </template>
@@ -66,10 +66,10 @@
               </template>
             </div>
           </template>
-        </NCard>
+        </n-card>
       </n-grid-item>
       <n-grid-item>
-        <NCard title="订单量" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
+        <n-card title="订单量" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="warning">周</n-tag>
           </template>
@@ -106,10 +106,10 @@
               </template>
             </div>
           </template>
-        </NCard>
+        </n-card>
       </n-grid-item>
       <n-grid-item>
-        <NCard title="成交额" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
+        <n-card title="成交额" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="error">月</n-tag>
           </template>
@@ -146,7 +146,7 @@
               </template>
             </div>
           </template>
-        </NCard>
+        </n-card>
       </n-grid-item>
     </n-grid>
   </div>

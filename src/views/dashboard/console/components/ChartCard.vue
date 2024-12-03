@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <n-card class="overflow-hidden" content-style="padding: 0;" :bordered="false">
-      <n-tabs class="bg-#fff" type="line" animated :tabs-padding="20" pane-style="padding: 20px;">
-        <n-tab-pane :name="item.name" :tab="item.tab" v-for="(item, index) in tabList" :key="index">
-          <component :is="item.component" />
-        </n-tab-pane>
-      </n-tabs>
-    </n-card>
-  </div>
+  <n-card class="overflow-hidden" content-style="padding: 0;" :bordered="false">
+    <n-tabs type="line" animated :tabs-padding="20" pane-style="padding: 20px;">
+      <n-tab-pane :name="item.name" :tab="item.tab" v-for="(item, index) in tabList" :key="index">
+        <component :is="item.component" />
+      </n-tab-pane>
+    </n-tabs>
+  </n-card>
 </template>
 
 <script setup lang="ts">
