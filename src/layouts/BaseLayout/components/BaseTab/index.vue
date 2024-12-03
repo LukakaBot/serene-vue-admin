@@ -3,8 +3,7 @@
     <div ref="navWrap" class="tab-card">
       <div class="tab-card-scroll">
         <VueDraggable ref="el" class="tab-card-scroll" v-model="tabStore.tabList">
-          <div class="tab-card-scroll-item"
-            :class="[{ 'active-item': activeRoutePath === tab.fullPath }, `text-${baseColor}`, `bg-${cardColor}`]"
+          <div class="tab-card-scroll-item" :class="[{ 'active-item': activeRoutePath === tab.fullPath }]"
             :style="setTabCardScrollItemStyle(tab)" v-for="tab in tabList" :key="tab.fullPath"
             @click="handleSkipPage(tab)" @contextmenu="handleContextMenu($event, tab)">
             <span>{{ tab.name }}</span>
