@@ -5,8 +5,8 @@
         <VueDraggable ref="el" class="tab-card-scroll" v-model="tabStore.tabList">
           <div class="tab-card-scroll-item"
             :class="[{ 'active-item': activeRoutePath === tab.fullPath }, `text-${baseColor}`, `bg-${cardColor}`]"
-            v-for="tab in tabList" :key="tab.fullPath" @click="handleSkipPage(tab)"
-            @contextmenu="handleContextMenu($event, tab)">
+            :style="setTabCardScrollItemStyle(tab)" v-for="tab in tabList" :key="tab.fullPath"
+            @click="handleSkipPage(tab)" @contextmenu="handleContextMenu($event, tab)">
             <span>{{ tab.name }}</span>
             <BaseIcon name="mdi:close" :size="14" @click="closeTab($event, tab)" />
           </div>
@@ -26,8 +26,8 @@
 
 <script setup lang="ts">
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
-import type { DropdownOption } from 'naive-ui';
 import { useRouter, useRoute } from 'vue-router';
+import type { DropdownOption } from 'naive-ui';
 import { useThemeVars } from 'naive-ui';
 import { VueDraggable } from 'vue-draggable-plus';
 import { renderIcon } from '@/utils/tools/index';
@@ -118,18 +118,12 @@ function handleContextMenu(e: MouseEvent, menu: RouteLocationNormalizedLoaded) {
   });
 }
 
-/** 监视路由变化 */
-watch(
-  () => route,
-  (_) => {
-    const currentRoute = routeStore.currentRoute;
-    routeStore.addCacheRoute(currentRoute);
-    tabStore.addTab(currentRoute);
-
-    activeRoutePath.value = routeStore.currentRoute.fullPath;
-  },
-  { immediate: true, deep: true }
-)
+function setTabCardScrollItemStyle(route: RouteLocationNormalizedLoaded) {
+  return {
+    backgroundColor: cardColor.value,
+    color: activeRoutePath.value !== route.fullPath ? baseColor.value : '#18a058',
+  };
+}
 
 const cardColor = computed(() => themeVars.value.cardColor);
 
@@ -149,6 +143,19 @@ const menuOptions = computed((): DropdownOption[] => {
     { key: '4', label: '关闭全部', disabled: isDisabled, icon: () => renderIcon({ name: 'material-symbols:eco-outline-rounded', size: 20 }), },
   ];
 });
+
+/** 监视路由变化 */
+watch(
+  () => route,
+  (_) => {
+    const currentRoute = routeStore.currentRoute;
+    routeStore.addCacheRoute(currentRoute);
+    tabStore.addTab(currentRoute);
+
+    activeRoutePath.value = routeStore.currentRoute.fullPath;
+  },
+  { immediate: true, deep: true }
+);
 </script>
 
 <style lang="scss" scoped>
