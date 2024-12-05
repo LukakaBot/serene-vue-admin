@@ -1,9 +1,9 @@
 import { App } from 'vue';
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
-import globalConfig  from '@/config/app/index';
+import globalConfig from '@/config/app/index';
 import { createRouteGuard } from './guard/index';
 
-const { routeConfig, title } = globalConfig ;
+const { routeConfig, title } = globalConfig;
 
 const routes = [
   {
@@ -38,10 +38,9 @@ const router = createRouter({
   },
 });
 
-export async function setupRoute(app: App) {
+export function setupRoute(app: App) {
   app.use(router);
   createRouteGuard(router, title);
-  await router.isReady();
 }
 
 export default router;

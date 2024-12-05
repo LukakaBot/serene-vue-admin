@@ -10,7 +10,7 @@ import { useUserStore } from './modules/users';
 export const store = createPinia();
 store.use(piniaPluginPersistedstate);
 
-export function mountStore(app: App<Element>) {
+export function setupStore(app: App<Element>) {
   app.use(store);
 }
 

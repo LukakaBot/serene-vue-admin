@@ -46,7 +46,7 @@ function filterRoute(route: RouteRecordRaw) {
 
 /** 渲染菜单 */
 function renderMenu(route: RouteRecordRaw): MenuOption {
-  const { path, name, meta, children } = route as Route.RouteItem;
+  const { path, name, meta, children } = route as AppRoute.RouteItem;
 
   const link = () => h(RouterLink, { to: path }, () => `${name}`);
   const icon = meta?.icon ? () => h(BaseIcon, { name: meta.icon, size: 22 }) : undefined;
@@ -66,10 +66,7 @@ const filterRoutes = computed(() => routeStore.routes.filter(filterRoute));
 const currentRoute = computed(() => routeStore.currentRoute.fullPath);
 
 /** 菜单 */
-const menus = computed(() => {
-  const menus = filterRoutes.value.map(renderMenu);
-  return menus;
-});
+const menus = computed(() => filterRoutes.value.map(renderMenu));
 </script>
 
 <style scoped></style>

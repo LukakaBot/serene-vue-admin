@@ -1,7 +1,7 @@
 import { createDiscreteApi } from 'naive-ui'
 
 /** 全局属性挂载 */
-export function mountSetting() {
+export function setupSetting() {
   const { message, loadingBar } = createDiscreteApi(['message', 'loadingBar']);
 
   // 消息提示

@@ -4,9 +4,10 @@ import 'virtual:svg-icons-register';
 import App from './App.vue';
 import AppLoading from './layouts/AppLoading/AppLoading.vue';
 import './styles/index';
-import { mountStore } from '@/store/index';
-import { mountSetting } from '@/setting';
-import { setupRoute } from '@/router';
+import { setupStore } from '@/store/index';
+import { setupSetting } from '@/setting';
+import router, { setupRoute } from '@/router';
+import { setupDirectives } from './directives';
 
 async function mountApp() {
   const appLoading = createApp(AppLoading);
@@ -15,13 +16,17 @@ async function mountApp() {
 
   const app = createApp(App);
 
-  mountStore(app);
+  setupStore(app);
 
-  await setupRoute(app);
-
-  mountSetting();
+  setupSetting();
+  
+  setupDirectives(app);
 
   app.use(TlbsMap);
+
+  setupRoute(app);
+
+  await router.isReady();
 
   appLoading.unmount();
 
