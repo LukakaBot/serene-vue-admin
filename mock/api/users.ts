@@ -50,6 +50,12 @@ const menus = [
         name: '轮播图',
         component: '/views/component/carousel/index.vue',
         meta: { icon: 'lucide:images' },
+      },
+      {
+        path: '/component/hignlight',
+        name: '高亮文本',
+        component: '/views/component/hignlight/index.vue',
+        meta: {},
       }
     ]
   },
