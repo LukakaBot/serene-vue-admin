@@ -1,17 +1,23 @@
 <template>
   <div class="base-container">
-    <NormalBtn />
-    <IconBtn />
-    <LoadingBtn />
-    <ShapeBtn />
+    <BaseButton />
+    <SecondaryButton />
+    <TertiaryButton />
+    <TextButton />
+    <IconButton />
+    <ShapeButton />
+    <LoadingButton />
   </div>
 </template>
 
 <script setup lang="ts">
-import NormalBtn from './components/NormalBtn.vue';
-import IconBtn from './components/IconBtn.vue';
-import LoadingBtn from './components/LoadingBtn.vue';
-import ShapeBtn from './components/ShapeBtn.vue';
+import BaseButton from './components/BaseButton.vue';
+import SecondaryButton from './components/SecondaryButton.vue';
+import TertiaryButton from './components/TertiaryButton.vue';
+import TextButton from './components/TextButton.vue';
+import IconButton from './components/IconButton.vue';
+import ShapeButton from './components/ShapeButton.vue';
+import LoadingButton from './components/LoadingButton.vue';
 </script>
 
 <style scoped></style>

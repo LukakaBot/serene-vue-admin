@@ -1,10 +1,12 @@
 <template>
   <n-card>
-    <BaseTitle title="加载中" />
-    <n-flex>
+    <template #header>
+      <BaseTitle title="加载中" />
+    </template>
+    <n-space>
       <n-button :loading="loading" :render-icon="renderButtonIcon" @click="handleClick"> 点我 </n-button>
       <n-button :loading="loading" @click="handleClick"> 点我 </n-button>
-    </n-flex>
+    </n-space>
   </n-card>
 </template>
 
@@ -16,13 +18,11 @@ const [loading, setLoading] = useLoading();
 
 function handleClick() {
   setLoading(true);
-  setTimeout(() => {
-    setLoading(false);
-  }, 500);
+  setTimeout(() => setLoading(false), 500);
 }
 
 function renderButtonIcon() {
-  return renderIcon({ name: 'carbon:money' });
+  return renderIcon({ name: 'ion:cash-outline' });
 }
 </script>
 

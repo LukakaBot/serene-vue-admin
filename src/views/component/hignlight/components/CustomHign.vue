@@ -1,7 +1,7 @@
 <template>
   <n-card :segmented="{ content: true }" size="small">
     <template #header>
-      <BaseTitle title="基础" />
+      <BaseTitle title="样式" />
     </template>
     <n-highlight class="whitespace-pre-wrap" :text="text" :patterns="patterns" :highlight-style="highlightStyle" />
   </n-card>

@@ -21,7 +21,6 @@ const watermarkProps = computed<WatermarkProps>(() => {
     content: configStore.watermarkContent,
     cross: true,
     fullscreen: true,
-
     fontSize: 16,
     lineHeight: 16,
     width: 384,

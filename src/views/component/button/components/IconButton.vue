@@ -1,10 +1,12 @@
 <template>
   <n-card>
-    <BaseTitle title="图标" />
-    <n-flex>
+    <template #header>
+      <BaseTitle title="图标" />
+    </template>
+    <n-space>
       <n-button secondary strong :render-icon="renderButtonIcon"> +100 元 </n-button>
       <n-button icon-placement="right" secondary strong :render-icon="renderButtonIcon"> +100 元 </n-button>
-    </n-flex>
+    </n-space>
   </n-card>
 </template>
 
@@ -12,7 +14,7 @@
 import { renderIcon } from '@/utils/tools';
 
 function renderButtonIcon() {
-  return renderIcon({ name: 'carbon:money' });
+  return renderIcon({ name: 'ion:cash-outline' });
 }
 </script>
 
