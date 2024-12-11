@@ -1,17 +1,19 @@
 <template>
   <n-card>
-    <BaseTitle title="弹窗表单" />
+    <template #header>
+      <BaseTitle title="弹窗表单" />
+    </template>
     <n-space>
-      <n-button @click="addModalRef?.openModal">新增表单弹窗</n-button>
+      <n-button @click="formModalRef?.openModal">Open Modal</n-button>
     </n-space>
-    <AddModal ref="addModalRef" />
+    <FormModal ref="formModalRef" />
   </n-card>
 </template>
 
 <script setup lang="ts">
-import AddModal from "./AddModal.vue";
+import FormModal from "./FormModal.vue";
 
-const addModalRef = ref<InstanceType<typeof AddModal>>();
+const formModalRef = ref<InstanceType<typeof FormModal>>();
 </script>
 
 <style scoped></style>

@@ -31,19 +31,19 @@ const menus = [
         path: '/component/button',
         name: '按钮',
         component: '/views/component/button/index.vue',
-        meta: { icon: 'lucide:mouse-pointer-click' }
+        meta: { icon: 'mdi:button-cursor' }
       },
       {
         path: '/component/form',
         name: '表单',
         component: '/views/component/form/index.vue',
-        meta: { icon: 'lucide:text-cursor-input' }
+        meta: { icon: 'fluent:form-48-regular' }
       },
       {
         path: '/component/table',
         name: '表格',
         component: '/views/component/table/index.vue',
-        meta: { icon: 'lucide:table' },
+        meta: { icon: 'mdi:table' },
       },
       {
         path: '/component/carousel',
@@ -55,7 +55,7 @@ const menus = [
         path: '/component/hignlight',
         name: '高亮文本',
         component: '/views/component/hignlight/index.vue',
-        meta: {},
+        meta: { icon: 'mdi:text' },
       }
     ]
   },

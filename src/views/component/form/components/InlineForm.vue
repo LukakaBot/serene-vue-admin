@@ -1,7 +1,9 @@
 <template>
   <n-card>
-    <BaseTitle title="行内表单" />
-    <div>
+    <template #header>
+      <BaseTitle title="行内表单" />
+    </template>
+    <n-space vertical>
       <n-radio-group v-model:value="size" name="left-size" style="margin-bottom: 12px">
         <n-radio-button value="small"> 小 </n-radio-button>
         <n-radio-button value="medium"> 中 </n-radio-button>
@@ -23,7 +25,7 @@
           </n-button>
         </n-form-item>
       </n-form>
-    </div>
+    </n-space>
   </n-card>
 </template>
 
