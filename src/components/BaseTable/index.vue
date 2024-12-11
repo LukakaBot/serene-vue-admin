@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   operations: () => [],
   rowKey: (row: RowData) => row.id,
-  maxHeight: 500,
+  maxHeight: undefined,
 });
 
 const emits = defineEmits<Emits>();
