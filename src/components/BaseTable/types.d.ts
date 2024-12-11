@@ -6,7 +6,8 @@ export type SearchParams = {
   page?: number;
   pageSize?: number;
   total?: number;
-} & Record<string, string | number | null | undefined>;
+  [key: string]: string | number | null | undefined;
+};
 
 export type Operation = {
   label: string;

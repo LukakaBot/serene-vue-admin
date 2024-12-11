@@ -6,8 +6,8 @@ import AppLoading from './layouts/AppLoading/AppLoading.vue';
 import './styles/index';
 import { setupStore } from '@/store/index';
 import { setupNaiveDiscrete } from '@/plugins/naiveDiscrete';
-import router, { setupRoute } from '@/router';
 import { setupDirectives } from './directives';
+import router, { setupRoute } from '@/router';
 
 async function mountApp() {
   const appLoading = createApp(AppLoading);

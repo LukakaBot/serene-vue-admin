@@ -9,7 +9,7 @@
 import { resolveDirective, withDirectives } from 'vue';
 import type { PaginationProps, ButtonProps } from 'naive-ui';
 import type { RowData } from 'naive-ui/lib/data-table/src/interface';
-import { NFlex, NPopover } from 'naive-ui';
+import { NPopover, NSpace } from 'naive-ui';
 import type { Operation, BaseTableColumn, SearchParams } from './types.d.ts';
 import { renderIcon, renderButton } from '@/utils/tools';
 
@@ -81,7 +81,7 @@ function renderOperationColumnButtons(operations: Operation[], row: RowData) {
     const props: ButtonProps = {
       size: 'small',
       type: operation?.type ?? 'default',
-      disabled: operation?.disabled ? operation.disabled(row) : false,
+      disabled: operation?.disabled?.(row) ?? false,
       renderIcon: operation.icon ? () => renderIcon({ name: operation.icon as string }) : undefined,
       onClick: () => emits('operate', operation.label, row),
     };
@@ -105,10 +105,10 @@ function renderOperationColumn(operations: Operation[]): BaseTableColumn[] {
     if (operations.length > 2) {
       return h(NPopover, { trigger: 'hover', placement: 'bottom' }, {
         trigger: () => renderButton({ type: 'info', size: 'small', iconPlacement: 'right', renderIcon: () => renderIcon({ name: 'ep:arrow-down' }) }, () => '更多'),
-        default: () => h(NFlex, { vertical: true, justify: 'center' }, () => renderOperationColumnButtons(operations, row))
+        default: () => h(NSpace, { vertical: true, justify: 'center' }, () => renderOperationColumnButtons(operations, row))
       });
     }
-    return h(NFlex, { justify: 'center' }, () => renderOperationColumnButtons(operations, row));
+    return h(NSpace, { justify: 'center' }, () => renderOperationColumnButtons(operations, row));
   };
 
   return [newOperationColumn];
