@@ -1,12 +1,13 @@
 <template>
   <BaseTable :search-params="searchParams" :columns="columns" :data="tableData" :loading="loading"
-    @update:page="handleUpdatePage" @update:size="handleUpdatePageSize" />
+    :operations="operations" @operate="handleOperate" @update:page="handleUpdatePage"
+    @update:size="handleUpdatePageSize" />
 </template>
 
 <script setup lang="ts">
 import type { InternalRowData } from 'naive-ui/es/data-table/src/interface';
-import { NAvatar } from 'naive-ui';
-import type { BaseTableColumn } from '@/components/BaseTable/types';
+import { NAvatar, NTag } from 'naive-ui';
+import type { BaseTableColumn, Operation } from '@/components/BaseTable/types';
 import { fetchTableDataPage } from '@/api/table/index.ts';
 import { useLoading } from '@/hooks/useLoading';
 
@@ -28,13 +29,38 @@ const columns: BaseTableColumn[] = [
   { title: '地址', key: 'address', width: 180, align: 'center', ellipsis: { tooltip: true } },
   { title: '开始日期', key: 'beginTime', width: 180, align: 'center', ellipsis: { tooltip: true } },
   { title: '结束日期', key: 'endTime', width: 180, align: 'center', ellipsis: { tooltip: true } },
-  { title: '状态', key: 'status', width: 120, align: 'center', ellipsis: { tooltip: true } },
+  { title: '状态', key: 'status', width: 120, align: 'center', ellipsis: { tooltip: true }, render: renderStatusTag },
   { title: '创建时间', key: 'date', width: 180, align: 'center', ellipsis: { tooltip: true } },
   { title: '停留时间', key: 'time', width: 80, align: 'center', ellipsis: { tooltip: true } },
 ];
 
+const operations: Operation[] = [
+  { type: 'primary', label: '详情', icon: 'mdi:document' },
+  { type: 'primary', label: '修改', icon: 'mdi:pencil' },
+  { type: 'error', label: '删除', icon: 'mdi:trash-can' },
+];
+
+function handleOperate(key: string, _row: InternalRowData) {
+  switch (key) {
+    case '详情':
+      window.$message?.info('详情');
+      break;
+    case '修改':
+      window.$message?.info('修改');
+      break;
+    case '删除':
+      window.$message?.info('删除');
+      break;
+  }
+}
+
 function renderAvatar(row: InternalRowData) {
   return h(NAvatar, { size: 48, src: row.avatar + '', });
+}
+
+function renderStatusTag(row: InternalRowData) {
+  const status = row.status;
+  return h(NTag, { type: status ? 'success' : 'error' }, { default: () => status ? '启用' : '禁用' });
 }
 
 async function getTableData() {

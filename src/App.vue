@@ -1,5 +1,5 @@
 <template>
-  <NConfigProvider :theme="theme" :locale="zhCN" :date-locale="dateZhCN">
+  <NConfigProvider :theme="theme" :theme-overrides="themeStore.appTheme" :locale="zhCN" :date-locale="dateZhCN">
     <RouterView />
     <n-watermark v-if="showWatermark" v-bind="watermarkProps" />
   </NConfigProvider>
@@ -8,9 +8,11 @@
 <script setup lang="ts">
 import type { WatermarkProps } from 'naive-ui';
 import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
-import { useConfigStore } from './store';
+import { useConfigStore, useThemeStore } from './store';
 
 const configStore = useConfigStore();
+
+const themeStore = useThemeStore();
 
 const theme = computed(() => configStore.isDarkMode ? darkTheme : undefined);
 

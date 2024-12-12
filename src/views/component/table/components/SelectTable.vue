@@ -1,11 +1,12 @@
 <template>
-  <BaseTable :search-params="searchParams" :columns="columns" :data="tableData" :loading="loading"
-    @update:page="handleUpdatePage" @update:size="handleUpdatePageSize" />
+  <BaseTable :search-params="searchParams" :columns="columns" :data="tableData" :loading="loading" :checked-row-keys="checkedRowKeys"
+    @update:page="handleUpdatePage" @update:size="handleUpdatePageSize"
+    @update:checked-row-keys="handleCheckedRowKeys" />
 </template>
 
 <script setup lang="ts">
 import type { InternalRowData } from 'naive-ui/es/data-table/src/interface';
-import { NAvatar, NTag } from 'naive-ui';
+import { DataTableRowKey, NAvatar, NTag } from 'naive-ui';
 import type { BaseTableColumn } from '@/components/BaseTable/types';
 import { fetchTableDataPage } from '@/api/table/index.ts';
 import { useLoading } from '@/hooks/useLoading';
@@ -18,9 +19,12 @@ const searchParams = ref({
   total: 0,
 });
 
+const checkedRowKeys = ref<DataTableRowKey[]>([]);
+
 const tableData = ref<any>([]);
 
 const columns: BaseTableColumn[] = [
+  { type: 'selection', key: 'selection', width: 60, fixed: 'left' },
   { title: 'id', align: "center", key: "index", width: 60, fixed: "left", render: (_, index) => `${index + 1}` },
   { title: '编号', key: 'no', width: 120, align: 'center', ellipsis: { tooltip: true } },
   { title: '名称', key: 'name', width: 120, align: 'center', ellipsis: { tooltip: true } },
@@ -42,6 +46,20 @@ function renderStatusTag(row: InternalRowData) {
   return h(NTag, { type: status ? 'success' : 'error' }, { default: () => status ? '启用' : '禁用' });
 }
 
+function handleUpdatePage(page: number) {
+  searchParams.value.page = page;
+  getTableData();
+}
+
+function handleUpdatePageSize(size: number) {
+  searchParams.value.pageSize = size;
+  getTableData();
+}
+
+function handleCheckedRowKeys(rowKeys: DataTableRowKey[]) {
+  checkedRowKeys.value = rowKeys;
+}
+
 async function getTableData() {
   try {
     setLoading(true);
@@ -53,16 +71,6 @@ async function getTableData() {
   } finally {
     setLoading(false);
   }
-}
-
-function handleUpdatePage(page: number) {
-  searchParams.value.page = page;
-  getTableData();
-}
-
-function handleUpdatePageSize(size: number) {
-  searchParams.value.pageSize = size;
-  getTableData();
 }
 
 function init() {

@@ -103,7 +103,7 @@ function renderOperationColumn(operations: Operation[]): BaseTableColumn[] {
 
   newOperationColumn.render = (row) => {
     if (operations.length > 2) {
-      return h(NPopover, { trigger: 'hover', placement: 'bottom' }, {
+      return h(NPopover, { trigger: 'click', placement: 'bottom' }, {
         trigger: () => renderButton({ type: 'info', size: 'small', iconPlacement: 'right', renderIcon: () => renderIcon({ name: 'ep:arrow-down' }) }, () => '更多'),
         default: () => h(NSpace, { vertical: true, justify: 'center' }, () => renderOperationColumnButtons(operations, row))
       });
