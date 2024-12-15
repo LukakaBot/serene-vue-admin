@@ -53,8 +53,7 @@ export default defineConfig((({ command, mode }) => {
       }
     },
     server: {
-      hmr: true,
-      port: 9001
+      port: 9000
     }
   };
 }))

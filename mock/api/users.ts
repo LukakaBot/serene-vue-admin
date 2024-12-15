@@ -64,19 +64,19 @@ const menus = [
     name: '地图',
     component: '/layouts/BaseLayout/BaseLayout.vue',
     redirect: '/map/amap',
-    meta: { icon: 'ep:map-location' },
+    meta: { icon: 'mdi:compass' },
     children: [
       {
         path: '/map/amap',
         name: '高德地图',
         component: '/views/map/amap/index.vue',
-        meta: { icon: 'ant-design:environment-outlined' }
+        meta: { icon: 'mdi:navigation-variant-outline' }
       },
       {
         path: '/map/tmap',
         name: '腾讯地图',
         component: '/views/map/tmap/index.vue',
-        meta: { icon: 'ant-design:environment-outlined' }
+        meta: { icon: 'mdi:penguin' }
       },
     ]
   },

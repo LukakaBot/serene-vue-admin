@@ -36,11 +36,11 @@ let map: AMap.Map | null = null;
 
 function initMap() {
   window._AMapSecurityConfig = {
-    securityJsCode: import.meta.env.VITE_MAP_SECURITY_JS_CODE,
+    securityJsCode: import.meta.env.VITE_AMAP_SECURITY_JS_CODE,
   };
 
   const options = {
-    key: import.meta.env.VITE_MAP_KEY,
+    key: import.meta.env.VITE_AMAP_KEY,
     version: "2.0",
   };
 
@@ -50,6 +50,9 @@ function initMap() {
       map = new AMap.Map('container', {
         center: [props.longitude, props.latitude],
         zoom: props.zoom,
+        canvas: {
+          willReadFrequently: true
+        }
       });
       map?.on('complete', function () {
         emits('complete', map);
