@@ -9,6 +9,12 @@
       <n-form-item label="密码" path="password">
         <n-input v-model:value="accountFormData.password" placeholder="请输入密码" type="password" />
       </n-form-item>
+      <n-form-item>
+        <n-space>
+          <n-input v-model:value="accountFormData.code" placeholder="请输入验证码" />
+          <AuthCaptcha ref="authCaptchaRef" :height="40" />
+        </n-space>
+      </n-form-item>
     </n-form>
     <div class="mt-10px text-center">
       <n-button strong secondary :loading="loading" @click="handleSubmit">登录</n-button>
@@ -18,28 +24,42 @@
 
 <script setup lang="ts">
 import type { UserTokenAccountParams } from '@/api/users/types';
-import type { FormRules } from 'naive-ui';
+import type { FormItemRule, FormRules } from 'naive-ui';
 import { FormInst } from 'naive-ui';
 import { useUserStore } from '@/store/index';
 import { useLoading } from '@/hooks/useLoading';
 import router from '@/router';
+import AuthCaptcha from './AuthCaptcha.vue';
+
+type AccountFormData = UserTokenAccountParams & {
+  /** 验证码 */
+  code: string;
+};
 
 /** 用户信息商店 */
 const userStore = useUserStore();
 
 const [loading, setLoading] = useLoading();
 
+const authCaptchaRef = ref<InstanceType<typeof AuthCaptcha>>();
+
 /** 表单组件实例 */
 const formRef = ref<FormInst>();
 
 /** 表单数据 */
-const accountFormData = ref<UserTokenAccountParams>({} as UserTokenAccountParams);
+const accountFormData = ref<AccountFormData>({} as AccountFormData);
 
 /** 表单校验规则 */
 const rules: FormRules = {
   'username': [{ required: true, message: '请输入用户名' }],
   'password': [{ required: true, message: '请输入密码' }],
+  'code': [{ required: true, validator: checkCaptcha }],
 };
+
+function checkCaptcha(_rule: FormItemRule, value: string) {
+  if (!value) return new Error('请输入验证码');
+  return true;
+}
 
 /** 表单提交事件 */
 async function handleSubmit() {
@@ -59,7 +79,8 @@ async function handleSubmit() {
 function resetFormData() {
   accountFormData.value = {
     username: 'admin',
-    password: '123456'
+    password: '123456',
+    code: '',
   };
 }
 
