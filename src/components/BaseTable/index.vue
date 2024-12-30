@@ -1,7 +1,7 @@
 <template>
   <n-data-table class="flex-1" :columns="tableColumns" :checked-row-keys="checkedRowKeys" :data="data"
-    :scroll-x="scrollX" :pagination="pagination" :single-line="false" :loading="loading" flex-height
-    :max-height="maxHeight" remote :row-key="rowKey" @update:checked-row-keys="handleUpdateCheckedRowKeys"
+    :scroll-x="scrollX" :pagination="pagination" :single-line="false" :loading="loading" :max-height="maxHeight"
+    flex-height remote striped :row-key="rowKey" @update:checked-row-keys="handleUpdateCheckedRowKeys"
     @update:page="handleUpdatePage" @update:page-size="handleUpdatePageSize" />
 </template>
 
@@ -38,7 +38,7 @@ type Emits = {
   (event: 'update:page', page: number): void;
   (event: 'update:page-size', size: number): void;
   (event: 'update:checked-row-keys', keys: Array<number | string>): void;
-  (event: 'operate', label: string, row: RowData): void;
+  (event: 'operate', label: string, row: RowData, index: number): void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -76,14 +76,14 @@ function calculateTableWidth(acc: number, cur: BaseTableColumn): number {
 }
 
 /** 渲染操作列按钮 */
-function renderOperationColumnButtons(operations: Operation[], row: RowData) {
+function renderOperationColumnButtons(operations: Operation[], row: RowData, index: number) {
   return operations.map(operation => {
     const props: ButtonProps = {
       size: 'small',
       type: operation?.type ?? 'default',
-      disabled: operation?.disabled?.(row) ?? false,
+      disabled: operation?.disabled?.(row, index) ?? false,
       renderIcon: operation.icon ? () => renderIcon({ name: operation.icon as string }) : undefined,
-      onClick: () => emits('operate', operation.label, row),
+      onClick: () => emits('operate', operation.label, row, index),
     };
     const render = renderButton(props, () => operation.label);
 
@@ -101,14 +101,14 @@ function renderOperationColumn(operations: Operation[]): BaseTableColumn[] {
   let newOperationColumn: BaseTableColumn = { title: '操作', align: 'center', key: 'operations', fixed: 'right', width: operationColumnWidth.value };
   if (!operations || operations.length <= 0) return [];
 
-  newOperationColumn.render = (row) => {
+  newOperationColumn.render = (row, index) => {
     if (operations.length > 2) {
       return h(NPopover, { trigger: 'click', placement: 'bottom' }, {
         trigger: () => renderButton({ type: 'info', size: 'small', iconPlacement: 'right', renderIcon: () => renderIcon({ name: 'ep:arrow-down' }) }, () => '更多'),
-        default: () => h(NSpace, { vertical: true, justify: 'center' }, () => renderOperationColumnButtons(operations, row))
+        default: () => h(NSpace, { vertical: true, justify: 'center' }, () => renderOperationColumnButtons(operations, row, index))
       });
     }
-    return h(NSpace, { justify: 'center' }, () => renderOperationColumnButtons(operations, row));
+    return h(NSpace, { justify: 'center' }, () => renderOperationColumnButtons(operations, row, index));
   };
 
   return [newOperationColumn];
@@ -121,10 +121,10 @@ const tableColumns = computed(() => {
 });
 
 /** 分页 */
-const paginationOptions = computed((): PaginationProps => {
-  const page = props.searchParams.page || 1;
-  const pageSize = props.searchParams.pageSize || 10;
-  const itemCount = props.searchParams.total || 0;
+const paginationOptions = computed<PaginationProps>(() => {
+  const page = props.searchParams.page ?? 1;
+  const pageSize = props.searchParams.pageSize ?? 10;
+  const itemCount = props.searchParams.total ?? 0;
 
   return {
     page,
@@ -138,7 +138,7 @@ const paginationOptions = computed((): PaginationProps => {
 });
 
 /** 分页 */
-const pagination = computed(() => props.showPagination ? paginationOptions.value : false);
+const pagination = computed(() => !!props.showPagination && paginationOptions.value);
 
 /** 表格操作列宽度 */
 const operationColumnWidth = computed(() => {

@@ -12,7 +12,7 @@ export type SearchParams = {
 export type Operation = {
   label: string;
   type?: Type;
-  disabled?: (row: RowData) => boolean;
+  disabled?: (row: RowData, index: number) => boolean;
   icon?: string | (() => VNode);
   auth?: boolean;
 };
