@@ -1,31 +1,42 @@
-<template>
-  <div>
-    <svg :style="iconStyle" :width="size" :height="size" aria-hidden="true" v-if="isRenderLocalIcon">
-      <use :xlink:href="iconName" :fill="color" />
-    </svg>
-    <Icon :icon="name" :width="size" :height="size" :color="color" v-else />
-  </div>
-</template>
-
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { Icon } from '@iconify/vue';
-import type { BaseIconProps } from './types';
 
+export default defineComponent({
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+      default: ''
+    },
+    size: {
+      type: Number,
+      default: 16
+    },
+  },
+  setup(props) {
+    const isLocalIcon = computed(() => props.name.startsWith('icon-'));
 
-const props = withDefaults(defineProps<BaseIconProps>(), {
-  size: 16,
-});
+    const iconName = computed(() => `#svg-${props.name}`);
 
-const iconName = computed(() => `#svg-${props.name}`);
+    const iconStyle = computed(() => ({
+      color: props.color,
+    }));
 
-const iconStyle = computed(() => {
-  return {
-    color: props.color,
-  };
-});
+    return () => {
+      if (isLocalIcon.value) {
+        return h('svg', { style: iconStyle.value, width: props.size, height: props.size, 'aria-hidden': 'true' }, [
+          h('use', { 'xlink:href': iconName.value, fill: props.color })
+        ]);
+      }
 
-/** 是否渲染本地图标 */
-const isRenderLocalIcon = computed(() => props.name.startsWith('icon-'));
+      return h(Icon, { icon: props.name, width: props.size, height: props.size, color: props.color });
+    }
+  }
+})
 </script>
 
 <style scoped></style>

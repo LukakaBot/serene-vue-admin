@@ -24,7 +24,7 @@ type Props = {
   checkedRowKeys?: Array<number | string>;
   /** 是否显示分页 */
   showPagination?: boolean;
-  /** 是否显示 loading 状态 */
+  /** loading 状态 */
   loading?: boolean;
   /** 表格操作按钮 */
   operations?: Operation[];

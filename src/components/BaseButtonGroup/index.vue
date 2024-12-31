@@ -1,38 +1,41 @@
-<template>
-  <n-flex>
-    <n-button v-for="(btn, index) in list" :key="index" :type="btn.type" :render-icon="renderIconName(btn.icon!)" strong
-      @click="handleClick(btn.text)">
-      {{ btn.text }}
-    </n-button>
-  </n-flex>
-</template>
-
-<script setup lang="ts">
-import type { BaseButtonGroup } from './types';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { NButton, NSpace } from 'naive-ui';
+import { call, MaybeArray } from 'naive-ui/es/_utils';
+import type { BaseButtonGroup, OnClick } from './types';
 import { renderIcon } from '@/utils/tools/index';
 
-type Props = {
-  list: BaseButtonGroup[];
-};
+export default defineComponent({
+  props: {
+    list: {
+      type: Array as PropType<BaseButtonGroup[]>,
+      required: true,
+    },
+    onClick: {
+      type: [Function, Array] as PropType<MaybeArray<OnClick>>,
+    }
+  },
+  setup(props, { emit }) {
+    console.log(emit)
 
-type Emits = {
-  (event: 'click', text: string): void;
-};
+    function handleClick(label: string) {
+      call(props.onClick as OnClick, label);
+    }
 
-withDefaults(defineProps<Props>(), {
-  list: () => []
-});
-
-const emits = defineEmits<Emits>();
-
-function handleClick(text: string) {
-  emits('click', text);
-}
-
-function renderIconName(name: string) {
-  if (!name) return undefined;
-  return () => renderIcon({ name });
-}
+    return () => {
+      return h(NSpace, () => [
+        props.list.map(btn => {
+          return h(NButton, {
+            type: btn.type,
+            renderIcon: btn.icon ? () => renderIcon({ name: btn.icon! }) : undefined,
+            strong: true,
+            onClick: () => handleClick(btn.label),
+          }, () => btn.label)
+        })
+      ])
+    }
+  }
+})
 </script>
 
 <style scoped></style>

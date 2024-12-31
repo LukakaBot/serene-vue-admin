@@ -4,7 +4,9 @@ export type BaseButtonGroup = {
   /** 按钮类型 */
   type: Type;
   /** 按钮文字 */
-  text: string;
+  label: string;
   /** 按钮图标 */
   icon?: string;
 };
+
+type OnClick = (label: string) => void;
