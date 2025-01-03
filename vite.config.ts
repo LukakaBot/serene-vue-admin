@@ -8,6 +8,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { viteMockServe } from 'vite-plugin-mock'
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig((({ command, mode }) => {
@@ -46,6 +47,7 @@ export default defineConfig((({ command, mode }) => {
         mockPath: 'mock',
         enable: true,
       }),
+      vueJsx(),
     ],
     resolve: {
       alias: {
