@@ -49,7 +49,7 @@ function renderMenu(route: RouteRecordRaw): MenuOption {
   const { path, name, meta, children } = route as AppRoute.RouteItem;
 
   const link = () => h(RouterLink, { to: path }, () => `${name}`);
-  const icon = meta?.icon ? () => h(BaseIcon, { name: meta.icon, size: 22 }) : undefined;
+  const icon = meta?.icon ? () => h(BaseIcon, { name: meta.icon!, size: 22 }) : undefined;
 
   return {
     key: path,

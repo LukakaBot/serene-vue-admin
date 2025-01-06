@@ -28,9 +28,9 @@ declare namespace AppRoute {
   };
 
   type Meta = {
-    title: string;
-    icon: string;
-    hidden: boolean;
-    auths: Auths;
+    title?: string;
+    icon?: string;
+    hidden?: boolean;
+    auths?: Auths;
   };
 }
