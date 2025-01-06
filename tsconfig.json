@@ -3,9 +3,12 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -14,7 +17,6 @@
     "noEmit": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true, // 有未使用的变量时，抛出错误
@@ -27,21 +29,42 @@
     "strictPropertyInitialization": true, // 类的实例属性必须初始化
     "strictBindCallApply": true, // 严格的 bind/call/apply 检查
     "strictNullChecks": true, // 启用严格的 null 检查
-
-
     /* Additional Checks */
     "noImplicitReturns": true, // 并不是所有函数里的代码都有返回值时，抛出错误
     "noUncheckedIndexedAccess": true, // 用于监视可能是 null 的索引表达式
     "noImplicitOverride": true, // 当在重写方法时，如果没有正确匹配到父类的方法时，抛出错误
     "noPropertyAccessFromIndexSignature": false, // 防止通过索引签名访问属性时出错
-
-    "types": ["node", "vite/client"],
+    "types": [
+      "node",
+      "vite/client",
+      "unplugin-vue-macros/macros-global"
+    ],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
-    "typeRoots": ["./node_modules/@types/", "./node_modules", "./src/typings/"] // 指定包含类型声明的文件或文件夹
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./node_modules",
+      "./src/typings/"
+    ] // 指定包含类型声明的文件或文件夹
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "vueCompilerOptions": {
+    "plugins": [
+      "unplugin-vue-macros/volar"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

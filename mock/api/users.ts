@@ -91,7 +91,7 @@ const menus = [
         path: '/system/users',
         name: '用户管理',
         component: '/views/system/users/index.vue',
-        meta: { icon: 'ant-design:user-outlined', roles: ['admin'] }
+        meta: { icon: 'ant-design:user-outlined', roles: ['admin'], auths: [{ id: '新增', name: '新增' }, { id: '批量删除', name: '批量删除' }] }
       },
       {
         path: '/system/roles',

@@ -40,8 +40,8 @@ function handleSearch(params: SearchParams) {
 }
 
 const btnList: BaseButtonGroup[] = [
-  { label: '新增', icon: 'ep:plus', type: 'primary' },
-  { label: '批量删除', icon: 'ep:delete', type: 'error' },
+  { type: 'primary', text: '新增', icon: 'ep:plus', auth: true },
+  { type: 'error', text: '批量删除', icon: 'ep:delete', auth: true },
 ];
 
 function handleClickButtonGroup(text: string) {

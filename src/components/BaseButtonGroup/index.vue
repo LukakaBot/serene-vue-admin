@@ -1,41 +1,51 @@
-<script lang="ts">
-import { defineComponent, PropType } from 'vue';
+<script setup lang="tsx">
+import type { VNode } from 'vue';
+import { resolveDirective, withDirectives } from 'vue';
+import type { ButtonProps } from 'naive-ui';
 import { NButton, NSpace } from 'naive-ui';
-import { call, MaybeArray } from 'naive-ui/es/_utils';
-import type { BaseButtonGroup, OnClick } from './types';
+import type { BaseButtonGroup } from './types';
 import { renderIcon } from '@/utils/tools/index';
 
-export default defineComponent({
-  props: {
-    list: {
-      type: Array as PropType<BaseButtonGroup[]>,
-      required: true,
-    },
-    onClick: {
-      type: [Function, Array] as PropType<MaybeArray<OnClick>>,
-    }
-  },
-  setup(props, { emit }) {
-    console.log(emit)
+type Props = {
+  list: BaseButtonGroup[];
+};
 
-    function handleClick(label: string) {
-      call(props.onClick as OnClick, label);
-    }
+const props = defineProps<Props>();
 
-    return () => {
-      return h(NSpace, () => [
-        props.list.map(btn => {
-          return h(NButton, {
-            type: btn.type,
-            renderIcon: btn.icon ? () => renderIcon({ name: btn.icon! }) : undefined,
-            strong: true,
-            onClick: () => handleClick(btn.label),
-          }, () => btn.label)
-        })
-      ])
-    }
-  }
-})
+type Emits = {
+  (e: 'click', label: string): void;
+};
+
+const emits = defineEmits<Emits>();
+
+function handleClick(label: string) {
+  emits('click', label);
+}
+
+function createButtonProps(btn: BaseButtonGroup): ButtonProps {
+  return {
+    type: btn.type,
+    renderIcon: btn.icon ? () => renderIcon({ name: btn.icon! }) : undefined,
+    strong: true,
+    onClick: () => handleClick(btn.text),
+  };
+}
+
+function withAuthDirective(vnode: VNode, value: string) {
+  const vAuth = resolveDirective('auth');
+  return withDirectives(vnode, [[vAuth, value]]);
+}
+
+defineRender(() => (
+  h(NSpace, () => [
+    props.list.map(btn => {
+      const buttonProps = createButtonProps(btn);
+      const buttonRender = <NButton {...buttonProps}>{btn.text}</NButton>;
+
+      return btn.auth !== undefined
+        ? withAuthDirective(buttonRender, btn.text)
+        : buttonRender;
+    })
+  ])
+));
 </script>
-
-<style scoped></style>
