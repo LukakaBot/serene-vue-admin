@@ -1,16 +1,16 @@
 <script setup lang="tsx">
 import { resolveDirective, withDirectives } from 'vue';
-import type { DataTableColumns, PaginationProps, ButtonProps, DataTableRowKey, DataTableCreateRowKey } from 'naive-ui';
+import type { PaginationProps, ButtonProps, DataTableRowKey, DataTableCreateRowKey } from 'naive-ui';
 import type { RowData } from 'naive-ui/es/data-table/src/interface';
 import { NDataTable, NPopover, NSpace } from 'naive-ui';
-import type { Operations, BaseTableColumn, SearchParams } from './types.d.ts';
+import type { BaseTableColumns, BaseTableColumn, Operations, SearchParams } from './types.d.ts';
 import { renderIcon, renderButton } from '@/utils/tools';
 
 type Props = {
   /** 查询参数 */
   searchParams: SearchParams;
   /** 表格列 */
-  columns: BaseTableColumn<any>[];
+  columns: BaseTableColumns<any>;
   /** 表格数据 */
   data: RowData[];
   /** 表格选中项 */
@@ -90,7 +90,7 @@ function renderOperationColumnButtons(operations: Operations, row: RowData, inde
 }
 
 /** 渲染操作列 */
-function renderOperationColumn(operations: Operations): DataTableColumns {
+function renderOperationColumn(operations: Operations): BaseTableColumns {
   let newOperationColumn: BaseTableColumn = { title: '操作', align: 'center', key: 'operations', fixed: 'right', width: operationColumnWidth.value };
   if (!operations || operations.length <= 0) return [];
 

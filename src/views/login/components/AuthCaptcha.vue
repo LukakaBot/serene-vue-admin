@@ -7,13 +7,13 @@ import { useThemeVars } from 'naive-ui';
 
 type Props = {
   /** 验证码宽度 */
-  width: number,
+  width?: number,
   /** 验证码高度 */
-  height: number,
+  height?: number,
   /** 是否绘制线条 */
-  drawLine: boolean,
+  drawLine?: boolean,
   /** 是否绘制圆点 */
-  drawPoint: boolean,
+  drawPoint?: boolean,
 };
 
 withDefaults(defineProps<Props>(), {

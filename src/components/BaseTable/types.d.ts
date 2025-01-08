@@ -16,7 +16,9 @@ export interface Operation extends BaseButton {
   disabled?: (row: RowData, index: number) => boolean;
 };
 
+export type BaseTableColumns<T = InternalRowData> = BaseTableColumn<T>[];
+
 export type BaseTableColumn<T = InternalRowData> = TableColumn<T> & {
   key: string;
-  children?: BaseTableColumn<T>[];
+  children?: BaseTableColumns<T>;
 };
