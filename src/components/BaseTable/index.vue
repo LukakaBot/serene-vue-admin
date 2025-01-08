@@ -1,35 +1,28 @@
-<template>
-  <n-data-table class="flex-1" :columns="tableColumns" :checked-row-keys="checkedRowKeys" :data="data"
-    :scroll-x="scrollX" :pagination="pagination" :single-line="false" :loading="loading" :max-height="maxHeight"
-    flex-height remote striped :row-key="rowKey" @update:checked-row-keys="handleUpdateCheckedRowKeys"
-    @update:page="handleUpdatePage" @update:page-size="handleUpdatePageSize" />
-</template>
-
-<script setup lang="ts">
+<script setup lang="tsx">
 import { resolveDirective, withDirectives } from 'vue';
-import type { PaginationProps, ButtonProps } from 'naive-ui';
-import type { RowData } from 'naive-ui/lib/data-table/src/interface';
-import { NPopover, NSpace } from 'naive-ui';
-import type { Operation, BaseTableColumn, SearchParams } from './types.d.ts';
+import type { DataTableColumns, PaginationProps, ButtonProps, DataTableRowKey, DataTableCreateRowKey } from 'naive-ui';
+import type { RowData } from 'naive-ui/es/data-table/src/interface';
+import { NDataTable, NPopover, NSpace } from 'naive-ui';
+import type { Operations, BaseTableColumn, SearchParams } from './types.d.ts';
 import { renderIcon, renderButton } from '@/utils/tools';
 
 type Props = {
   /** 查询参数 */
   searchParams: SearchParams;
   /** 表格列 */
-  columns: BaseTableColumn[];
+  columns: BaseTableColumn<any>[];
   /** 表格数据 */
   data: RowData[];
   /** 表格选中项 */
-  checkedRowKeys?: Array<number | string>;
+  checkedRowKeys?: DataTableRowKey[];
   /** 是否显示分页 */
   showPagination?: boolean;
   /** loading 状态 */
   loading?: boolean;
   /** 表格操作按钮 */
-  operations?: Operation[];
+  operations?: Operations;
   /** 表格行的 key */
-  rowKey?: (rowData: RowData) => (number | string);
+  rowKey?: DataTableCreateRowKey<any>;
   /** 表格内容的最大高度，可以是 CSS 属性值 */
   maxHeight?: number;
 };
@@ -37,8 +30,8 @@ type Props = {
 type Emits = {
   (event: 'update:page', page: number): void;
   (event: 'update:page-size', size: number): void;
-  (event: 'update:checked-row-keys', keys: Array<number | string>): void;
-  (event: 'operate', label: string, row: RowData, index: number): void;
+  (event: 'update:checked-row-keys', keys: DataTableRowKey[]): void;
+  (event: 'operate', label: string, row: any, index: number): void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -53,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emits = defineEmits<Emits>();
 
 /** checked-row-keys 值更新事件 */
-function handleUpdateCheckedRowKeys(keys: Array<number | string>) {
+function handleUpdateCheckedRowKeys(keys: DataTableRowKey[]) {
   emits('update:checked-row-keys', keys);
 }
 
@@ -76,20 +69,20 @@ function calculateTableWidth(acc: number, cur: BaseTableColumn): number {
 }
 
 /** 渲染操作列按钮 */
-function renderOperationColumnButtons(operations: Operation[], row: RowData, index: number) {
+function renderOperationColumnButtons(operations: Operations, row: RowData, index: number) {
   return operations.map(operation => {
     const props: ButtonProps = {
       size: 'small',
       type: operation?.type ?? 'default',
       disabled: operation?.disabled?.(row, index) ?? false,
       renderIcon: operation.icon ? () => renderIcon({ name: operation.icon as string }) : undefined,
-      onClick: () => emits('operate', operation.label, row, index),
+      onClick: () => emits('operate', operation.text, row, index),
     };
-    const render = renderButton(props, () => operation.label);
+    const render = renderButton(props, () => operation.text);
 
     if (operation?.auth) {
       const authDirective = resolveDirective('auth');
-      return withDirectives(render, [[authDirective, operation.label]]);
+      return withDirectives(render, [[authDirective, operation.text]]);
     };
 
     return render;
@@ -97,7 +90,7 @@ function renderOperationColumnButtons(operations: Operation[], row: RowData, ind
 }
 
 /** 渲染操作列 */
-function renderOperationColumn(operations: Operation[]): BaseTableColumn[] {
+function renderOperationColumn(operations: Operations): DataTableColumns {
   let newOperationColumn: BaseTableColumn = { title: '操作', align: 'center', key: 'operations', fixed: 'right', width: operationColumnWidth.value };
   if (!operations || operations.length <= 0) return [];
 
@@ -145,7 +138,7 @@ const operationColumnWidth = computed(() => {
   const length = props.operations.length;
   const width = length < 3
     ? props.operations.reduce((acc, cur) => {
-      const hanziLength = cur.label.length;
+      const hanziLength = cur.text.length;
       return acc + hanziLength * 50;
     }, 0)
     : 116;
@@ -162,6 +155,27 @@ const scrollX = computed(() => {
 
   return columnsWidth + fixedLeftColumnsWidth + fixedRightColumnsWidth;
 });
+
+defineRender(() => (
+  <NDataTable
+    class="flex-1"
+    columns={tableColumns.value}
+    checked-row-keys={props.checkedRowKeys}
+    data={props.data}
+    scroll-x={scrollX.value}
+    pagination={pagination.value}
+    single-line={false}
+    loading={props.loading}
+    max-height={props.maxHeight}
+    flex-height={true}
+    remote={true}
+    striped={true}
+    row-key={props.rowKey}
+    onUpdateCheckedRowKeys={handleUpdateCheckedRowKeys}
+    onUpdatePage={handleUpdatePage}
+    onUpdatePageSize={handleUpdatePageSize}
+  />
+));
 </script>
 
 <style scoped></style>

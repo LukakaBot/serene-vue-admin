@@ -91,7 +91,15 @@ const menus = [
         path: '/system/users',
         name: '用户管理',
         component: '/views/system/users/index.vue',
-        meta: { icon: 'ant-design:user-outlined', roles: ['admin'], auths: [{ id: '新增', name: '新增' }, { id: '批量删除', name: '批量删除' }] }
+        meta: {
+          icon: 'ant-design:user-outlined', roles: ['admin'], auths: [
+            { id: '新增', name: '新增' },
+            { id: '批量删除', name: '批量删除' },
+            { id: '详情', name: '详情' },
+            { id: '编辑', name: '编辑' },
+            { id: '删除', name: '删除' },
+          ]
+        }
       },
       {
         path: '/system/roles',
@@ -119,6 +127,7 @@ function userTableList(pageSize) {
       phone: /^1[3-9]\d{9}$/,
       'roleName|1': Mock.Random.pick(['超级管理员', '管理员', '普通角色', '通用角色']),
       createTime: '@datetime',
+      updateTime: '@datetime',
       'no|100000-10000000': 100000,
       'status|1': [true, false],
     });

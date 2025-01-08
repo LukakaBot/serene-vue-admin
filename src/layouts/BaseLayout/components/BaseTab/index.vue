@@ -1,27 +1,4 @@
 <template>
-  <!-- <div class="tab-view">
-    <div ref="navWrap" class="tab-card">
-      <div class="tab-card-scroll">
-        <VueDraggable ref="el" class="tab-card-scroll" v-model="tabStore.tabList">
-          <div class="tab-card-scroll-item" :class="[{ 'active-item': activeRoutePath === tab.fullPath }]"
-            :style="setTabCardScrollItemStyle(tab)" v-for="tab in tabList" :key="tab.fullPath"
-            @click="handleSkipPage(tab)" @contextmenu="handleContextMenu($event, tab)">
-            <span>{{ tab.name }}</span>
-            <BaseIcon name="mdi:close" :size="14" @click="closeTab($event, tab)" />
-          </div>
-        </VueDraggable>
-      </div>
-    </div>
-    <div class="tab-close">
-      <n-dropdown trigger="click" @select="handleSelectMenu" placement="bottom-end" :options="menuOptions">
-        <n-button quaternary
-          :render-icon="() => renderIcon({ name: 'fluent-emoji-high-contrast:partying-face', size: 20 })" />
-      </n-dropdown>
-    </div>
-    <n-dropdown :show="showSideMenu" :x="sideMenuPosition.x" :y="sideMenuPosition.y" @clickoutside="handleCloseSideMenu"
-      placement="bottom-start" @select="handleSelectMenu" :options="menuOptions" />
-  </div> -->
-
   <n-el class="tab-view">
     <n-scrollbar ref="scrollbarRef" x-scrollable>
       <n-el>
@@ -117,7 +94,7 @@ function handleSelectMenu(key: string) {
 
   const action = actions[key];
   if (!action) {
-    throw new Error('Unknown operation');
+    throw new Error('unknown operation');
   }
 
   action(); // 执行对应的操作

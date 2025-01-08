@@ -1,5 +1,5 @@
 import type { VNodeChild } from 'vue';
-import type { InternalRowData } from 'naive-ui/lib/data-table/src/interface';
+import type { InternalRowData } from 'naive-ui/es/data-table/src/interface';
 
 export type BaseDescriptionRender = (data: BaseDescriptionData, field: string) => VNodeChild;
 

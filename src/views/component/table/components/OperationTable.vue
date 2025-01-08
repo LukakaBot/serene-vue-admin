@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import type { InternalRowData } from 'naive-ui/es/data-table/src/interface';
 import { NAvatar, NTag } from 'naive-ui';
-import type { BaseTableColumn, Operation } from '@/components/BaseTable/types';
+import type { BaseTableColumn, Operations } from '@/components/BaseTable/types';
 import { fetchTableDataPage } from '@/api/table/index.ts';
 import { useLoading } from '@/hooks/useLoading';
 
@@ -34,10 +34,10 @@ const columns: BaseTableColumn[] = [
   { title: '停留时间', key: 'time', width: 80, align: 'center', ellipsis: { tooltip: true } },
 ];
 
-const operations: Operation[] = [
-  { type: 'primary', label: '详情', icon: 'mdi:document' },
-  { type: 'primary', label: '修改', icon: 'mdi:pencil' },
-  { type: 'error', label: '删除', icon: 'mdi:trash-can' },
+const operations: Operations = [
+  { type: 'primary', text: '详情', icon: 'mdi:document' },
+  { type: 'primary', text: '修改', icon: 'mdi:pencil' },
+  { type: 'error', text: '删除', icon: 'mdi:trash-can' },
 ];
 
 function handleOperate(key: string, _row: InternalRowData) {

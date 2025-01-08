@@ -3,11 +3,11 @@ import type { VNode } from 'vue';
 import { resolveDirective, withDirectives } from 'vue';
 import type { ButtonProps } from 'naive-ui';
 import { NButton, NSpace } from 'naive-ui';
-import type { BaseButtonGroup } from './types';
+import type { BaseButton } from './types';
 import { renderIcon } from '@/utils/tools/index';
 
 type Props = {
-  list: BaseButtonGroup[];
+  list: BaseButton[];
 };
 
 const props = defineProps<Props>();
@@ -22,7 +22,7 @@ function handleClick(label: string) {
   emits('click', label);
 }
 
-function createButtonProps(btn: BaseButtonGroup): ButtonProps {
+function createButtonProps(btn: BaseButton): ButtonProps {
   return {
     type: btn.type,
     renderIcon: btn.icon ? () => renderIcon({ name: btn.icon! }) : undefined,

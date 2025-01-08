@@ -1,7 +1,7 @@
 import type { ButtonProps } from 'naive-ui';
 import type { Type } from 'naive-ui/es/button/src/interface';
 
-export interface BaseButtonGroup extends ButtonProps {
+export interface BaseButton extends ButtonProps {
   /** 按钮文字 */
   text: string;
   /** 按钮图标 */
