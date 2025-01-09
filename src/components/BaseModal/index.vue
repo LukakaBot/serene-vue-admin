@@ -42,16 +42,19 @@ type Props = {
   draggable?: boolean;
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  title: "我是标题",
-  bodyStyle: () => ({
-    width: '600px',
-  }),
-  showFooter: true,
-  showSubmit: true,
-  loading: false,
-  draggable: false,
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    title: "我是标题",
+    bodyStyle: () => ({
+      width: '600px',
+    }),
+    showFooter: true,
+    showSubmit: true,
+    loading: false,
+    draggable: false,
+  }
+);
 
 const emits = defineEmits(['close', 'closed', 'submit']);
 

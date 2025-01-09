@@ -1,5 +1,5 @@
 <template>
-  <div id="container" class="relative" :class="hiddenMapLogoClassName" :style="renderMapStyle"></div>
+  <div id="container" class="relative" :class="hiddenMapLogoClassName" :style="mapContainerStyle"></div>
 </template>
 
 <script setup lang="ts">
@@ -20,19 +20,26 @@ type Props = {
   showLogo?: boolean;
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  width: '100%',
-  height: '100%',
-  latitude: 39.90923,
-  longitude: 116.397428,
-  zoom: 13,
-  showLogo: true,
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    width: '100%',
+    height: '100%',
+    latitude: 39.90923,
+    longitude: 116.397428,
+    zoom: 13,
+    showLogo: true,
+  }
+);
 
-const emits = defineEmits(['complete', 'locate']);
+type Emits = {
+  (event: 'complete', map: AMap.Map): void;
+};
+
+const emits = defineEmits<Emits>();
 
 /** 地图实例 */
-let map: AMap.Map | null = null;
+const map = shallowRef<AMap.Map | null>(null);
 
 function initMap() {
   window._AMapSecurityConfig = {
@@ -47,15 +54,15 @@ function initMap() {
   AMapLoader.load(options)
     .then((AMap) => {
       window.AMap = AMap;
-      map = new AMap.Map('container', {
+      map.value = new AMap.Map('container', {
         center: [props.longitude, props.latitude],
         zoom: props.zoom,
         canvas: {
           willReadFrequently: true
         }
       });
-      map?.on('complete', function () {
-        emits('complete', map);
+      map.value?.on('complete', function () {
+        emits('complete', map.value!);
       });
     }).catch((err) => {
       console.log(err);
@@ -66,7 +73,7 @@ function init() {
   initMap();
 }
 
-const renderMapStyle = computed(() => ({ width: props.width, height: props.height }));
+const mapContainerStyle = computed(() => ({ width: props.width, height: props.height }));
 
 const hiddenMapLogoClassName = computed(() => ({
   'amap-logo-hidden': !props.showLogo
@@ -75,7 +82,7 @@ const hiddenMapLogoClassName = computed(() => ({
 onMounted(() => init());
 
 onUnmounted(() => {
-  map?.destroy();
+  map.value?.destroy();
 });
 
 defineExpose({ map });

@@ -27,21 +27,24 @@ type Props = {
   maxHeight?: number;
 };
 
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    checkedRowKeys: () => [],
+    showPagination: true,
+    loading: false,
+    operations: () => [],
+    rowKey: (row: RowData) => row.id,
+    maxHeight: undefined,
+  }
+);
+
 type Emits = {
   (event: 'update:page', page: number): void;
   (event: 'update:page-size', size: number): void;
   (event: 'update:checked-row-keys', keys: DataTableRowKey[]): void;
   (event: 'operate', label: string, row: any, index: number): void;
 };
-
-const props = withDefaults(defineProps<Props>(), {
-  checkedRowKeys: () => [],
-  showPagination: true,
-  loading: false,
-  operations: () => [],
-  rowKey: (row: RowData) => row.id,
-  maxHeight: undefined,
-});
 
 const emits = defineEmits<Emits>();
 

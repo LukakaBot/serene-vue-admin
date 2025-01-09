@@ -16,12 +16,15 @@ type Props = {
   tagDirection?: 'left' | 'bottom';
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  title: '我是标题',
-  titleStyle: () => ({}),
-  showTag: true,
-  tagDirection: 'bottom',
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    title: '我是标题',
+    titleStyle: () => ({}),
+    showTag: true,
+    tagDirection: 'bottom',
+  }
+);
 
 const tagClassName = computed(() => {
   if (props.tagDirection === 'left') {

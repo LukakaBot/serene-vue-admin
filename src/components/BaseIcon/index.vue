@@ -7,9 +7,12 @@ type Props = {
   size?: number,
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  size: 16,
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    size: 16,
+  }
+);
 
 const isLocalIcon = computed(() => props.name.startsWith('icon-'));
 

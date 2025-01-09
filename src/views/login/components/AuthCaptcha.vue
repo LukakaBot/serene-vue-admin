@@ -16,12 +16,15 @@ type Props = {
   drawPoint?: boolean,
 };
 
-withDefaults(defineProps<Props>(), {
-  width: 100,
-  height: 50,
-  drawLine: true,
-  drawPoint: true,
-});
+withDefaults(
+  defineProps<Props>(),
+  {
+    width: 100,
+    height: 50,
+    drawLine: true,
+    drawPoint: true,
+  }
+);
 
 const themeVars = useThemeVars();
 

@@ -24,9 +24,12 @@ type Props = {
   itemContentStyle: CSSProperties;
 };
 
-withDefaults(defineProps<Props>(), {
-  list: () => []
-});
+withDefaults(
+  defineProps<Props>(),
+  {
+    list: () => []
+  }
+);
 
 const attrs = useAttrs();
 </script>

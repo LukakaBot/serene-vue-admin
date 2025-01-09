@@ -14,10 +14,13 @@ type Props = {
   showSeparator?: boolean;
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  size: '14px',
-  showSeparator: true,
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    size: '14px',
+    showSeparator: true,
+  }
+);
 
 const attrs = useAttrs();
 

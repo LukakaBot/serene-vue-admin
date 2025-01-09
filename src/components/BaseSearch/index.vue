@@ -31,11 +31,11 @@ type Props = {
   list: SearchItem[];
 };
 
+const props = defineProps<Props>();
+
 type Emits = {
   (event: 'update:search', params: SearchParams): void;
 };
-
-const props = defineProps<Props>();
 
 const emits = defineEmits<Emits>();
 

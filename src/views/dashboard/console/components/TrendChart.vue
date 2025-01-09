@@ -14,10 +14,13 @@ type Props = {
   height?: string;
 };
 
-withDefaults(defineProps<Props>(), {
-  width: '100%',
-  height: '300px',
-});
+withDefaults(
+  defineProps<Props>(),
+  {
+    width: '100%',
+    height: '300px',
+  }
+);
 
 const chartRef = ref<HTMLDivElement | null>(null);
 
