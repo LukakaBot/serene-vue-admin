@@ -1,8 +1,5 @@
-<template>
-  <div id="container" class="relative" :class="hiddenMapLogoClassName" :style="mapContainerStyle"></div>
-</template>
-
-<script setup lang="ts">
+<script setup lang="tsx">
+import type { CSSProperties } from 'vue';
 import AMapLoader from "@amap/amap-jsapi-loader";
 
 type Props = {
@@ -69,23 +66,30 @@ function initMap() {
     });
 }
 
-function init() {
-  initMap();
-}
+const mapContainerStyle = computed<CSSProperties>(() => ({ width: props.width, height: props.height }));
 
-const mapContainerStyle = computed(() => ({ width: props.width, height: props.height }));
+const hiddenMapLogoClassName = computed(() => (
+  {
+    'amap-logo-hidden': !props.showLogo
+  }
+));
 
-const hiddenMapLogoClassName = computed(() => ({
-  'amap-logo-hidden': !props.showLogo
-}));
-
-onMounted(() => init());
+onMounted(() => initMap());
 
 onUnmounted(() => {
   map.value?.destroy();
 });
 
 defineExpose({ map });
+
+defineRender(() => (
+  <div
+    id="container"
+    class={hiddenMapLogoClassName.value}
+    style={mapContainerStyle.value}
+  >
+  </div>
+));
 </script>
 
 <style lang="scss" scoped>
