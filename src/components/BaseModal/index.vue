@@ -1,29 +1,6 @@
-<template>
-  <n-modal v-bind="attrs" :show="show" preset="card" :style="bodyStyle" :title="title" :bordered="false"
-    :close-on-esc="false" :mask-closable="false" :on-close="handleClose" :on-after-leave="handleAfterLeave">
-    <template #header-extra>
-      <slot name="header-extra"></slot>
-    </template>
-    <template #default>
-      <slot name="default">我是内容</slot>
-    </template>
-    <template #footer>
-      <slot name="footer">
-        <div class="flex justify-center items-center gap-x-20px" v-if="showFooter">
-          <n-button @click="handleClose" strong secondary type="tertiary">取消</n-button>
-          <n-button @click="handleSubmit" type="primary" v-if="showSubmit" :loading="loading">提交</n-button>
-        </div>
-      </slot>
-    </template>
-    <template #action>
-      <slot name="action"></slot>
-    </template>
-  </n-modal>
-</template>
-
-<script setup lang="ts">
-import { CSSProperties } from 'vue';
-import { NModal } from 'naive-ui';
+<script setup lang="tsx">
+import type { CSSProperties, VNode } from 'vue';
+import { NModal, NButton } from 'naive-ui';
 
 type Props = {
   /** 是否展示 Modal */
@@ -59,6 +36,15 @@ const props = withDefaults(
 const emits = defineEmits(['close', 'closed', 'submit']);
 
 const attrs = useAttrs();
+
+type Slots = {
+  headerExtra: (() => VNode) | undefined;
+  default: (() => VNode) | undefined;
+  footer: (() => VNode) | undefined;
+  action: (() => VNode) | undefined;
+};
+
+const slots = useSlots() as Slots;
 
 const modalRef = ref<HTMLElement | null>(null);
 
@@ -141,8 +127,37 @@ function init() {
 
 watch(
   () => props.show,
-  (_) => init(),
-)
+  (value) => {
+    if (!value) init();
+  }
+);
+
+defineRender(() => (
+  <NModal
+    {...attrs}
+    show={props.show}
+    preset='card'
+    title={props.title}
+    bordered={false}
+    style={props.bodyStyle}
+    closeOnEsc={false}
+    maskClosable={false}
+    onClose={handleClose}
+    onAfterLeave={handleAfterLeave}
+  >
+    {{
+      'header-extra': slots.headerExtra ? slots.headerExtra : undefined,
+      'default': slots.default,
+      'footer': slots.footer 
+      ? slots.footer 
+      : <div class="flex justify-center items-center gap-x-20px" v-if={props.showFooter}>
+          <NButton type='tertiary' strong={true} secondary={true} onClick={handleClose}>取消</NButton>
+          <NButton type='primary' strong={true} loading={props.loading} onClick={handleSubmit}>提交</NButton>
+        </div>,
+      'action': slots.action ? slots.action : undefined
+    }}
+  </NModal>
+));
 </script>
 
 <style scoped></style>

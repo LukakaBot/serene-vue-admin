@@ -1,6 +1,6 @@
 <template>
   <BaseModal :show="show" :title="modalTitle" draggable @close="closeModal" @submit="handleSubmit">
-
+    <template #default>123</template>
   </BaseModal>
 </template>
 
