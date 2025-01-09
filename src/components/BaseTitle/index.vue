@@ -1,5 +1,5 @@
 <template>
-  <n-el :class="tagClassName" :style="titleStyle">{{ title }}</n-el>
+  <div :class="tagClassName" :style="titleStyle">{{ title }}</div>
 </template>
 
 <script setup lang="ts">

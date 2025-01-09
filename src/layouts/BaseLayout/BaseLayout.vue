@@ -5,10 +5,10 @@
       <main class="flex flex-col h-full overflow-hidden">
         <BaseHeader />
         <n-layout-content :class="{ 'bg-#eceef0': !isDarkMode }">
-          <div class="flex flex-col h-full overflow-hidden">
+          <n-el class="flex flex-col h-full overflow-hidden">
             <BaseTab />
             <BaseContent />
-          </div>
+          </n-el>
         </n-layout-content>
       </main>
     </n-layout>
