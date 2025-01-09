@@ -1,8 +1,4 @@
-<template>
-  <div :class="tagClassName" :style="titleStyle">{{ title }}</div>
-</template>
-
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { CSSProperties } from 'vue';
 
 type Props = {
@@ -26,14 +22,20 @@ const props = withDefaults(
   }
 );
 
-const tagClassName = computed(() => {
-  if (props.tagDirection === 'left') {
-    return 'left-tag-title'
-  }
-  else {
-    return 'bottom-tag-title'
-  }
-});
+const tagClassName = computed(() => (
+  props.tagDirection === 'left'
+    ? 'left-tag-title'
+    : 'bottom-tag-title'
+));
+
+defineRender(() => (
+  <div
+    class={tagClassName.value}
+    style={props.titleStyle}
+  >
+    {props.title}
+  </div>
+));
 </script>
 
 <style scoped></style>
