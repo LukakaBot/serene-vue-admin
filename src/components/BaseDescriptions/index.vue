@@ -1,37 +1,51 @@
-<template>
-  <n-descriptions v-bind="attrs">
-    <n-descriptions-item :label="item.text" :label-style="itemLabelStyle" :content-style="itemContentStyle"
-      v-for="(item, index) in list" :key="index">
-      <DescriptionsItemRender :data="data" :field="item.field" :render="item.render" v-if="item?.render" />
-      <div v-else>{{ data[item.field] }}</div>
-    </n-descriptions-item>
-  </n-descriptions>
-</template>
-
-<script setup lang="ts">
+<script setup lang="tsx">
 import type { CSSProperties } from 'vue';
 import type { BaseDescription, BaseDescriptionData } from './types';
-import DescriptionsItemRender from './components/DescriptionsItemRender.vue';
+import type { DescriptionsProps } from 'naive-ui';
 
-type Props = {
+interface Props extends DescriptionsProps {
   /** 描述列表 */
   list: BaseDescription[];
   /** 数据 */
   data: BaseDescriptionData;
   /** 标签样式 */
-  itemLabelStyle: CSSProperties;
+  itemLabelStyle?: CSSProperties;
   /** 内容样式 */
-  itemContentStyle: CSSProperties;
+  itemContentStyle?: CSSProperties;
 };
 
-withDefaults(
+const props = withDefaults(
   defineProps<Props>(),
   {
-    list: () => []
+    list: () => [],
+    itemLabelStyle: () => ({}),
+    itemContentStyle: () => ({}),
   }
 );
 
 const attrs = useAttrs();
+
+defineRender(() => (
+  <n-descriptions
+    {...attrs}
+    bordered={true}
+  >
+    {props.list.map((item, index) => (
+      <n-descriptions-item
+        key={index}
+        label={item.text}
+        label-style={props.itemLabelStyle}
+        content-style={props.itemContentStyle}
+      >
+        {
+          item.render
+            ? item.render(props.data, item.field)
+            : props.data[item.field]
+        }
+      </n-descriptions-item>
+    ))}
+  </n-descriptions>
+));
 </script>
 
 <style scoped></style>

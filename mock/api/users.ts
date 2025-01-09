@@ -56,7 +56,13 @@ const menus = [
         name: '高亮文本',
         component: '/views/component/hignlight/index.vue',
         meta: { icon: 'mdi:text' },
-      }
+      },
+      {
+        path: '/component/descriptions',
+        name: '描述列表',
+        component: '/views/component/descriptions/index.vue',
+        meta: { icon: 'mdi:text' },
+      },
     ]
   },
   {
