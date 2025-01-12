@@ -6,13 +6,13 @@ export function useMap(options?: Options) {
   let map = shallowRef<AMap.Map>();
 
   function initMap() {
-    const _options = Object.assign({
+    const config = Object.assign({
       key: import.meta.env.VITE_AMAP_KEY,
       version: "2.0",
     }, options);
 
     return new Promise((resolve, reject) => {
-      AMapLoader.load(_options)
+      AMapLoader.load(config)
         .then((AMap) => {
           resolve(AMap);
         })
