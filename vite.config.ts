@@ -7,7 +7,7 @@ import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
-import vueDevTools from 'vite-plugin-vue-devtools';
+// import vueDevTools from 'vite-plugin-vue-devtools';
 import { viteMockServe } from 'vite-plugin-mock';
 import vueJsx from "@vitejs/plugin-vue-jsx";
 
@@ -26,7 +26,7 @@ export default defineConfig((({ command, mode }) => {
       }),
       UnoCSS(),
       AutoImport({
-        dts: 'src/types/auto-import.d.ts',
+        dts: 'src/typings/auto-import.d.ts',
         imports: [
           'vue',
           'vue-router',
@@ -41,14 +41,14 @@ export default defineConfig((({ command, mode }) => {
         },
       }),
       Components({
-        dts: 'src/types/components.d.ts',
+        dts: 'src/typings/components.d.ts',
         resolvers: [NaiveUiResolver()],
       }),
       createSvgIconsPlugin({
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
         symbolId: 'svg-[name]',
       }),
-      vueDevTools(),
+      // vueDevTools(),
       viteMockServe({
         mockPath: 'mock',
         enable: true,
@@ -60,7 +60,13 @@ export default defineConfig((({ command, mode }) => {
       }
     },
     server: {
-      port: 9000
+      port: 9000,
+      // proxy: {
+      //   '/api': {
+      //     target: 'http://192.168.5.148:9000',
+      //     changeOrigin: true,
+      //   },
+      // },
     }
   };
 }))
