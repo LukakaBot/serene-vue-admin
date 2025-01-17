@@ -7,6 +7,7 @@ import './styles/index';
 import { setupStore } from '@/store/index';
 import { setupNaiveDiscrete } from '@/plugins/naiveDiscrete';
 import { setupDirectives } from './directives';
+import { setupBucket } from '@/plugins/bucket';
 import router, { setupRoute } from '@/router';
 
 async function mountApp() {
@@ -21,6 +22,8 @@ async function mountApp() {
   setupNaiveDiscrete();
 
   setupDirectives(app);
+  
+  setupBucket();
 
   app.use(TlbsMap);
 
