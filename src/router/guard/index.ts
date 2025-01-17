@@ -7,7 +7,6 @@ async function checkPermissions(to: RouteLocationNormalized, from: RouteLocation
   const routeStore = useRouteStore();
   const { routeWhitelist } = globalConfig;
   const token = window.$bucket?.get('token');
-  console.log(token);
 
   // 如果目标路由在白名单内，则直接访问；但如果已登录还试图访问登录页，则重定向到之前的页面
   if (routeWhitelist.includes(to.path)) {

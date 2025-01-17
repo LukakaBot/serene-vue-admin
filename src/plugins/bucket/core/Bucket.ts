@@ -13,7 +13,10 @@ class Bucket {
 
   /** 获取缓存 */
   get<T>(key: string) {
-    return JSON.parse(this.storage.getItem(key) || '{}') as T;
+    if (this.storage.getItem(key)) {
+      return JSON.parse(this.storage.getItem(key)!) as T;
+    }
+    return null;
   }
 
   /** 删除缓存 */
