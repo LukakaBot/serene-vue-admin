@@ -9,10 +9,10 @@
       <n-form-item label="密码" path="password">
         <n-input v-model:value="accountFormData.password" placeholder="请输入密码" type="password" />
       </n-form-item>
-      <n-form-item>
+      <n-form-item label="验证码" path="code">
         <n-space>
           <n-input v-model:value="accountFormData.code" placeholder="请输入验证码" />
-          <AuthCaptcha ref="authCaptchaRef" :height="40" />
+          <AuthCaptcha ref="authCaptchaRef" :width="100" :height="40" />
         </n-space>
       </n-form-item>
     </n-form>
@@ -58,6 +58,7 @@ const rules: FormRules = {
 
 function checkCaptcha(_rule: FormItemRule, value: string) {
   if (!value) return new Error('请输入验证码');
+  if (!authCaptchaRef.value?.checkCaptcha(value)) return new Error('验证码错误');
   return true;
 }
 

@@ -66,13 +66,14 @@ function initMap() {
     });
 }
 
-const mapContainerStyle = computed<CSSProperties>(() => ({ width: props.width, height: props.height }));
+const mapContainerStyle = computed<CSSProperties>(() => ({
+  width: props.width,
+  height: props.height
+}));
 
-const hiddenMapLogoClassName = computed(() => (
-  {
-    'amap-logo-hidden': !props.showLogo
-  }
-));
+const hiddenMapLogoClassName = computed(() => ({
+  'amap-logo-hidden': !props.showLogo
+}));
 
 onMounted(() => initMap());
 
