@@ -1,12 +1,4 @@
-<template>
-  <div :style="bindStyle">
-    <span v-if="isRenderPrefix">{{ prefix }}</span>
-    <n-number-animation v-bind="attrs" :showSeparator="showSeparator" />
-    <span v-if="isRenderSuffix">{{ suffix }}</span>
-  </div>
-</template>
-
-<script setup lang="ts">
+<script setup lang="tsx">
 type Props = {
   prefix?: string;
   suffix?: string;
@@ -14,13 +6,10 @@ type Props = {
   showSeparator?: boolean;
 };
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    size: '14px',
-    showSeparator: true,
-  }
-);
+const props = withDefaults(defineProps<Props>(), {
+  size: "14px",
+  showSeparator: true,
+});
 
 const attrs = useAttrs();
 
@@ -31,6 +20,14 @@ const bindStyle = computed(() => ({
 const isRenderPrefix = computed(() => !!props.prefix);
 
 const isRenderSuffix = computed(() => !!props.suffix);
+
+defineRender(() => (
+  <div style={bindStyle.value}>
+    <span v-if={isRenderPrefix.value}>{props.prefix}</span>
+    <n-number-animation {...attrs} showSeparator={props.showSeparator} />
+    <span v-if={isRenderSuffix.value}>{props.suffix}</span>
+  </div>
+));
 </script>
 
 <style scoped></style>
