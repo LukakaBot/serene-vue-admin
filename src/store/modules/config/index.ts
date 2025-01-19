@@ -10,7 +10,7 @@ export const useConfigStore = defineStore({
     return {
       showWatermark: true,
       watermarkContent: 'serene-admin',
-      isDarkMode: true,
+      isDarkMode: false,
       theme: themeStore.$state,
     }
   },
