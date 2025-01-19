@@ -39,9 +39,7 @@ defineRender(() => (
       }) => (
         <>
           {routeStore.isRouteLoaded && (
-            <Transition>
-              <component is={Component} key={route.fullPath} />
-            </Transition>
+            <Transition>{h(Component, { key: route.fullPath })}</Transition>
           )}
           {showWatermark.value && <n-watermark {...watermarkProps.value} />}
         </>
