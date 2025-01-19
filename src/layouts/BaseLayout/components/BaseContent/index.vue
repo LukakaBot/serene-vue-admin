@@ -1,15 +1,54 @@
-<template>
-  <RouterView v-slot="{ Component, route }">
-    <Transition name="slide-fade" mode="out-in" appear>
-      <component :is="Component" :key="route.fullPath" v-if="routeStore.isRouteLoaded" />
-    </Transition>
-  </RouterView>
-</template>
-
-<script setup lang="ts">
-import { useRouteStore } from '@/store';
+<script setup lang="tsx">
+import type { VNode } from "vue";
+import { Transition } from "vue";
+import type { RouteLocationNormalizedLoaded } from "vue-router";
+import { RouterView } from "vue-router";
+import type { WatermarkProps } from "naive-ui";
+import { useRouteStore, useConfigStore } from "@/store";
 
 const routeStore = useRouteStore();
+
+const configStore = useConfigStore();
+
+const showWatermark = computed(() => configStore.showWatermark);
+
+const watermarkProps = computed<WatermarkProps>(() => {
+  return {
+    content: configStore.watermarkContent,
+    cross: true,
+    fullscreen: true,
+    fontSize: 16,
+    lineHeight: 16,
+    width: 384,
+    height: 384,
+    xOffset: 12,
+    yOffset: 60,
+    rotate: -15,
+  };
+});
+
+defineRender(() => (
+  <RouterView>
+    {{
+      default: ({
+        Component,
+        route,
+      }: {
+        Component: VNode;
+        route: RouteLocationNormalizedLoaded;
+      }) => (
+        <>
+          {routeStore.isRouteLoaded && (
+            <Transition>
+              <component is={Component} key={route.fullPath} />
+            </Transition>
+          )}
+          {showWatermark.value && <n-watermark {...watermarkProps.value} />}
+        </>
+      ),
+    }}
+  </RouterView>
+));
 </script>
 
 <style scoped>
