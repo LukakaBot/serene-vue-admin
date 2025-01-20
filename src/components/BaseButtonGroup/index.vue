@@ -7,45 +7,45 @@ import type { BaseButton } from './types';
 import { renderIcon } from '@/utils/tools/index';
 
 type Props = {
-  list: BaseButton[];
+	list: BaseButton[];
 };
 
 const props = defineProps<Props>();
 
 type Emits = {
-  (e: 'click', label: string): void;
+	(e: 'click', label: string): void;
 };
 
 const emits = defineEmits<Emits>();
 
 function handleClick(label: string) {
-  emits('click', label);
+	emits('click', label);
 }
 
 function createButtonProps(btn: BaseButton): ButtonProps {
-  return {
-    type: btn.type,
-    renderIcon: btn.icon ? () => renderIcon({ name: btn.icon! }) : undefined,
-    strong: true,
-    onClick: () => handleClick(btn.text),
-  };
+	return {
+		type: btn.type,
+		renderIcon: btn.icon ? () => renderIcon({ name: btn.icon! }) : undefined,
+		strong: true,
+		onClick: () => handleClick(btn.text),
+	};
 }
 
 function withAuthDirective(vnode: VNode, value: string) {
-  const vAuth = resolveDirective('auth');
-  return withDirectives(vnode, [[vAuth, value]]);
+	const vAuth = resolveDirective('auth');
+	return withDirectives(vnode, [[vAuth, value]]);
 }
 
 defineRender(() => (
-  h(NSpace, () => [
-    props.list.map(btn => {
-      const buttonProps = createButtonProps(btn);
-      const buttonRender = <NButton {...buttonProps}>{btn.text}</NButton>;
+	<NSpace>
+		{props.list.map((btn) => {
+			const buttonProps = createButtonProps(btn);
+			const buttonRender = <NButton {...buttonProps}>{btn.text}</NButton>;
 
-      return btn.auth !== undefined
-        ? withAuthDirective(buttonRender, btn.text)
-        : buttonRender;
-    })
-  ])
+			return btn.auth !== undefined
+				? withAuthDirective(buttonRender, btn.text)
+				: buttonRender;
+		})}
+	</NSpace>
 ));
 </script>
