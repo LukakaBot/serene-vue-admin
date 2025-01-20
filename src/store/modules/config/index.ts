@@ -18,7 +18,7 @@ export const useConfigStore = defineStore({
   actions: {
     /**
      * 更新主题模式为指定的布尔值
-     * @param value - 要设置的主题模式值，true 为深色模式，false 为浅色模式
+     * @param {boolean} value - 要设置的主题模式值，true 为深色模式，false 为浅色模式
      */
     updateDarkMode(value: boolean) {
       this.isDarkMode = value;
