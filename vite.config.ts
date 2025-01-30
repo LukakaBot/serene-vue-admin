@@ -7,7 +7,7 @@ import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
-// import vueDevTools from 'vite-plugin-vue-devtools';
+import vueDevTools from 'vite-plugin-vue-devtools';
 import { viteMockServe } from 'vite-plugin-mock';
 import vueJsx from "@vitejs/plugin-vue-jsx";
 
@@ -48,7 +48,7 @@ export default defineConfig((({ command, mode }) => {
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
         symbolId: 'svg-[name]',
       }),
-      // vueDevTools(),
+      vueDevTools(),
       viteMockServe({
         mockPath: 'mock',
         enable: true,
