@@ -12,6 +12,7 @@ declare module 'vue' {
     BaseDescriptions: typeof import('./../components/BaseDescriptions/index.vue')['default']
     BaseIcon: typeof import('./../components/BaseIcon/index.vue')['default']
     BaseModal: typeof import('./../components/BaseModal/index.vue')['default']
+    BaseProvider: typeof import('./../components/BaseProvider/index.vue')['default']
     BaseSearch: typeof import('./../components/BaseSearch/index.vue')['default']
     BaseTable: typeof import('./../components/BaseTable/index.vue')['default']
     BaseTitle: typeof import('./../components/BaseTitle/index.vue')['default']
