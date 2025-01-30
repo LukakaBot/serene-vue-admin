@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import { darkTheme, zhCN, dateZhCN, NConfigProvider } from "naive-ui";
 import { useConfigStore, useThemeStore } from "./store";
+import BaseProvider from "@/components/BaseProvider/index.vue";
 
 const configStore = useConfigStore();
 
@@ -16,7 +17,9 @@ defineRender(() => (
     locale={zhCN}
     date-locale={dateZhCN}
   >
-    <RouterView />
+    <BaseProvider>
+      <RouterView />
+    </BaseProvider>
   </NConfigProvider>
 ));
 </script>
