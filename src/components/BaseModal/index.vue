@@ -1,6 +1,6 @@
 <script setup lang="tsx">
-import type { CSSProperties, VNode } from 'vue';
-import { NModal, NButton } from 'naive-ui';
+import type { CSSProperties, VNode } from "vue";
+import { NModal, NButton } from "naive-ui";
 
 type Props = {
   /** 是否展示 Modal */
@@ -19,21 +19,18 @@ type Props = {
   draggable?: boolean;
 };
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    title: "我是标题",
-    bodyStyle: () => ({
-      width: '600px',
-    }),
-    showFooter: true,
-    showSubmit: true,
-    loading: false,
-    draggable: false,
-  }
-);
+const props = withDefaults(defineProps<Props>(), {
+  title: "我是标题",
+  bodyStyle: () => ({
+    width: "600px",
+  }),
+  showFooter: true,
+  showSubmit: true,
+  loading: false,
+  draggable: false,
+});
 
-const emits = defineEmits(['close', 'closed', 'submit']);
+const emits = defineEmits(["close", "closed", "submit"]);
 
 const attrs = useAttrs();
 
@@ -44,7 +41,7 @@ type Slots = {
   action: (() => VNode) | undefined;
 };
 
-const slots = useSlots() as Slots;
+const slots = defineSlots<Slots>();
 
 const modalRef = ref<HTMLElement | null>(null);
 
@@ -53,15 +50,15 @@ const headerRef = ref<HTMLElement | null>(null);
 let transform = { offsetX: 0, offsetY: 0 };
 
 function handleClose() {
-  emits('close');
+  emits("close");
 }
 
 function handleAfterLeave() {
-  emits('closed');
+  emits("closed");
 }
 
 function handleSubmit() {
-  emits('submit');
+  emits("submit");
 }
 
 function onMousedown(e: MouseEvent) {
@@ -82,30 +79,35 @@ function onMousedown(e: MouseEvent) {
 
   function onMousemove(e: MouseEvent) {
     // 计算移动位置
-    const moveX = Math.min(Math.max(offsetX + e.clientX - downX, minLeft), maxLeft);
-    const moveY = Math.min(Math.max(offsetY + e.clientY - downY, minTop), maxTop);
+    const moveX = Math.min(
+      Math.max(offsetX + e.clientX - downX, minLeft),
+      maxLeft
+    );
+    const moveY = Math.min(
+      Math.max(offsetY + e.clientY - downY, minTop),
+      maxTop
+    );
 
     transform = { offsetX: moveX, offsetY: moveY };
     modalRef.value!.style.transform = `translate(${moveX}px, ${moveY}px)`;
   }
 
   function onMouseup() {
-    document.removeEventListener('mousemove', onMousemove);
-    document.removeEventListener('mouseup', onMouseup);
+    document.removeEventListener("mousemove", onMousemove);
+    document.removeEventListener("mouseup", onMouseup);
   }
 
-  document.addEventListener('mousemove', onMousemove);
-  document.addEventListener('mouseup', onMouseup);
+  document.addEventListener("mousemove", onMousemove);
+  document.addEventListener("mouseup", onMouseup);
 }
 
 function toggleDraggable(show: boolean) {
   if (headerRef.value && modalRef.value) {
     if (show) {
-      headerRef.value.addEventListener('mousedown', onMousedown);
-      headerRef.value.style.cursor = 'move';
-    }
-    else {
-      headerRef.value.removeEventListener('mousedown', onMousedown);
+      headerRef.value.addEventListener("mousedown", onMousedown);
+      headerRef.value.style.cursor = "move";
+    } else {
+      headerRef.value.removeEventListener("mousedown", onMousedown);
     }
   }
 }
@@ -119,8 +121,8 @@ function init() {
   nextTick(() => {
     const { draggable, show } = props;
 
-    modalRef.value = document.querySelector('.n-modal');
-    headerRef.value = document.querySelector('.n-card-header');
+    modalRef.value = document.querySelector(".n-modal");
+    headerRef.value = document.querySelector(".n-card-header");
     toggleDraggable(draggable && show);
   });
 }
@@ -136,7 +138,7 @@ defineRender(() => (
   <NModal
     {...attrs}
     show={props.show}
-    preset='card'
+    preset="card"
     title={props.title}
     bordered={false}
     style={props.bodyStyle}
@@ -146,15 +148,34 @@ defineRender(() => (
     onAfterLeave={handleAfterLeave}
   >
     {{
-      'header-extra': slots.headerExtra ? slots.headerExtra : undefined,
-      'default': slots.default,
-      'footer': slots.footer 
-      ? slots.footer 
-      : <div class="flex justify-center items-center gap-x-20px" v-if={props.showFooter}>
-          <NButton type='tertiary' strong={true} secondary={true} onClick={handleClose}>取消</NButton>
-          <NButton type='primary' strong={true} loading={props.loading} onClick={handleSubmit}>提交</NButton>
-        </div>,
-      'action': slots.action ? slots.action : undefined
+      "header-extra": slots.headerExtra,
+      default: slots.default,
+      footer: slots.footer ? (
+        slots.footer
+      ) : (
+        <div
+          class="flex justify-center items-center gap-x-20px"
+          v-if={props.showFooter}
+        >
+          <NButton
+            type="tertiary"
+            strong={true}
+            secondary={true}
+            onClick={handleClose}
+          >
+            取消
+          </NButton>
+          <NButton
+            type="primary"
+            strong={true}
+            loading={props.loading}
+            onClick={handleSubmit}
+          >
+            提交
+          </NButton>
+        </div>
+      ),
+      action: slots.action,
     }}
   </NModal>
 ));
