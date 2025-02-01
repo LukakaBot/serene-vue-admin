@@ -18,7 +18,11 @@
       @update:page="handleUpdatePage"
       @update:page-size="handleUpdatePageSize"
     />
-    <AddEditModal ref="addEditModalRef" :select-row="selectRow" />
+    <AddEditModal
+      ref="addEditModalRef"
+      :select-row="selectRow"
+      @update:table="getTableData"
+    />
   </div>
 </template>
 
@@ -47,8 +51,11 @@ const searchParams = ref({
 });
 
 const searchList = ref([
-  { type: "text", label: "姓名", key: "name", value: "" },
+  { type: "text", label: "用户名", key: "username", value: "" },
+  { type: "text", label: "真实姓名", key: "nickname", value: "" },
   { type: "text", label: "手机号码", key: "phone", value: "" },
+  { type: "text", label: "地址", key: "address", value: "" },
+  { type: "date", label: "创建日期", key: "date", value: null },
 ]);
 
 function handleSearch(params: SearchParams) {
