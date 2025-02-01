@@ -150,31 +150,31 @@ defineRender(() => (
     {{
       "header-extra": slots.headerExtra,
       default: slots.default,
-      footer: slots.footer ? (
-        slots.footer
-      ) : (
-        <div
-          class="flex justify-center items-center gap-x-20px"
-          v-if={props.showFooter}
-        >
-          <NButton
-            type="tertiary"
-            strong={true}
-            secondary={true}
-            onClick={handleClose}
-          >
-            取消
-          </NButton>
-          <NButton
-            type="primary"
-            strong={true}
-            loading={props.loading}
-            onClick={handleSubmit}
-          >
-            提交
-          </NButton>
-        </div>
-      ),
+      footer: slots.footer
+        ? slots.footer
+        : () => (
+            <div
+              class="flex justify-center items-center gap-x-20px"
+              v-if={props.showFooter}
+            >
+              <NButton
+                type="tertiary"
+                strong={true}
+                secondary={true}
+                onClick={handleClose}
+              >
+                取消
+              </NButton>
+              <NButton
+                type="primary"
+                strong={true}
+                loading={props.loading}
+                onClick={handleSubmit}
+              >
+                提交
+              </NButton>
+            </div>
+          ),
       action: slots.action,
     }}
   </NModal>

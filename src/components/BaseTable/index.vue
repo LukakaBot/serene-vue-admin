@@ -204,8 +204,6 @@ const scrollX = computed(() => {
   return columnsWidth + fixedLeftColumnsWidth + fixedRightColumnsWidth;
 });
 
-console.log(props);
-
 defineRender(() => (
   <NDataTable
     class="flex-1"

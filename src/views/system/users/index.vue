@@ -97,13 +97,6 @@ const tableData = ref<UserPageContent[]>([]);
 const columns: BaseTableColumn<UserPageContent>[] = [
   { type: "selection", key: "selection", fixed: "left" },
   {
-    title: "id",
-    align: "center",
-    key: "id",
-    width: 60,
-    fixed: "left",
-  },
-  {
     title: "序号",
     align: "center",
     key: "index",
@@ -223,7 +216,6 @@ async function getTableData() {
     searchParams.value.pageSize = pageSize;
     searchParams.value.total = total;
     tableData.value = data;
-    console.log(data);
   } finally {
     setLoading(false);
   }
