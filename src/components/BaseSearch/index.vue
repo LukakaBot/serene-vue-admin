@@ -28,9 +28,13 @@ function resetFormData(type: string) {
 
 /** 搜索查询事件 */
 function handleSearch() {
-  const params = props.list.reduce((accumulator, current) => {
-    return { ...accumulator, [current.key]: current.value };
-  }, {} as SearchParams);
+  const params = props.list.reduce(
+    (accumulator, current) => ({
+      ...accumulator,
+      [current.key]: current.value,
+    }),
+    {} as SearchParams
+  );
 
   emits("update:search", params);
 }
@@ -39,9 +43,13 @@ function handleSearch() {
 function handleClear() {
   props.list.forEach((item) => (item.value = resetFormData(item.type)));
 
-  const params = props.list.reduce((accumulator, current) => {
-    return { ...accumulator, [current.key]: resetFormData(current.type) };
-  }, {} as SearchParams);
+  const params = props.list.reduce(
+    (accumulator, current) => ({
+      ...accumulator,
+      [current.key]: resetFormData(current.type),
+    }),
+    {} as SearchParams
+  );
 
   emits("update:search", params);
 }
@@ -64,7 +72,7 @@ defineExpose({ handleSearch, handleClear });
 
 defineRender(() => (
   <Transition mode="out-in">
-    <div class={`search-container ${!isCollapse && "expand"}}`}>
+    <div class={`search-container ${!isCollapse.value ? "expand" : ""}`}>
       <div class="search-wrap">
         {props.list.map((item, index) => (
           <n-form-item label-placement="left" label={item.label} key={index}>
@@ -104,7 +112,7 @@ defineRender(() => (
             onClick={() => (isCollapse.value = !isCollapse.value)}
           >
             <BaseIcon
-              class={`arrow  ${!isCollapse && "arrow__up"} `}
+              class={`arrow  ${!isCollapse.value ? "arrow__up" : ""} `}
               name="ep:arrow-down-bold"
             />
           </n-button>
@@ -120,7 +128,7 @@ defineRender(() => (
   position: relative;
   overflow: hidden;
   height: 58px;
-  transition: height 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &.expand {
     height: v-bind(expandSearchHeight);
