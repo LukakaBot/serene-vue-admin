@@ -22,7 +22,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   title: "我是标题",
   bodyStyle: () => ({
-    width: "600px",
+    width: "400px",
   }),
   showFooter: true,
   showSubmit: true,
@@ -130,7 +130,7 @@ function init() {
 watch(
   () => props.show,
   (value) => {
-    if (!value) init();
+    if (value) init();
   }
 );
 
