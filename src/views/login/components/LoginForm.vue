@@ -11,6 +11,8 @@ type AccountFormData = UserTokenAccountParams & {
   code: string;
 };
 
+const isDev = import.meta.env.DEV;
+
 /** 用户信息商店 */
 const userStore = useUserStore();
 
@@ -28,7 +30,7 @@ const accountFormData = ref<AccountFormData>({} as AccountFormData);
 const rules: FormRules = {
   username: [{ required: true, message: "请输入用户名" }],
   password: [{ required: true, message: "请输入密码" }],
-  code: [{ required: true, validator: checkCaptcha }],
+  code: [{ required: true, validator: !isDev ? checkCaptcha : undefined }],
 };
 
 function checkCaptcha(_rule: FormItemRule, value: string) {
@@ -53,11 +55,17 @@ async function handleSubmit() {
 
 /** 重置表单 */
 function resetFormData() {
-  accountFormData.value = {
-    username: "admin",
-    password: "123456",
-    code: "",
-  };
+  accountFormData.value = isDev
+    ? {
+        username: "admin",
+        password: "123456",
+        code: "9527",
+      }
+    : {
+        username: "",
+        password: "",
+        code: "",
+      };
 }
 
 /** 初始化 */

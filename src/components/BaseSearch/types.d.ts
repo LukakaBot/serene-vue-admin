@@ -7,7 +7,7 @@ export type SearchItem = {
   type: string;
   /** 搜索的字段名 */
   key: string;
-  /** 搜索 label */
+  /** 搜索名称 */
   label: string;
   /** 搜索内容 */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

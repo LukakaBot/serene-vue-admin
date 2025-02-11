@@ -2,10 +2,11 @@ import axios from 'axios';
 import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import type { ResponseContent } from './types';
 
+const isDev = import.meta.env.DEV;
 const { VITE_SERVICE_URL, VITE_SERVICE_PORT, VITE_SERVICE_PREFIX } = import.meta.env;
 
 const request: AxiosInstance = axios.create({
-  baseURL: `${VITE_SERVICE_URL}:${VITE_SERVICE_PORT}${VITE_SERVICE_PREFIX}`,
+  baseURL: isDev ? VITE_SERVICE_PREFIX : `${VITE_SERVICE_URL}:${VITE_SERVICE_PORT}${VITE_SERVICE_PREFIX}`,
   timeout: 5 * 1000,
 });
 

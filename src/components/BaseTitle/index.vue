@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import type { CSSProperties } from 'vue';
+import type { CSSProperties } from "vue";
 
 type Props = {
   /** 标题 */
@@ -9,30 +9,22 @@ type Props = {
   /** 是否显示 tag */
   showTag?: boolean;
   /** tag 方向 */
-  tagDirection?: 'left' | 'bottom';
+  tagDirection?: "left" | "bottom";
 };
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    title: '我是标题',
-    titleStyle: () => ({}),
-    showTag: true,
-    tagDirection: 'bottom',
-  }
+const props = withDefaults(defineProps<Props>(), {
+  title: "我是标题",
+  titleStyle: () => ({}),
+  showTag: true,
+  tagDirection: "bottom",
+});
+
+const tagClassName = computed(() =>
+  props.tagDirection === "left" ? "left-tag-title" : "bottom-tag-title"
 );
 
-const tagClassName = computed(() => (
-  props.tagDirection === 'left'
-    ? 'left-tag-title'
-    : 'bottom-tag-title'
-));
-
 defineRender(() => (
-  <div
-    class={tagClassName.value}
-    style={props.titleStyle}
-  >
+  <div class={tagClassName.value} style={props.titleStyle}>
     {props.title}
   </div>
 ));

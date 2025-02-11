@@ -1,10 +1,20 @@
 <script setup lang="tsx">
-import { resolveDirective, withDirectives } from 'vue';
-import type { PaginationProps, ButtonProps, DataTableRowKey, DataTableCreateRowKey } from 'naive-ui';
-import type { RowData } from 'naive-ui/es/data-table/src/interface';
-import { NDataTable, NPopover, NSpace } from 'naive-ui';
-import type { BaseTableColumns, BaseTableColumn, Operations, SearchParams } from './types.d.ts';
-import { renderIcon, renderButton } from '@/utils/tools';
+import { resolveDirective, withDirectives } from "vue";
+import type {
+  PaginationProps,
+  ButtonProps,
+  DataTableRowKey,
+  DataTableCreateRowKey,
+} from "naive-ui";
+import type { RowData } from "naive-ui/es/data-table/src/interface";
+import { NDataTable, NPopover, NSpace } from "naive-ui";
+import type {
+  BaseTableColumns,
+  BaseTableColumn,
+  Operations,
+  SearchParams,
+} from "./types.d.ts";
+import { renderIcon, renderButton } from "@/utils/tools";
 
 type Props = {
   /** 查询参数 */
@@ -27,66 +37,70 @@ type Props = {
   maxHeight?: number;
 };
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    checkedRowKeys: () => [],
-    showPagination: true,
-    loading: false,
-    operations: () => [],
-    rowKey: (row: RowData) => row.id,
-    maxHeight: undefined,
-  }
-);
+const props = withDefaults(defineProps<Props>(), {
+  checkedRowKeys: () => [],
+  showPagination: true,
+  loading: false,
+  operations: () => [],
+  rowKey: () => (row: RowData) => row.id,
+  maxHeight: undefined,
+});
 
 type Emits = {
-  (event: 'update:page', page: number): void;
-  (event: 'update:page-size', size: number): void;
-  (event: 'update:checked-row-keys', keys: DataTableRowKey[]): void;
-  (event: 'operate', label: string, row: any, index: number): void;
+  (event: "update:page", page: number): void;
+  (event: "update:page-size", size: number): void;
+  (event: "update:checked-row-keys", keys: DataTableRowKey[]): void;
+  (event: "operate", label: string, row: any, index: number): void;
 };
 
 const emits = defineEmits<Emits>();
 
-/** checked-row-keys 值更新事件 */
+/** update checked-row-keys emit */
 function handleUpdateCheckedRowKeys(keys: DataTableRowKey[]) {
-  emits('update:checked-row-keys', keys);
+  emits("update:checked-row-keys", keys);
 }
 
-/** 分页更新事件 */
+/** update page emit */
 function handleUpdatePage(page: number) {
-  emits('update:page', page);
+  emits("update:page", page);
 }
 
-/** 分页大小更新事件 */
+/** update page-size emit */
 function handleUpdatePageSize(size: number) {
-  emits('update:page-size', size);
+  emits("update:page-size", size);
 }
 
 /** 计算表格宽度 */
 function calculateTableWidth(acc: number, cur: BaseTableColumn): number {
   const childrenColumnWidth = cur.children?.reduce(calculateTableWidth, 0) ?? 0;
-  const columnWidth = !cur.children?.length && cur.width ? Number(cur.width) : 0;
+  const columnWidth =
+    !cur.children?.length && cur.width ? Number(cur.width) : 0;
 
   return acc + childrenColumnWidth + columnWidth;
 }
 
 /** 渲染操作列按钮 */
-function renderOperationColumnButtons(operations: Operations, row: RowData, index: number) {
-  return operations.map(operation => {
+function renderOperationColumnButtons(
+  operations: Operations,
+  row: RowData,
+  index: number
+) {
+  return operations.map((operation) => {
     const props: ButtonProps = {
-      size: 'small',
-      type: operation?.type ?? 'default',
+      size: "small",
+      type: operation?.type ?? "default",
       disabled: operation?.disabled?.(row, index) ?? false,
-      renderIcon: operation.icon ? () => renderIcon({ name: operation.icon as string }) : undefined,
-      onClick: () => emits('operate', operation.text, row, index),
+      renderIcon: operation.icon
+        ? () => renderIcon({ name: operation.icon as string })
+        : undefined,
+      onClick: () => emits("operate", operation.text, row, index),
     };
     const render = renderButton(props, () => operation.text);
 
     if (operation?.auth) {
-      const authDirective = resolveDirective('auth');
+      const authDirective = resolveDirective("auth");
       return withDirectives(render, [[authDirective, operation.text]]);
-    };
+    }
 
     return render;
   });
@@ -94,17 +108,41 @@ function renderOperationColumnButtons(operations: Operations, row: RowData, inde
 
 /** 渲染操作列 */
 function renderOperationColumn(operations: Operations): BaseTableColumns {
-  let newOperationColumn: BaseTableColumn = { title: '操作', align: 'center', key: 'operations', fixed: 'right', width: operationColumnWidth.value };
+  let newOperationColumn: BaseTableColumn = {
+    title: "操作",
+    align: "center",
+    key: "operations",
+    fixed: "right",
+    width: operationColumnWidth.value,
+  };
   if (!operations || operations.length <= 0) return [];
 
   newOperationColumn.render = (row, index) => {
     if (operations.length > 2) {
-      return h(NPopover, { trigger: 'click', placement: 'bottom' }, {
-        trigger: () => renderButton({ type: 'info', size: 'small', iconPlacement: 'right', renderIcon: () => renderIcon({ name: 'ep:arrow-down' }) }, () => '更多'),
-        default: () => h(NSpace, { vertical: true, justify: 'center' }, () => renderOperationColumnButtons(operations, row, index))
-      });
+      return h(
+        NPopover,
+        { trigger: "click", placement: "bottom" },
+        {
+          trigger: () =>
+            renderButton(
+              {
+                type: "info",
+                size: "small",
+                iconPlacement: "right",
+                renderIcon: () => renderIcon({ name: "ep:arrow-down" }),
+              },
+              () => "更多"
+            ),
+          default: () =>
+            h(NSpace, { vertical: true, justify: "center" }, () =>
+              renderOperationColumnButtons(operations, row, index)
+            ),
+        }
+      );
     }
-    return h(NSpace, { justify: 'center' }, () => renderOperationColumnButtons(operations, row, index));
+    return h(NSpace, { justify: "center" }, () =>
+      renderOperationColumnButtons(operations, row, index)
+    );
   };
 
   return [newOperationColumn];
@@ -134,17 +172,20 @@ const paginationOptions = computed<PaginationProps>(() => {
 });
 
 /** 分页 */
-const pagination = computed(() => !!props.showPagination && paginationOptions.value);
+const pagination = computed(
+  () => !!props.showPagination && paginationOptions.value
+);
 
 /** 表格操作列宽度 */
 const operationColumnWidth = computed(() => {
   const length = props.operations.length;
-  const width = length < 3
-    ? props.operations.reduce((acc, cur) => {
-      const hanziLength = cur.text.length;
-      return acc + hanziLength * 50;
-    }, 0)
-    : 116;
+  const width =
+    length < 3
+      ? props.operations.reduce((acc, cur) => {
+          const hanziLength = cur.text.length;
+          return acc + hanziLength * 50;
+        }, 0)
+      : 116;
 
   return width;
 });
@@ -153,7 +194,11 @@ const operationColumnWidth = computed(() => {
 const scrollX = computed(() => {
   if (props.columns.length === 0) return 0;
   const columnsWidth = props.columns.reduce(calculateTableWidth, 0);
-  const fixedLeftColumnsWidth = props.columns.reduce((acc, cur) => acc + (cur.fixed === 'left' ? (cur.width ? Number(cur.width) : 0) : 0), 0);
+  const fixedLeftColumnsWidth = props.columns.reduce(
+    (acc, cur) =>
+      acc + (cur.fixed === "left" ? (cur.width ? Number(cur.width) : 0) : 0),
+    0
+  );
   const fixedRightColumnsWidth = operationColumnWidth.value;
 
   return columnsWidth + fixedLeftColumnsWidth + fixedRightColumnsWidth;
