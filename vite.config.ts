@@ -16,7 +16,7 @@ export default defineConfig((({ command, mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
-    base: env.VITE_PUBLIC_PATH,
+    base: env.VITE_APP_PUBLIC_PATH,
     plugins: [
       VueMacros({
         plugins: {
