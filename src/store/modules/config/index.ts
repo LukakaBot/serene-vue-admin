@@ -2,8 +2,7 @@ import { defineStore } from "pinia";
 import type { ConfigState } from "./types";
 import { useThemeStore } from "../theme";
 
-export const useConfigStore = defineStore({
-  id: 'config-store',
+export const useConfigStore = defineStore('config', {
   state: (): ConfigState => {
     const themeStore = useThemeStore(); // 引用 themeStore
 

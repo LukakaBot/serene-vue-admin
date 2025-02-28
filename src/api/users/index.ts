@@ -24,6 +24,6 @@ export function fetchUserPage(params: UserPageParams): Promise<ResponseContent<U
   return request({
     url: '/user/page',
     method: 'GET',
-    params
+    params,
   });
 }

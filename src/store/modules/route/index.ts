@@ -3,10 +3,9 @@ import type { RouteComponent, RouteRecordRaw, RouteLocationNormalizedLoaded } fr
 import type { RouteState, RouteModule } from './types';
 import { fetchUserInfo } from '@/api/users/index';
 import router from '@/router';
-import globalConfig  from '@/config/app/index';
+import globalConfig from '@/config/app/index';
 
-export const useRouteStore = defineStore({
-  id: 'route-store',
+export const useRouteStore = defineStore('route', {
   state: (): RouteState => ({
     hasAuthRoute: false,
     currentRoute: {} as RouteLocationNormalizedLoaded,
@@ -41,7 +40,7 @@ export const useRouteStore = defineStore({
     },
     /** 初始化动态路由 */
     async initDynamicRoute() {
-      const { defaultRoutePath } = globalConfig ;
+      const { defaultRoutePath } = globalConfig;
       const { menus } = await fetchUserInfo();
       const routes = menus.map(this.processMenu);
       const defaultRoute: RouteRecordRaw[] = [{ path: '/', redirect: defaultRoutePath }];

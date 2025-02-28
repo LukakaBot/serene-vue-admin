@@ -4,8 +4,7 @@ import type { UserTokenAccountParams, UserInfo } from "@/api/users/types";
 import { fetchUserTokenByAccount } from "@/api/users";
 import router from "@/router";
 
-export const useUserStore = defineStore({
-  id: 'user-store',
+export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     userInfo: {} as UserInfo
   }),

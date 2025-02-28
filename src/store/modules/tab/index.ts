@@ -5,8 +5,7 @@ import { useRouteStore } from '@/store/modules/route';
 import globalConfig from '@/config/app/index';
 import router from '@/router';
 
-export const useTabStore = defineStore({
-	id: 'tab-store',
+export const useTabStore = defineStore('tab', {
 	state: (): TabState => ({
 		tabList: [],
 	}),

@@ -3,8 +3,7 @@ import type { GlobalThemeOverrides } from 'naive-ui';
 import type { ThemeState } from './types';
 // import { lighten } from '@/utils/tools';
 
-export const useThemeStore = defineStore({
-    id: 'theme-store',
+export const useThemeStore = defineStore('theme', {
     state: (): ThemeState => {
         // const appTheme = '#2d8cf0';
         // const lightenStr = lighten(appTheme, 6);
