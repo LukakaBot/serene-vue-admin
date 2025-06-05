@@ -1,18 +1,19 @@
 import AMapLoader from '@amap/amap-jsapi-loader';
 
-type Options = Parameters<typeof AMapLoader.load>[0];
+type MapOptions = Parameters<typeof AMapLoader.load>[0];
 
-export function useMap(options?: Options) {
+function useMap(options?: MapOptions) {
   let map = shallowRef<AMap.Map>();
 
-  function initMap() {
+  const initMap = () => {
     const config = Object.assign({
       key: import.meta.env.VITE_AMAP_KEY,
       version: "2.0",
     }, options);
 
     return new Promise((resolve, reject) => {
-      AMapLoader.load(config)
+      AMapLoader
+        .load(config)
         .then((AMap) => {
           resolve(AMap);
         })
@@ -23,9 +24,12 @@ export function useMap(options?: Options) {
     });
   }
 
-  function createMap(element: string | HTMLDivElement, options?: AMap.MapOptions) {
+  const createMap = (element: string | HTMLDivElement, options?: AMap.MapOptions) => {
     map.value = new AMap.Map(element, options);
   }
 
   return { map, initMap, createMap };
 }
+
+
+export default useMap;
