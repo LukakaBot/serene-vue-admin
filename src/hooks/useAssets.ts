@@ -1,10 +1,10 @@
-export function useAssets() {
+function useAssets() {
 	/**
 	 * 获取图片URL
 	 * @param {string} name - 图片文件名
 	 * @returns {string} 图片的完整URL
 	 */
-	function getImageUrl(name: string): string {
+	const getImageUrl = (name: string) => {
 		// 是否为SVG文件
 		const isSvg = name.endsWith('.svg');
 		// 根据文件类型选择目录
@@ -13,5 +13,7 @@ export function useAssets() {
 		return new URL(`/src/assets/${directory}/${name}`, import.meta.url).href;
 	}
 
-	return { getImageUrl, };
+	return { getImageUrl };
 }
+
+export default useAssets;
