@@ -1,4 +1,4 @@
-export function useVisible(initValue: boolean = false): [Ref<boolean>, () => void, () => void] {
+function useVisible(initValue: boolean = false) {
   const show = ref(initValue);
 
   function openModal() {
@@ -9,5 +9,7 @@ export function useVisible(initValue: boolean = false): [Ref<boolean>, () => voi
     show.value = false;
   }
 
-  return [show, openModal, closeModal];
+  return [show, openModal, closeModal] as const;
 }
+
+export default useVisible;

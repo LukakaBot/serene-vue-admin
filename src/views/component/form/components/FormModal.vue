@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { FormInst, FormRules } from 'naive-ui';
-import { useVisible } from '@/hooks/useVisible';
+import useVisible from '@/hooks/useVisible';
 import useLoading from '@/hooks/useLoading';
 
 type FormData = {
