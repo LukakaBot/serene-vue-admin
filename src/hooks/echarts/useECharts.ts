@@ -11,7 +11,7 @@ type ThemeType = 'light' | 'dark' | 'default'
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const mde = breakpoints.smallerOrEqual('md')
 
-export function useECharts(elRef: Ref<HTMLDivElement>, theme: ThemeType = 'default') {
+function useECharts(elRef: Ref<HTMLDivElement>, theme: ThemeType = 'default') {
   // 获取主题
   const getTheme = computed(() => {
     return theme
@@ -23,7 +23,7 @@ export function useECharts(elRef: Ref<HTMLDivElement>, theme: ThemeType = 'defau
   // create debounce fn
   let resizeFn = resize
   resizeFn = useDebounceFn(resize, 200)
-  let removeResizeFn = () => {}
+  let removeResizeFn = () => { }
 
   // 获取属性
   const getOptions = computed(() => {
@@ -119,3 +119,5 @@ export function useECharts(elRef: Ref<HTMLDivElement>, theme: ThemeType = 'defau
     getInstance,
   }
 }
+
+export default useECharts
