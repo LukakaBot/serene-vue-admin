@@ -1,153 +1,170 @@
 <script setup lang="tsx">
-import { Transition } from "vue";
-import type { SearchParams, SearchItem } from "./types.d.ts";
-import BaseIcon from "@/components/BaseIcon/index.vue";
+import { Transition } from 'vue';
+import type { SearchParams, SearchItem } from './types.d.ts';
+import BaseIcon from '@/components/BaseIcon/index.vue';
 
 type Props = {
-  list: SearchItem[];
+	list: SearchItem[];
 };
 
 const props = defineProps<Props>();
 
 type Emits = {
-  (event: "update:search", params: SearchParams): void;
+	(event: 'update:search', params: SearchParams): void;
 };
 
 const emits = defineEmits<Emits>();
 
 /** 表单类型排除 */
-const formTypeExcludes = ["select", "date", "dateRange"];
+const formTypeExcludes = ['select', 'date', 'dateRange'];
 
 /** 是否折叠 */
 const isCollapse = ref(true);
 
 /** 重置表单值 */
 function resetFormData(type: string) {
-  return formTypeExcludes.includes(type) ? null : "";
+	return formTypeExcludes.includes(type) ? null : '';
 }
 
 /** 搜索查询事件 */
 function handleSearch() {
-  const params = props.list.reduce(
-    (accumulator, current) => ({
-      ...accumulator,
-      [current.key]: current.value,
-    }),
-    {} as SearchParams
-  );
+	const params = props.list.reduce(
+		(accumulator, current) => ({
+			...accumulator,
+			[current.key]: current.value,
+		}),
+		{} as SearchParams
+	);
 
-  emits("update:search", params);
+	emits('update:search', params);
 }
 
 /** 搜索清空事件 */
 function handleClear() {
-  props.list.forEach((item) => (item.value = resetFormData(item.type)));
+	props.list.forEach((item) => (item.value = resetFormData(item.type)));
 
-  const params = props.list.reduce(
-    (accumulator, current) => ({
-      ...accumulator,
-      [current.key]: resetFormData(current.type),
-    }),
-    {} as SearchParams
-  );
+	const params = props.list.reduce(
+		(accumulator, current) => ({
+			...accumulator,
+			[current.key]: resetFormData(current.type),
+		}),
+		{} as SearchParams
+	);
 
-  emits("update:search", params);
+	emits('update:search', params);
 }
 
 /** 搜索容器展开状态的高度 */
 const expandSearchHeight = computed(() => {
-  const searchContainerEle = document.querySelector(
-    ".search-container"
-  ) as HTMLElement;
+	const searchContainerEle = document.querySelector(
+		'.search-container'
+	) as HTMLElement;
 
-  if (!searchContainerEle) return "58px";
-  searchContainerEle.style.height = "auto";
-  const height = searchContainerEle.offsetHeight;
-  searchContainerEle.style.height = "";
+	if (!searchContainerEle) return '58px';
+	searchContainerEle.style.height = 'auto';
+	const height = searchContainerEle.offsetHeight;
+	searchContainerEle.style.height = '';
 
-  return `${height}px`;
+	return `${height}px`;
 });
 
 defineExpose({ handleSearch, handleClear });
 
 defineRender(() => (
-  <Transition mode="out-in">
-    <div class={`search-container ${!isCollapse.value ? "expand" : ""}`}>
-      <div class="search-wrap">
-        {props.list.map((item, index) => (
-          <n-form-item label-placement="left" label={item.label} key={index}>
-            <n-input
-              v-model:value={item.value}
-              clearable
-              placeholder={`请输入${item.label}`}
-              v-if={item.type === "text"}
-            />
-            <n-date-picker
-              class="w-full"
-              v-model:formatted-value={item.value}
-              value-format="yyyy-MM-dd"
-              type="date"
-              v-if={item.type === "date"}
-            />
-            <n-date-picker
-              class="w-full"
-              v-model:formatted-value={item.value}
-              value-format="yyyy-MM-dd"
-              type="daterange"
-              v-if={item.type === "daterange"}
-            />
-          </n-form-item>
-        ))}
+	<Transition mode='out-in'>
+		<div class={`search-container ${!isCollapse.value ? 'expand' : ''}`}>
+			<div class='search-wrap'>
+				{props.list.map((item, index) => (
+					<n-form-item label-placement='left' label={item.label} key={index}>
+						{/* 文本输入 */}
+						<n-input
+							v-model:value={item.value}
+							v-if={item.type === 'text'}
+							placeholder={`请输入${item.label}`}
+							clearable
+						/>
+						{/* 下拉选择 */}
+						<n-select
+							v-model:value={item.value}
+							v-if={item.type === 'select'}
+							options={item.options}
+							placeholder={`请选择${item.label}`}
+							value-field={item.valueField}
+							label-field={item.labelField}
+							filterable={item.filterable}
+							virtual-scroll={item.virtualScroll}
+							clearable
+						/>
+						{/* 日期选择 */}
+						<n-date-picker
+							class='w-full'
+							v-model:formatted-value={item.value}
+							v-if={item.type === 'date'}
+							value-format='yyyy-MM-dd'
+							type='date'
+							clearable
+						/>
+						{/* 日期范围选择 */}
+						<n-date-picker
+							class='w-full'
+							v-model:formatted-value={item.value}
+							v-if={item.type === 'daterange'}
+							value-format='yyyy-MM-dd'
+							type='daterange'
+							clearable
+						/>
+					</n-form-item>
+				))}
 
-        <n-flex class="absolute top-0 right-0">
-          <n-button strong type="primary" onClick={handleSearch}>
-            查询
-          </n-button>
-          <n-button strong secondary onClick={handleClear}>
-            重置
-          </n-button>
-          <n-button
-            tertiary
-            v-if={props.list.length > 4}
-            onClick={() => (isCollapse.value = !isCollapse.value)}
-          >
-            <BaseIcon
-              class={`arrow  ${!isCollapse.value ? "arrow__up" : ""} `}
-              name="ep:arrow-down-bold"
-            />
-          </n-button>
-        </n-flex>
-      </div>
-    </div>
-  </Transition>
+				<n-flex class='absolute top-0 right-0'>
+					<n-button strong type='primary' onClick={handleSearch}>
+						查询
+					</n-button>
+					<n-button strong secondary onClick={handleClear}>
+						重置
+					</n-button>
+					<n-button
+						tertiary
+						v-if={props.list.length > 4}
+						onClick={() => (isCollapse.value = !isCollapse.value)}
+					>
+						<BaseIcon
+							class={`arrow  ${!isCollapse.value ? 'arrow__up' : ''} `}
+							name='ep:arrow-down-bold'
+						/>
+					</n-button>
+				</n-flex>
+			</div>
+		</div>
+	</Transition>
 ));
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .search-container {
-  position: relative;
-  overflow: hidden;
-  height: 58px;
-  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+	height: 58px;
+	transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  &.expand {
-    height: v-bind(expandSearchHeight);
-  }
+.search-container.expand {
+	height: v-bind(expandSearchHeight);
 }
 
 .search-wrap {
-  display: grid;
-  grid-template-columns: repeat(4, 19.33%);
-  row-gap: 10px;
-  column-gap: 10px;
-  position: relative;
+	display: grid;
+	grid-template-columns: repeat(4, 19.33%);
+	row-gap: 10px;
+	column-gap: 10px;
+	position: relative;
 }
 
 .arrow {
-  transition: transform 0.3s ease-in-out;
+	transition: transform 0.3s ease-in-out;
+}
 
-  &.arrow__up {
-    transform: rotate(180deg);
-  }
+.arrow.arrow__up {
+	transform: rotate(180deg);
 }
 </style>

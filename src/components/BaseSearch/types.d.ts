@@ -18,4 +18,8 @@ export type SearchItem = {
   labelField?: string;
   /** 选项 value 的字段名 */
   valueField?: string;
+  /** 是否可以过滤 */
+  filterable?: boolean;
+  /** 是否启用虚拟滚动 */
+  virtualScroll?: boolean;
 };
