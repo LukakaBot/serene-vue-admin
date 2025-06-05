@@ -3,8 +3,8 @@ import echarts from '@/utils/lib/echarts';
 import { tryOnUnmounted, useBreakpoints, useDebounceFn, breakpointsTailwind } from '@vueuse/core'
 import { ref } from 'vue'
 import type { EChartsOption } from 'echarts'
-import { useTimeoutFn } from '@/hooks/core/useTimeout'
-import { useEventListener } from '@/hooks/event/useEventListener'
+import useTimeoutFn from '@/hooks/core/useTimeout'
+import useEventListener from '@/hooks/event/useEventListener'
 
 type ThemeType = 'light' | 'dark' | 'default'
 
