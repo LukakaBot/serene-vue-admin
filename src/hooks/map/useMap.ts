@@ -5,9 +5,14 @@ type MapOptions = Parameters<typeof AMapLoader.load>[0];
 function useMap(options?: MapOptions) {
   let map = shallowRef<AMap.Map>();
 
+
   const initMap = () => {
+    window._AMapSecurityConfig = {
+      securityJsCode: import.meta.env.VITE_APP_MAP_SECURITY_JS_CODE,
+    };
+
     const config = Object.assign({
-      key: import.meta.env.VITE_AMAP_KEY,
+      key: import.meta.env.VITE_APP_MAP_KEY,
       version: "2.0",
     }, options);
 
