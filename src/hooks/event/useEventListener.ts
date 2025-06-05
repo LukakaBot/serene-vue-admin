@@ -13,7 +13,7 @@ export interface UseEventParams {
   wait?: number
 }
 
-export function useEventListener({
+function useEventListener({
   el = window,
   name,
   listener,
@@ -24,7 +24,7 @@ export function useEventListener({
 }: UseEventParams): {
   removeEvent: RemoveEventFn
 } {
-  let remove: RemoveEventFn = () => {}
+  let remove: RemoveEventFn = () => { }
   // 是否添加listener
   const isAddRef = ref(false)
 
@@ -62,3 +62,5 @@ export function useEventListener({
 
   return { removeEvent: remove }
 }
+
+export default useEventListener
