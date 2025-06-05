@@ -14,7 +14,7 @@ declare interface Fn<T = any, R = T> {
  * @param native 是否立即执行
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useTimeoutFn(handle: Fn<any>, wait: number, native = false) {
+function useTimeoutFn(handle: Fn<any>, wait: number, native = false) {
   if (!isFunction(handle)) {
     throw new Error('handle is not Function!')
   }
@@ -59,3 +59,5 @@ export function useTimeoutRef(wait: number) {
 
   return { readyRef, stop, start }
 }
+
+export default useTimeoutFn
