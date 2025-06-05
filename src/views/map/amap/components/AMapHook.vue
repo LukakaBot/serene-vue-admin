@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import useMap from '@/hooks/map/useMap';
+import { useMap } from '@/hooks';
 const mapRef = ref<HTMLDivElement>();
 
 const { initMap, createMap } = useMap();

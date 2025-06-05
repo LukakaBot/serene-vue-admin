@@ -2,7 +2,7 @@
 import type { UserTokenAccountParams } from '@/api/users/types';
 import type { FormInst, FormItemRule, FormRules } from 'naive-ui';
 import { useUserStore } from '@/store/index';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks';
 import router from '@/router';
 import AuthCaptcha from './AuthCaptcha.vue';
 

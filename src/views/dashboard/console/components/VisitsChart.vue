@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import useECharts from '@/hooks/echarts/useECharts';
+import { useECharts } from '@/hooks';
 
 type Props = {
 	/** 图表宽度 */

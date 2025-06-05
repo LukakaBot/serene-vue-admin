@@ -217,7 +217,7 @@
 </template>
 
 <script setup lang="ts">
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks';
 import type { DataCardItem } from '../types';
 
 const [loading, setLoading] = useLoading();

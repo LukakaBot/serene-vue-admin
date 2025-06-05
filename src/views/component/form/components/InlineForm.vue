@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { FormInst, FormRules } from 'naive-ui';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks';
 
 type FormData = {
 	name: string;

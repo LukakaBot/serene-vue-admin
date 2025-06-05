@@ -16,7 +16,7 @@ import type { InternalRowData } from 'naive-ui/es/data-table/src/interface';
 import { DataTableRowKey, NAvatar, NTag } from 'naive-ui';
 import type { BaseTableColumn } from '@/components/BaseTable/types';
 import { fetchTableDataPage } from '@/api/table/index.ts';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks';
 
 const [loading, setLoading] = useLoading();
 

@@ -37,7 +37,7 @@ import type {
 	Operations,
 } from '@/components/BaseTable/types.d.ts';
 import { fetchUserPage } from '@/api/users/index';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks';
 import AddEditModal from './components/AddEditModal.vue';
 
 const [loading, setLoading] = useLoading();

@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import type { UserPageContent } from '@/api/users/types';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks';
 import { FormInst } from 'naive-ui';
 
 type AddEditUserDto = {
