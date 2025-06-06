@@ -1,6 +1,5 @@
 function useInfoWindow(opts: AMap.InfoOptions) {
-  const infoWindow = new AMap.InfoWindow(opts);
-  return infoWindow;
+  return new AMap.InfoWindow(opts);
 }
 
 export default useInfoWindow;
