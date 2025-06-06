@@ -11,7 +11,7 @@ type ThemeType = 'light' | 'dark' | 'default'
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const mde = breakpoints.smallerOrEqual('md')
 
-function useECharts(elRef: Ref<HTMLDivElement>, theme: ThemeType = 'default') {
+function useECharts(elRef: (Ref<HTMLDivElement | null | undefined>) | HTMLDivElement, theme: ThemeType = 'default') {
   // 获取主题
   const getTheme = computed(() => {
     return theme

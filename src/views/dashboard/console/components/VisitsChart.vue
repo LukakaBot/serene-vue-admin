@@ -1,10 +1,4 @@
-<template>
-	<div class="h-400px">
-		<div ref="chartRef" class="h-400px"></div>
-	</div>
-</template>
-
-<script setup lang="ts">
+<script setup lang="tsx">
 import { useECharts } from '@/hooks';
 
 type Props = {
@@ -19,9 +13,9 @@ withDefaults(defineProps<Props>(), {
 	height: '300px',
 });
 
-const chartRef = ref<HTMLDivElement | null>(null);
+const chartRef = ref<HTMLDivElement>();
 
-const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>);
+const { setOptions } = useECharts(chartRef);
 
 function initChartOption() {
 	setOptions({
@@ -82,6 +76,14 @@ function init() {
 }
 
 onMounted(() => init());
+
+defineRender(() => {
+	return (
+		<div class='h-400px'>
+			<div ref='chartRef' class='h-400px'></div>
+		</div>
+	);
+});
 </script>
 
 <style scoped></style>
