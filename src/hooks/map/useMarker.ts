@@ -1,6 +1,6 @@
-function useMarker(map: AMap.Map, options: AMap.MarkerOptions) {
-  const marker = new AMap.Marker(options);
-  map.add(marker);
+function useMarker(opts: AMap.MarkerOptions) {
+  const marker = new AMap.Marker(opts);
+  return marker;
 }
 
 export default useMarker;
