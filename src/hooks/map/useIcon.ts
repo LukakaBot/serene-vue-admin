@@ -1,6 +1,5 @@
 function useIcon(opts: AMap.IconOpts) {
-  const icon = new AMap.Icon(opts);
-  return icon;
+  return new AMap.Icon(opts);
 }
 
 export default useIcon;
