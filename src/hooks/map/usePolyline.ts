@@ -1,6 +1,5 @@
 function usePolyline(opts: AMap.PolylineOptions) {
-  const polyline = new AMap.Polyline(opts);
-  return polyline;
+  return new AMap.Polyline(opts);
 }
 
 export default usePolyline
