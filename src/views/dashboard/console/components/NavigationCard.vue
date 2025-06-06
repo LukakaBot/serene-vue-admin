@@ -13,9 +13,6 @@
 						<div class="cursor-pointer" v-else>
 							<p class="flex justify-center">
 								<span>
-									<!-- <n-icon :size="item.size" class="flex-1" :color="item.color">
-                    <component :is="item.icon" v-on="item.event || {}" />
-                  </n-icon> -->
 									<BaseIcon
 										:name="item.icon"
 										:color="item.color"

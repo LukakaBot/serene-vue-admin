@@ -213,6 +213,60 @@
 				</n-card>
 			</n-grid-item>
 		</n-grid>
+		<!-- <n-grid
+			cols="1 s:2 m:3 l:4 xl:4 2xl:4"
+			responsive="screen"
+			:x-gap="12"
+			:y-gap="8"
+		>
+			<n-grid-item v-for="item in dataList" :key="item.title">
+				<n-card
+					:title="item.title"
+					:segmented="{ content: true, footer: true }"
+					size="small"
+					:bordered="false"
+				>
+					<template #header-extra>
+						<n-tag type="success">{{ item.extraTitle }}</n-tag>
+					</template>
+					<div class="flex justify-between px-1 py-1">
+						<n-skeleton v-if="loading" :width="100" size="medium" />
+						<NumberAnimation :from="1" :to="item.value" size="30px" v-else />
+					</div>
+					<div class="flex justify-between px-1 py-1">
+						<div
+							class="flex items-center gap-x-4px"
+							v-for="data in item.list"
+							:key="data.label"
+						>
+							<n-skeleton v-if="loading" :width="100" size="medium" />
+							<template v-else>
+								{{ data.label }}
+								<NumberAnimation :from="1" :to="data.value" suffix="%" />
+								<BaseIcon
+									:name="getCountIcon(data.type)"
+									:color="getCountColor(data.type)"
+									:size="14"
+								/>
+							</template>
+						</div>
+					</div>
+					<template #footer>
+						<div class="flex justify-between">
+							<n-skeleton v-if="loading" text :repeat="2" />
+							<template v-else>
+								<div class="flex items-center gap-x-4px">
+									{{ item.footTitle }}
+								</div>
+								<div class="flex items-center gap-x-4px">
+									<NumberAnimation :from="1" :to="item.footValue" />
+								</div>
+							</template>
+						</div>
+					</template>
+				</n-card>
+			</n-grid-item>
+		</n-grid> -->
 	</div>
 </template>
 
@@ -229,6 +283,66 @@ const saleroom = ref<any>({});
 const orderLarge = ref<any>({});
 
 const volume = ref<any>({});
+
+// const dataList = ref([
+// 	{
+// 		title: '访问量',
+// 		extraTitle: '日',
+// 		value: 0,
+// 		suffix: '￥',
+// 		list: [
+// 			{ label: '日同比', value: 0, type: 'up' },
+// 			{ label: '周同比', value: 0, type: 'down' },
+// 		],
+// 		footTitle: '总访问量：',
+// 		footValue: 0,
+// 		footSuffix: '%',
+// 	},
+// 	{
+// 		title: '销售额',
+// 		extraTitle: '周',
+// 		count: {},
+// 		suffix: '￥',
+// 		list: [
+// 			{ label: '周同比', value: 0, type: 'up' },
+// 			{ label: '月同比', value: 0, type: 'down' },
+// 		],
+// 		footTitle: '总销售额：',
+// 		footSuffix: '%',
+// 	},
+// 	{
+// 		title: '订单量',
+// 		extraTitle: '周',
+// 		count: {},
+// 		suffix: '￥',
+// 		list: [
+// 			{ label: '日同比', value: 0, type: 'up' },
+// 			{ label: '周同比', value: 0, type: 'down' },
+// 		],
+// 		footTitle: '转化率：',
+// 		footSuffix: '%',
+// 	},
+// 	{
+// 		title: '交易额',
+// 		extraTitle: '月',
+// 		count: {},
+// 		suffix: '￥',
+// 		list: [
+// 			{ label: '日同比', value: 0, type: 'up' },
+// 			{ label: '月同比', value: 0, type: 'down' },
+// 		],
+// 		footTitle: '总交易额：',
+// 		footSuffix: '%',
+// 	},
+// ]);
+
+// function getCountIcon(type: string) {
+// 	return type === 'up' ? 'ep:caret-top' : 'ep:caret-bottom';
+// }
+
+// function getCountColor(type: string) {
+// 	return type === 'up' ? '#00ff6f' : '#ffde66';
+// }
 
 function fetchData(): Promise<DataCardItem> {
 	const data = {
