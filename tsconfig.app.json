@@ -49,7 +49,8 @@
     "types": [
       "@types/node",
       "vite/client",
-      "vue-macros/macros-global"
+      "vue-macros/macros-global",
+      "vite-plugin-svg-icons/client"
     ],
     "typeRoots": [
       "./node_modules/@types/",
