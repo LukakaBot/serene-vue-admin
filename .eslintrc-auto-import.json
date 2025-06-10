@@ -83,6 +83,13 @@
     "useDialog": true,
     "useLoadingBar": true,
     "useMessage": true,
-    "useNotification": true
+    "useNotification": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }
