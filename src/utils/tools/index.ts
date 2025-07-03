@@ -1,8 +1,12 @@
-import { Slot } from 'vue';
+import type { Slot } from 'vue';
 import type { ButtonProps } from 'naive-ui';
 import { NButton } from 'naive-ui';
 import type { BaseIconProps } from '@/components/BaseIcon/types';
 import BaseIcon from '@/components/BaseIcon/index.vue';
+
+interface FormatNumberWithThousandOpts extends Intl.NumberFormatOptions {
+  locale: Intl.LocalesArgument;
+}
 
 /**
  * Sums the passed percentage to the R, G or B of a HEX color
@@ -31,11 +35,20 @@ export function lighten(color: string, amount: number) {
   )}${addLight(color.substring(4, 6), amount)}`;
 }
 
-
 export function renderIcon(props: BaseIconProps) {
   return h(BaseIcon, props);
 }
 
 export function renderButton(props: ButtonProps, slot: Slot | (() => string) | string) {
   return h(NButton, props, slot);
+}
+
+export function formatNumberWithThousand(num: number, opts: FormatNumberWithThousandOpts = { locale: 'en-US' }) {
+  const { locale, ...rest } = opts;
+  const options: Intl.NumberFormatOptions = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 5,
+    ...rest
+  };
+  return new Intl.NumberFormat(locale, options).format(num);
 }
