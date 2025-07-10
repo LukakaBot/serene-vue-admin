@@ -52,8 +52,7 @@ const props = withDefaults(defineProps<IProps>(), {
 const text = ref('');
 
 function handleUpdateValue(value: string) {
-	const { 'onUpdate:value': onUpdateValue, onUpdateValue: onUpdateValue2 } =
-		props;
+	const { onUpdateValue, 'onUpdate:value': onUpdateValue2 } = props;
 
 	onUpdateValue && onUpdateValue(value);
 	onUpdateValue2 && onUpdateValue2(value);
