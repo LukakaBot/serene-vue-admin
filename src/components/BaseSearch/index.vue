@@ -12,12 +12,6 @@ type Props = {
 
 const props = defineProps<Props>();
 
-// type Emits = {
-// 	(event: 'update:search', params: SearchParams): void;
-// };
-
-// const emits = defineEmits<Emits>();
-
 /** 表单类型排除 */
 const formTypeExcludes = ['select', 'date', 'dateRange'];
 
@@ -105,7 +99,8 @@ defineRender(() => (
 							class='w-full'
 							v-model:formatted-value={item.value}
 							v-if={item.type === 'date'}
-							value-format='yyyy-MM-dd'
+							value-format={item.valueFormat || 'yyyy-MM-dd'}
+							is-date-disabled={item.dateDisabled}
 							type='date'
 							clearable
 						/>
@@ -114,7 +109,8 @@ defineRender(() => (
 							class='w-full'
 							v-model:formatted-value={item.value}
 							v-if={item.type === 'daterange'}
-							value-format='yyyy-MM-dd'
+							value-format={item.valueFormat || 'yyyy-MM-dd'}
+							is-date-disabled={item.dateDisabled}
 							type='daterange'
 							clearable
 						/>

@@ -1,10 +1,13 @@
 import type { SelectOption } from 'naive-ui';
+import type { IsDateDisabled } from 'naive-ui/es/date-picker/src/interface';
 
 type SearchParams = Record<string, string | null | number>;
 
-export type SearchItem = {
+export type SearchType = 'select' | 'date' | 'daterange' | 'text';
+
+export interface SearchItem {
   /** 搜索类型 */
-  type: string;
+  type: SearchType;
   /** 搜索的字段名 */
   key: string;
   /** 搜索名称 */
@@ -22,4 +25,8 @@ export type SearchItem = {
   filterable?: boolean;
   /** 是否启用虚拟滚动 */
   virtualScroll?: boolean;
-};
+  /** 日期格式 */
+  valueFormat?: string;
+  /** 日期禁用的校验函数 */
+  dateDisabled?: IsDateDisabled;
+}
