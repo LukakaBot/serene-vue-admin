@@ -116,7 +116,6 @@ defineRender(() => (
 						/>
 					</n-form-item>
 				))}
-
 				<n-flex class='absolute top-0 right-0'>
 					<n-button strong type='primary' onClick={handleSearch}>
 						查询
@@ -130,7 +129,7 @@ defineRender(() => (
 						onClick={() => (isCollapse.value = !isCollapse.value)}
 					>
 						<BaseIcon
-							class={`arrow  ${!isCollapse.value ? 'arrow__up' : ''} `}
+							class={`arrow ${!isCollapse.value ? 'arrow__up' : ''}`}
 							name='ep:arrow-down-bold'
 						/>
 					</n-button>
