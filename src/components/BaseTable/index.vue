@@ -35,6 +35,17 @@ type Props = {
 	rowKey?: DataTableCreateRowKey<any>;
 	/** 表格内容的最大高度，可以是 CSS 属性值 */
 	maxHeight?: number;
+	/** 分页页码变化时触发 */
+	'onUpdate:page'?: (page: number) => void;
+	onUpdatePage?: (page: number) => void;
+	/** 分页每页数量变化时触发 */
+	'onUpdate:page-size'?: (size: number) => void;
+	onUpdatePageSize?: (size: number) => void;
+	/** 表格选中项变化时触发 */
+	'onUpdate:checked-row-keys'?: (keys: DataTableRowKey[]) => void;
+	onUpdateCheckedRowKeys?: (keys: DataTableRowKey[]) => void;
+	/** 表格操作按钮点击时触发 */
+	onOperate?: (label: string, row: any, index: number) => void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -46,28 +57,40 @@ const props = withDefaults(defineProps<Props>(), {
 	maxHeight: undefined,
 });
 
-type Emits = {
-	(event: 'update:page', page: number): void;
-	(event: 'update:page-size', size: number): void;
-	(event: 'update:checked-row-keys', keys: DataTableRowKey[]): void;
-	(event: 'operate', label: string, row: any, index: number): void;
-};
+// type Emits = {
+// 	(event: 'update:page', page: number): void;
+// 	(event: 'update:page-size', size: number): void;
+// 	(event: 'update:checked-row-keys', keys: DataTableRowKey[]): void;
+// 	(event: 'operate', label: string, row: any, index: number): void;
+// };
 
-const emits = defineEmits<Emits>();
+// const emits = defineEmits<Emits>();
 
 /** update checked-row-keys emit */
 function handleUpdateCheckedRowKeys(keys: DataTableRowKey[]) {
-	emits('update:checked-row-keys', keys);
+	// emits('update:checked-row-keys', keys);
+	const {
+		onUpdateCheckedRowKeys,
+		'onUpdate:checked-row-keys': onUpdateCheckedRowKeys2,
+	} = props;
+	onUpdateCheckedRowKeys?.(keys);
+	onUpdateCheckedRowKeys2?.(keys);
 }
 
 /** update page emit */
 function handleUpdatePage(page: number) {
-	emits('update:page', page);
+	// emits('update:page', page);
+	const { onUpdatePage, 'onUpdate:page': onUpdatePage2 } = props;
+	onUpdatePage?.(page);
+	onUpdatePage2?.(page);
 }
 
 /** update page-size emit */
 function handleUpdatePageSize(size: number) {
-	emits('update:page-size', size);
+	// emits('update:page-size', size);
+	const { onUpdatePageSize, 'onUpdate:page-size': onUpdatePageSize2 } = props;
+	onUpdatePageSize?.(size);
+	onUpdatePageSize2?.(size);
 }
 
 /** 计算表格宽度 */
@@ -85,6 +108,7 @@ function renderOperationColumnButtons(
 	row: RowData,
 	index: number
 ) {
+	const { onOperate } = props;
 	return operations.map((operation) => {
 		const props: ButtonProps = {
 			size: 'small',
@@ -93,7 +117,8 @@ function renderOperationColumnButtons(
 			renderIcon: operation.icon
 				? () => renderIcon({ name: operation.icon as string })
 				: undefined,
-			onClick: () => emits('operate', operation.text, row, index),
+			// onClick: () => emits('operate', operation.text, row, index),
+			onClick: () => onOperate?.(operation.text, row, index),
 		};
 		const render = renderButton(props, () => operation.text);
 
