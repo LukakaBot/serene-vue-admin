@@ -8,18 +8,19 @@ import { renderIcon } from '@/utils/tools/index';
 
 type Props = {
 	list: BaseButton[];
+	onClick?: (label: string) => void;
 };
 
 const props = defineProps<Props>();
 
-type Emits = {
-	(e: 'click', label: string): void;
-};
+// type Emits = {
+// 	(e: 'click', label: string): void;
+// };
 
-const emits = defineEmits<Emits>();
+// const emits = defineEmits<Emits>();
 
 function handleClick(label: string) {
-	emits('click', label);
+	props.onClick?.(label);
 }
 
 function createButtonProps(btn: BaseButton): ButtonProps {
