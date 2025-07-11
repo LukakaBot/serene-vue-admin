@@ -2,7 +2,7 @@
 import type { VNode } from 'vue';
 import { resolveDirective, withDirectives } from 'vue';
 import type { ButtonProps } from 'naive-ui';
-import { NButton, NSpace } from 'naive-ui';
+import { NButton, NFlex } from 'naive-ui';
 import type { BaseButton } from './types';
 import { renderIcon } from '@/utils/tools/index';
 
@@ -34,7 +34,7 @@ function withAuthDirective(vnode: VNode, value: string) {
 defineRender(() => {
 	const { list } = props;
 	return (
-		<NSpace>
+		<NFlex>
 			{list.map((btn) => {
 				const buttonProps = createButtonProps(btn);
 				const buttonRender = <NButton {...buttonProps}>{btn.text}</NButton>;
@@ -43,7 +43,7 @@ defineRender(() => {
 					? withAuthDirective(buttonRender, btn.text)
 					: buttonRender;
 			})}
-		</NSpace>
+		</NFlex>
 	);
 });
 </script>
