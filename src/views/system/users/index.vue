@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import type { TagProps, DataTableRowKey } from 'naive-ui';
 import { NAvatar, NTag } from 'naive-ui';
-import type { SearchParams } from '@/components/BaseSearch/types';
+import type { SearchItem, SearchParams } from '@/components/BaseSearch/types';
 import type { UserPageContent } from '@/api/users/types';
 import type { BaseButton } from '@/components/BaseButtonGroup/types';
 import type {
@@ -50,7 +50,7 @@ const searchParams = ref({
 	total: 0,
 });
 
-const searchList = ref([
+const searchList = ref<SearchItem[]>([
 	{ type: 'text', label: '用户名', key: 'username', value: '' },
 	{ type: 'text', label: '真实姓名', key: 'nickname', value: '' },
 	{ type: 'text', label: '手机号码', key: 'phone', value: '' },
@@ -59,7 +59,7 @@ const searchList = ref([
 ]);
 
 function handleSearch(params: SearchParams) {
-	Object.assign(searchParams.value, params);
+	Object.assign(searchParams.value, params, { page: 1 });
 	getTableData();
 }
 
@@ -145,7 +145,7 @@ const columns: BaseTableColumn<UserPageContent>[] = [
 		width: 80,
 		align: 'center',
 		ellipsis: { tooltip: true },
-		render: (row) => h(NAvatar, { size: 48, src: row.avatar + '' }),
+		render: ({ avatar }) => h(NAvatar, { size: 48, src: avatar + '' }),
 	},
 	{
 		title: '角色',
@@ -178,9 +178,9 @@ const columns: BaseTableColumn<UserPageContent>[] = [
 	},
 ];
 
-function renderStatusTag(row: UserPageContent) {
-	const tagProps: TagProps = { type: row.status ? 'success' : 'error' };
-	const tagText = row.status ? '启用' : '禁用';
+function renderStatusTag({ status }: UserPageContent) {
+	const tagProps: TagProps = { type: status ? 'success' : 'error' };
+	const tagText = status ? '启用' : '禁用';
 	return h(NTag, tagProps, () => tagText);
 }
 
@@ -216,11 +216,8 @@ function handleOperate(text: string, row: UserPageContent) {
 async function getTableData() {
 	try {
 		setLoading(true);
-		const { page, pageSize, total, data } = await fetchUserPage(
-			searchParams.value
-		);
+		const { page, total, data } = await fetchUserPage(searchParams.value);
 		searchParams.value.page = page;
-		searchParams.value.pageSize = pageSize;
 		searchParams.value.total = total;
 		tableData.value = data;
 	} finally {
