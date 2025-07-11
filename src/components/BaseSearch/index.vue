@@ -5,15 +5,18 @@ import BaseIcon from '@/components/BaseIcon/index.vue';
 
 type Props = {
 	list: SearchItem[];
+	/** 搜索时触发 */
+	'onUpdate:search'?: (params: SearchParams) => void;
+	onUpdateSearch?: (params: SearchParams) => void;
 };
 
 const props = defineProps<Props>();
 
-type Emits = {
-	(event: 'update:search', params: SearchParams): void;
-};
+// type Emits = {
+// 	(event: 'update:search', params: SearchParams): void;
+// };
 
-const emits = defineEmits<Emits>();
+// const emits = defineEmits<Emits>();
 
 /** 表单类型排除 */
 const formTypeExcludes = ['select', 'date', 'dateRange'];
@@ -36,7 +39,8 @@ function handleSearch() {
 		{} as SearchParams
 	);
 
-	emits('update:search', params);
+	props['onUpdate:search']?.(params);
+	props.onUpdateSearch?.(params);
 }
 
 /** 搜索清空事件 */
@@ -51,7 +55,8 @@ function handleClear() {
 		{} as SearchParams
 	);
 
-	emits('update:search', params);
+	props['onUpdate:search']?.(params);
+	props.onUpdateSearch?.(params);
 }
 
 /** 搜索容器展开状态的高度 */
