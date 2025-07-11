@@ -3,17 +3,18 @@ import type { ToolbarNames } from 'md-editor-v3';
 import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 
-interface IProps {
+interface Props {
 	value: string;
 	/** 是否展示预览 */
 	preview?: boolean;
 	/** 工具栏 */
 	toolbars?: ToolbarNames[];
+	/** 内容更新时触发 */
 	'onUpdate:value'?: (value: string) => void;
 	onUpdateValue?: (value: string) => void;
 }
 
-const props = withDefaults(defineProps<IProps>(), {
+const props = withDefaults(defineProps<Props>(), {
 	preview: false,
 	toolbars: () => [
 		'bold',
@@ -52,20 +53,21 @@ const props = withDefaults(defineProps<IProps>(), {
 const text = ref('');
 
 function handleUpdateValue(value: string) {
-	const { onUpdateValue, 'onUpdate:value': onUpdateValue2 } = props;
-
-	onUpdateValue && onUpdateValue(value);
-	onUpdateValue2 && onUpdateValue2(value);
+	props['onUpdate:value']?.(value);
+	props.onUpdateValue?.(value);
 }
 
-defineRender(() => (
-	<MdEditor
-		v-model={text}
-		toolbars={props.toolbars}
-		preview={props.preview}
-		onUpdate:modelValue={handleUpdateValue}
-	/>
-));
+defineRender(() => {
+	const { toolbars, preview } = props;
+	return (
+		<MdEditor
+			v-model={text}
+			toolbars={toolbars}
+			preview={preview}
+			onUpdate:modelValue={handleUpdateValue}
+		/>
+	);
+});
 </script>
 
 <style scoped></style>
