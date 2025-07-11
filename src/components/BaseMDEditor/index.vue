@@ -57,17 +57,14 @@ function handleUpdateValue(value: string) {
 	props.onUpdateValue?.(value);
 }
 
-defineRender(() => {
-	const { toolbars, preview } = props;
-	return (
-		<MdEditor
-			v-model={text}
-			toolbars={toolbars}
-			preview={preview}
-			onUpdate:modelValue={handleUpdateValue}
-		/>
-	);
-});
+defineRender(() => (
+	<MdEditor
+		v-model={text}
+		toolbars={props.toolbars}
+		preview={props.preview}
+		onUpdate:modelValue={handleUpdateValue}
+	/>
+));
 </script>
 
 <style scoped></style>
