@@ -57,40 +57,22 @@ const props = withDefaults(defineProps<Props>(), {
 	maxHeight: undefined,
 });
 
-// type Emits = {
-// 	(event: 'update:page', page: number): void;
-// 	(event: 'update:page-size', size: number): void;
-// 	(event: 'update:checked-row-keys', keys: DataTableRowKey[]): void;
-// 	(event: 'operate', label: string, row: any, index: number): void;
-// };
-
-// const emits = defineEmits<Emits>();
-
-/** update checked-row-keys emit */
+/** update checked-row-keys */
 function handleUpdateCheckedRowKeys(keys: DataTableRowKey[]) {
-	// emits('update:checked-row-keys', keys);
-	const {
-		onUpdateCheckedRowKeys,
-		'onUpdate:checked-row-keys': onUpdateCheckedRowKeys2,
-	} = props;
-	onUpdateCheckedRowKeys?.(keys);
-	onUpdateCheckedRowKeys2?.(keys);
+	props.onUpdateCheckedRowKeys?.(keys);
+	props['onUpdate:checked-row-keys']?.(keys);
 }
 
-/** update page emit */
+/** update page */
 function handleUpdatePage(page: number) {
-	// emits('update:page', page);
-	const { onUpdatePage, 'onUpdate:page': onUpdatePage2 } = props;
-	onUpdatePage?.(page);
-	onUpdatePage2?.(page);
+	props.onUpdatePage?.(page);
+	props['onUpdate:page']?.(page);
 }
 
-/** update page-size emit */
+/** update page-size */
 function handleUpdatePageSize(size: number) {
-	// emits('update:page-size', size);
-	const { onUpdatePageSize, 'onUpdate:page-size': onUpdatePageSize2 } = props;
-	onUpdatePageSize?.(size);
-	onUpdatePageSize2?.(size);
+	props.onUpdatePageSize?.(size);
+	props['onUpdate:page-size']?.(size);
 }
 
 /** 计算表格宽度 */
@@ -117,7 +99,6 @@ function renderOperationColumnButtons(
 			renderIcon: operation.icon
 				? () => renderIcon({ name: operation.icon as string })
 				: undefined,
-			// onClick: () => emits('operate', operation.text, row, index),
 			onClick: () => onOperate?.(operation.text, row, index),
 		};
 		const render = renderButton(props, () => operation.text);
@@ -233,17 +214,17 @@ defineRender(() => (
 	<NDataTable
 		class='flex-1'
 		columns={tableColumns.value}
-		checked-row-keys={props.checkedRowKeys}
+		checkedRowKeys={props.checkedRowKeys}
 		data={props.data}
-		scroll-x={scrollX.value}
+		scrollX={scrollX.value}
 		pagination={pagination.value}
-		single-line={false}
+		singleLine={false}
 		loading={props.loading}
-		max-height={props.maxHeight}
-		flex-height={true}
+		maxHeight={props.maxHeight}
+		flexHeight={true}
 		remote={true}
 		striped={true}
-		row-key={props.rowKey}
+		rowKey={props.rowKey}
 		onUpdateCheckedRowKeys={handleUpdateCheckedRowKeys}
 		onUpdatePage={handleUpdatePage}
 		onUpdatePageSize={handleUpdatePageSize}
