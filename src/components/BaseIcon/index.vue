@@ -20,25 +20,16 @@ const iconStyle = computed(() => ({
 	color: props.color,
 }));
 
-defineRender(() =>
-	isLocalIcon.value ? (
-		<svg
-			style={iconStyle.value}
-			width={props.size}
-			height={props.size}
-			aria-hidden='true'
-		>
-			<use xlinkHref={iconName.value} fill={props.color} />
+defineRender(() => {
+	const { name, color, size } = props;
+	return isLocalIcon.value ? (
+		<svg style={iconStyle.value} width={size} height={size} aria-hidden='true'>
+			<use xlinkHref={iconName.value} fill={color} />
 		</svg>
 	) : (
-		<Icon
-			icon={props.name}
-			width={props.size}
-			height={props.size}
-			color={props.color}
-		/>
-	)
-);
+		<Icon icon={name} width={size} height={size} color={color} />
+	);
+});
 </script>
 
 <style scoped></style>
