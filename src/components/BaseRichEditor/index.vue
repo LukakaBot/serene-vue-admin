@@ -75,7 +75,10 @@ function handleCreated(editor: IDomEditor) {
 	props.onCreated?.(editor);
 }
 
-function handleUpdateValue() {}
+function handleUpdateValue(value: string) {
+	props.onUpdateValue?.(value);
+	props['onUpdate:value']?.(value);
+}
 
 defineRender(() => {
 	const {
