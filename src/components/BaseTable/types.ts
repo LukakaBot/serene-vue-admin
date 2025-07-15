@@ -1,9 +1,7 @@
-import type { VNode } from 'vue';
-import type { Type } from 'naive-ui/es/button/src/interface';
 import type { TableColumn, InternalRowData, RowData } from 'naive-ui/es/data-table/src/interface';
 import type { BaseButton } from '../BaseButtonGroup/types';
 
-export type SearchParams = {
+export interface SearchParams {
   page?: number;
   pageSize?: number;
   total?: number;
@@ -12,7 +10,7 @@ export type SearchParams = {
 
 export type Operations = Operation[];
 
-export interface Operation extends BaseButton {
+export interface Operation extends Omit<BaseButton, 'disabled'> {
   disabled?: (row: RowData, index: number) => boolean;
 };
 
