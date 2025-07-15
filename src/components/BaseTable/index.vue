@@ -39,10 +39,10 @@ type Props = {
 	'onUpdate:page'?: (page: number) => void;
 	onUpdatePage?: (page: number) => void;
 	/** 分页每页数量变化时触发 */
-	'onUpdate:page-size'?: (size: number) => void;
+	'onUpdate:pageSize'?: (size: number) => void;
 	onUpdatePageSize?: (size: number) => void;
 	/** 表格选中项变化时触发 */
-	'onUpdate:checked-row-keys'?: (keys: DataTableRowKey[]) => void;
+	'onUpdate:checkedRowKeys'?: (keys: DataTableRowKey[]) => void;
 	onUpdateCheckedRowKeys?: (keys: DataTableRowKey[]) => void;
 	/** 表格操作按钮点击时触发 */
 	onOperate?: (label: string, row: any, index: number) => void;
@@ -60,7 +60,7 @@ const props = withDefaults(defineProps<Props>(), {
 /** update checked-row-keys */
 function handleUpdateCheckedRowKeys(keys: DataTableRowKey[]) {
 	props.onUpdateCheckedRowKeys?.(keys);
-	props['onUpdate:checked-row-keys']?.(keys);
+	props['onUpdate:checkedRowKeys']?.(keys);
 }
 
 /** update page */
@@ -72,7 +72,7 @@ function handleUpdatePage(page: number) {
 /** update page-size */
 function handleUpdatePageSize(size: number) {
 	props.onUpdatePageSize?.(size);
-	props['onUpdate:page-size']?.(size);
+	props['onUpdate:pageSize']?.(size);
 }
 
 /** 计算表格宽度 */
