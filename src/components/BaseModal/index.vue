@@ -36,8 +36,6 @@ const props = withDefaults(defineProps<Props>(), {
 	draggable: false,
 });
 
-// const emits = defineEmits(['close', 'closed', 'submit']);
-
 const attrs = useAttrs();
 
 type Slots = {
