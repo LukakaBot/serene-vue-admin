@@ -1,13 +1,29 @@
 <template>
-  <n-layout-sider collapse-mode="width" :collapsed="collapsed" :collapsed-width="64" :width="240" show-trigger
-    :on-after-enter="handleAfterSiderEnter" @update:collapsed="handleUpdateCollapsed">
-    <div class="flex justify-center items-center gap-x-5px m-8px h-32px bg-#ccc overflow-hidden">
-      <span class="whitespace-nowrap break-all" v-if="isRenderTitle">Serene Admin</span>
-      <BaseIcon name="logos:vue" :size="22" v-else />
-    </div>
-    <n-menu :value="currentRoute" :default-value="currentRoute" :options="menus" :collapsed="collapsed"
-      :collapsed-width="64" />
-  </n-layout-sider>
+	<n-layout-sider
+		collapse-mode="width"
+		:collapsed="collapsed"
+		:collapsed-width="64"
+		:width="240"
+		show-trigger
+		:on-after-enter="handleAfterSiderEnter"
+		@update:collapsed="handleUpdateCollapsed"
+	>
+		<div
+			class="flex justify-center items-center gap-x-5px m-8px h-32px bg-#ccc overflow-hidden"
+		>
+			<span class="whitespace-nowrap break-all" v-if="isRenderTitle"
+				>Serene Admin</span
+			>
+			<BaseIcon name="logos:vue" :size="22" v-else />
+		</div>
+		<n-menu
+			:value="currentRoute"
+			:default-value="currentRoute"
+			:options="menus"
+			:collapsed="collapsed"
+			:collapsed-width="64"
+		/>
+	</n-layout-sider>
 </template>
 
 <script setup lang="ts">
@@ -27,36 +43,38 @@ const isRenderTitle = ref(true);
 
 /** 切换侧边栏 */
 function handleUpdateCollapsed(value: boolean) {
-  collapsed.value = value;
-  isRenderTitle.value = false;
+	collapsed.value = value;
+	isRenderTitle.value = false;
 }
 
 function handleAfterSiderEnter() {
-  isRenderTitle.value = true;
+	isRenderTitle.value = true;
 }
 
 /** 过滤路由 */
 function filterRoute(route: RouteRecordRaw) {
-  if (route.path === '/') return false;
-  if (route.meta?.hidden) return false;
-  if (route.children) route.children = route.children.filter(filterRoute);
-  if (route.children && route.children.length <= 0) delete route.children;
-  return true;
+	if (route.path === '/') return false;
+	if (route.meta?.hidden) return false;
+	if (route.children) route.children = route.children.filter(filterRoute);
+	if (route.children && route.children.length <= 0) delete route.children;
+	return true;
 }
 
 /** 渲染菜单 */
 function renderMenu(route: RouteRecordRaw): MenuOption {
-  const { path, name, meta, children } = route as AppRoute.RouteItem;
+	const { path, name, meta, children } = route as AppRoute.RouteRecordRaw;
 
-  const link = () => h(RouterLink, { to: path }, () => `${name}`);
-  const icon = meta?.icon ? () => h(BaseIcon, { name: meta.icon!, size: 22 }) : undefined;
+	const link = () => h(RouterLink, { to: path }, () => `${name}`);
+	const icon = meta?.icon
+		? () => h(BaseIcon, { name: meta.icon!, size: 22 })
+		: undefined;
 
-  return {
-    key: path,
-    label: route.children && route.children.length ? name : link,
-    icon,
-    children: children?.map(renderMenu),
-  };
+	return {
+		key: path,
+		label: route.children && route.children.length ? name : link,
+		icon,
+		children: children?.map(renderMenu),
+	};
 }
 
 /** 过滤后的路由列表 */
