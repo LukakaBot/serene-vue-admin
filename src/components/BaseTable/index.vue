@@ -7,7 +7,7 @@ import type {
 	DataTableCreateRowKey,
 } from 'naive-ui';
 import type { RowData } from 'naive-ui/es/data-table/src/interface';
-import { NDataTable, NPopover, NSpace } from 'naive-ui';
+import { NDataTable, NPopover, NFlex } from 'naive-ui';
 import type {
 	BaseTableColumns,
 	BaseTableColumn,
@@ -140,13 +140,13 @@ function renderOperationColumn(operations: Operations): BaseTableColumns {
 							() => '更多'
 						),
 					default: () =>
-						h(NSpace, { vertical: true, justify: 'center' }, () =>
+						h(NFlex, { vertical: true, justify: 'center' }, () =>
 							renderOperationColumnButtons(operations, row, index)
 						),
 				}
 			);
 		}
-		return h(NSpace, { justify: 'center' }, () =>
+		return h(NFlex, { justify: 'center' }, () =>
 			renderOperationColumnButtons(operations, row, index)
 		);
 	};
