@@ -1,7 +1,7 @@
 import type { SelectOption } from 'naive-ui';
 import type { IsDateDisabled } from 'naive-ui/es/date-picker/src/interface';
 
-type SearchParams = Record<string, string | null | number>;
+export type SearchParams = Record<string, string | null | number>;
 
 export type SearchType = 'select' | 'date' | 'daterange' | 'text';
 

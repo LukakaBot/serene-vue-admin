@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { Transition } from 'vue';
-import type { SearchParams, SearchItem } from './types.d.ts';
+import type { SearchParams, SearchItem } from './types.ts';
 import BaseIcon from '@/components/BaseIcon/index.vue';
 
 type Props = {

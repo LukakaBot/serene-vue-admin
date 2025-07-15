@@ -13,7 +13,7 @@ import type {
 	BaseTableColumn,
 	Operations,
 	SearchParams,
-} from './types.d.ts';
+} from './types.ts';
 import { renderIcon, renderButton } from '@/utils/tools';
 
 type Props = {

@@ -32,10 +32,7 @@ import { NAvatar, NTag } from 'naive-ui';
 import type { SearchItem, SearchParams } from '@/components/BaseSearch/types';
 import type { UserPageContent } from '@/api/users/types';
 import type { BaseButton } from '@/components/BaseButtonGroup/types';
-import type {
-	BaseTableColumn,
-	Operations,
-} from '@/components/BaseTable/types.d.ts';
+import type { BaseTableColumn, Operations } from '@/components/BaseTable/types';
 import { fetchUserPage } from '@/api/users/index';
 import { useLoading } from '@/hooks';
 import AddEditModal from './components/AddEditModal.vue';
