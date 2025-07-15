@@ -1,3 +1,3 @@
-import { defineConfig } from 'unplugin-vue-macros';
+import { defineConfig } from 'vue-macros'
 
 export default defineConfig({});
