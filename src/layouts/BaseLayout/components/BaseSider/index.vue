@@ -53,10 +53,10 @@ function handleAfterSiderEnter() {
 
 /** 过滤路由 */
 function filterRoute(route: RouteRecordRaw) {
-	if (route.path === '/') return false;
-	if (route.meta?.hidden) return false;
-	if (route.children) route.children = route.children.filter(filterRoute);
-	if (route.children && route.children.length <= 0) delete route.children;
+	const { path, meta, children } = route;
+	if (path === '/' || meta?.hidden) return false;
+	if (children) route.children = children.filter(filterRoute);
+	if (children && children.length <= 0) delete route.children;
 	return true;
 }
 
