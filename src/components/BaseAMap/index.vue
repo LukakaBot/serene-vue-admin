@@ -15,6 +15,8 @@ type Props = {
 	zoom?: number;
 	/** 是否显示高德地图logo */
 	showLogo?: boolean;
+	/** 地图加载完成时触发 */
+	onComplete?: (map: AMap.Map) => void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -26,11 +28,11 @@ const props = withDefaults(defineProps<Props>(), {
 	showLogo: true,
 });
 
-type Emits = {
-	(event: 'complete', map: AMap.Map): void;
-};
+// type Emits = {
+// 	(event: 'complete', map: AMap.Map): void;
+// };
 
-const emits = defineEmits<Emits>();
+// const emits = defineEmits<Emits>();
 
 /** 地图实例 */
 const map = shallowRef<AMap.Map | null>(null);
@@ -55,8 +57,8 @@ function initMap() {
 					willReadFrequently: true,
 				},
 			});
-			map.value?.on('complete', function () {
-				emits('complete', map.value!);
+			map.value?.on('complete', () => {
+				props.onComplete?.(map.value!);
 			});
 		})
 		.catch((err) => {
