@@ -1,5 +1,5 @@
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 
-export type TabState = {
+export interface TabState {
   tabList: RouteLocationNormalizedLoaded[];
 };
