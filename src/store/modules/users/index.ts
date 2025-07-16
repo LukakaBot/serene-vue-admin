@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import type { UserState } from './types';
-import type { UserTokenAccountParams, UserInfo } from "@/api/users/types";
+import type { UserTokenAccountParams } from "@/api/users/types";
 import { fetchUserTokenByAccount } from "@/api/users";
 import router from "@/router";
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    userInfo: {} as UserInfo
+    userInfo: null,
   }),
   actions: {
     async getUserTokenByAccount(params: UserTokenAccountParams) {
@@ -15,7 +15,7 @@ export const useUserStore = defineStore('user', {
     },
     logout() {
       window.$bucket?.remove('token');
-      this.userInfo = {} as UserInfo;
+      this.userInfo = null;
       router.replace({ path: '/login' });
     }
   }
