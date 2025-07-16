@@ -1,4 +1,4 @@
-export type BaseIconProps = {
+export interface BaseIconProps {
   /** 图标名称 */
   name: string;
   /** 图标颜色 */
