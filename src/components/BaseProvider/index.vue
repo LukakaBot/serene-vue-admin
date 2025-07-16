@@ -1,28 +1,24 @@
 <script setup lang="tsx">
-import type { VNode } from "vue";
 import {
-  NModalProvider,
-  NDialogProvider,
-  NMessageProvider,
-  NNotificationProvider,
-} from "naive-ui";
+	NModalProvider,
+	NDialogProvider,
+	NMessageProvider,
+	NNotificationProvider,
+} from 'naive-ui';
+import type { BaseProviderSlots } from './types';
 
-interface Slots {
-  default: VNode;
-}
-
-const slots = defineSlots<Slots>();
+const slots = defineSlots<BaseProviderSlots>();
 
 defineRender(() => (
-  <NModalProvider>
-    <NDialogProvider>
-      <NMessageProvider>
-        <NNotificationProvider>
-          {{ default: slots.default }}
-        </NNotificationProvider>
-      </NMessageProvider>
-    </NDialogProvider>
-  </NModalProvider>
+	<NModalProvider>
+		<NDialogProvider>
+			<NMessageProvider>
+				<NNotificationProvider>
+					{{ default: slots.default }}
+				</NNotificationProvider>
+			</NMessageProvider>
+		</NDialogProvider>
+	</NModalProvider>
 ));
 </script>
 
