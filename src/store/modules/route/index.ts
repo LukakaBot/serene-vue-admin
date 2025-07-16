@@ -25,17 +25,15 @@ export const useRouteStore = defineStore('route', {
         ['/src/layouts/**/*.vue', '/src/views/**/*.vue'],
         { eager: true }
       );
-
       const routeModule = routeModules[`/src${componentPath}`]?.default;
       return routeModule;
     },
     /** 处理菜单 */
-    processMenu(menu: RouteRecordRaw): RouteRecordRaw {
+    processMenu(menu: RouteRecordRaw) {
       if (menu?.children?.length) {
         menu.children = menu.children.map(this.processMenu);
       }
       menu.component = this.importRouteComponent(menu.component);
-
       return menu;
     },
     /** 初始化动态路由 */
@@ -48,7 +46,7 @@ export const useRouteStore = defineStore('route', {
       this.setRoutes(dynamicRoutes);
     },
     /** 将路由添加到路由实例中 */
-    setRoutes(routes: RouteRecordRaw[]): void {
+    setRoutes(routes: RouteRecordRaw[]) {
       const staticRoutes = router.options.routes;
       routes.forEach(route => router.addRoute(route));
       this.authRoutes = routes;
@@ -56,7 +54,7 @@ export const useRouteStore = defineStore('route', {
       this.hasAuthRoute = true;
     },
     /** 设置当前路由 */
-    setCurrentRoute(): void {
+    setCurrentRoute() {
       this.currentRoute = router.currentRoute.value;
     },
     /** 添加缓存路由 */
