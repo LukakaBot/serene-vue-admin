@@ -1,20 +1,9 @@
 <script setup lang="tsx">
-import type { ToolbarNames } from 'md-editor-v3';
 import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
+import type { BaseMDEditorProps } from './types';
 
-interface Props {
-	value: string;
-	/** 是否展示预览 */
-	preview?: boolean;
-	/** 工具栏 */
-	toolbars?: ToolbarNames[];
-	/** 内容更新时触发 */
-	'onUpdate:value'?: (value: string) => void;
-	onUpdateValue?: (value: string) => void;
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<BaseMDEditorProps>(), {
 	preview: false,
 	toolbars: () => [
 		'bold',
