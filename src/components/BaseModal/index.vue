@@ -1,31 +1,8 @@
 <script setup lang="tsx">
-import type { CSSProperties, VNode } from 'vue';
-import { NModal, NButton } from 'naive-ui';
+import { NModal, NFlex, NButton } from 'naive-ui';
+import type { BaseModalProps, BaseModalSlots } from './types';
 
-type Props = {
-	/** 是否展示 Modal */
-	show: boolean;
-	/** 标题 */
-	title?: string;
-	/** 弹窗样式 */
-	bodyStyle?: CSSProperties;
-	/** 显示底部 */
-	showFooter?: boolean;
-	/** 显示提交按钮 */
-	showSubmit?: boolean;
-	/** 提交按钮加载中 */
-	loading?: boolean;
-	/** 是否可拖拽 */
-	draggable?: boolean;
-	/** 关闭时触发 */
-	onClose?: () => void;
-	/** 关闭完成时触发 */
-	onClosed?: () => void;
-	/** 提交时触发 */
-	onSubmit?: () => void;
-};
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<BaseModalProps>(), {
 	title: '我是标题',
 	bodyStyle: () => ({
 		width: '400px',
@@ -38,32 +15,13 @@ const props = withDefaults(defineProps<Props>(), {
 
 const attrs = useAttrs();
 
-type Slots = {
-	headerExtra: (() => VNode) | undefined;
-	default: (() => VNode) | undefined;
-	footer: (() => VNode) | undefined;
-	action: (() => VNode) | undefined;
-};
-
-const slots = defineSlots<Slots>();
+const slots = defineSlots<BaseModalSlots>();
 
 const modalRef = ref<HTMLElement | null>(null);
 
 const headerRef = ref<HTMLElement | null>(null);
 
 let transform = { offsetX: 0, offsetY: 0 };
-
-function handleClose() {
-	props.onClose?.();
-}
-
-function handleAfterLeave() {
-	props.onClosed?.();
-}
-
-function handleSubmit() {
-	props.onSubmit?.();
-}
 
 function onMousedown(e: MouseEvent) {
 	const downX = e.clientX;
@@ -81,7 +39,7 @@ function onMousedown(e: MouseEvent) {
 	const maxLeft = clientWidth - targetRect.left - targetRect.width + offsetX;
 	const maxTop = clientHeight - targetRect.top - targetRect.height + offsetY;
 
-	function onMousemove(e: MouseEvent) {
+	const onMousemove = (e: MouseEvent) => {
 		// 计算移动位置
 		const moveX = Math.min(
 			Math.max(offsetX + e.clientX - downX, minLeft),
@@ -94,12 +52,12 @@ function onMousedown(e: MouseEvent) {
 
 		transform = { offsetX: moveX, offsetY: moveY };
 		modalRef.value!.style.transform = `translate(${moveX}px, ${moveY}px)`;
-	}
+	};
 
-	function onMouseup() {
+	const onMouseup = () => {
 		document.removeEventListener('mousemove', onMousemove);
 		document.removeEventListener('mouseup', onMouseup);
-	}
+	};
 
 	document.addEventListener('mousemove', onMousemove);
 	document.addEventListener('mouseup', onMouseup);
@@ -120,11 +78,22 @@ function resetTransformData() {
 	transform = { offsetX: 0, offsetY: 0 };
 }
 
+function handleClose() {
+	props.onClose?.();
+}
+
+function handleAfterLeave() {
+	props.onClosed?.();
+}
+
+function handleSubmit() {
+	props.onSubmit?.();
+}
+
 function init() {
 	resetTransformData();
 	nextTick(() => {
 		const { draggable, show } = props;
-
 		modalRef.value = document.querySelector('.n-modal');
 		headerRef.value = document.querySelector('.n-card-header');
 		toggleDraggable(draggable && show);
@@ -157,10 +126,7 @@ defineRender(() => (
 			footer: slots.footer
 				? slots.footer
 				: () => (
-						<div
-							class='flex justify-center items-center gap-x-20px'
-							v-if={props.showFooter}
-						>
+						<NFlex justify='center' align='center'>
 							<NButton
 								type='tertiary'
 								strong={true}
@@ -177,7 +143,7 @@ defineRender(() => (
 							>
 								提交
 							</NButton>
-						</div>
+						</NFlex>
 					),
 			action: slots.action,
 		}}
