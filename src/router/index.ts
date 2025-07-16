@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import type { App } from 'vue';
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 import globalConfig from '@/config/app/index';
 import { createRouteGuard } from './guard/index';
@@ -38,7 +38,7 @@ const router = createRouter({
   },
 });
 
-export function setupRoute(app: App) {
+export function setupRouter(app: App) {
   app.use(router);
   createRouteGuard(router, title);
 }

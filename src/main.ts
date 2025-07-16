@@ -8,7 +8,7 @@ import { setupStore } from '@/store/index';
 import { setupNaiveDiscrete } from '@/plugins/naiveDiscrete';
 import { setupDirectives } from './directives';
 import { setupBucket } from '@/plugins/bucket';
-import router, { setupRoute } from '@/router';
+import router, { setupRouter } from '@/router';
 
 async function mountApp() {
   const appLoading = createApp(AppLoading);
@@ -22,12 +22,12 @@ async function mountApp() {
   setupNaiveDiscrete();
 
   setupDirectives(app);
-  
+
   setupBucket();
 
   app.use(TlbsMap);
 
-  setupRoute(app);
+  setupRouter(app);
 
   await router.isReady();
 
