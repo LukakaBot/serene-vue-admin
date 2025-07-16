@@ -23,13 +23,12 @@ function tableList(pageSize) {
 };
 
 export default [
-  //表格数据列表
   {
     url: '/api/table/page',
     timeout: 1000,
     method: 'GET',
     response: ({ query }) => {
-      const { page = 1, pageSize = 10, name } = query;
+      const { page = 1, pageSize = 10 } = query;
       const list = tableList(100);
 
       return resultPageSuccess(Number(page), Number(pageSize), list);

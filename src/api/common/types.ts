@@ -1,21 +1,34 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RequestContent<T = any> = {
-  /** 页码 */
-  page: number;
-  /** 每页数量 */
-  pageSize: number;
-  /** 总数 */
-  total: number;
+export interface RequestContent {
+  /** 
+   * 当前页
+   */
+  page?: number;
+  /** 
+   * 分页大小
+   */
+  pageSize?: number;
+  /** 
+   * 总条数
+   */
+  total?: number;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ResponseContent<T = any> = {
-  /** 页码 */
+export interface ResponseContent<T = any> {
+  /** 
+   * 当前页
+   */
   page: number;
-  /** 每页数量 */
+  /** 
+   * 分页大小
+   */
   pageSize: number;
-  /** 总数 */
+  /** 
+   * 总数
+   */
   total: number;
-  /** 数据列表 */
+  /** 
+   * 数据
+   */
   data: T;
 };

@@ -2,48 +2,76 @@ import type { RouteRecordRaw } from 'vue-router';
 import type { RequestContent } from '../common/types';
 
 /** [账号密码登录] - 请求参数 */
-export type UserTokenAccountParams = {
-  /** 用户名 */
+export interface UserTokenAccountParams {
+  /** 
+   * 用户名
+   */
   username: string;
-  /** 密码 */
+  /** 
+   * 密码
+   */
   password: string;
 };
 
 /** 用户信息 */
-export type UserInfo = {
-  /** 用户ID */
+export interface UserInfo {
+  /** 
+   * 用户ID
+   */
   userId: string;
-  /** 用户名 */
+  /** 
+   * 用户名
+   */
   userName: string;
-  /** token */
+  /** 
+   * 凭证
+   */
   token: string;
 };
 
 /** 用户详情 */
-export type UserDetails = {
-  /** 用户ID */
+export interface UserDetails {
+  /** 
+   * 用户ID
+   */
   userId: string;
-  /** 用户名 */
+  /** 
+   * 用户名
+   */
   userName: string;
-  /** 头像 */
+  /** 
+   * 头像
+   */
   avatar: string;
-  /** 角色 */
+  /** 
+   * 角色
+   */
   roles: string[];
-  /** 角色名 */
+  /** 
+   * 角色名
+   */
   roleName: string;
-  /** 菜单 */
+  /** 
+   * 菜单
+   */
   menus: RouteRecordRaw[];
-  /** token */
+  /** 
+   * 凭证
+   */
   token: string;
-  /** 组织ID */
+  /** 
+   * 组织ID
+   */
   organizeId: string;
-  /** 组织名 */
+  /** 
+   * 组织名
+   */
   organizeName: string;
 };
 
 export type UserPageParams = RequestContent;
 
-export type UserPageContent = {
+export interface UserPageContent {
   id: number,
   beginTime: string,
   endTime: string,
