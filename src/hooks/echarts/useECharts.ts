@@ -1,9 +1,8 @@
 import type { Ref } from 'vue';
-import { computed, nextTick, unref, watch } from 'vue'
-import echarts from '@/utils/lib/echarts';
-import { tryOnUnmounted, useBreakpoints, useDebounceFn, breakpointsTailwind } from '@vueuse/core'
-import { ref } from 'vue'
+import { computed, nextTick, unref, watch, ref } from 'vue'
 import type { EChartsOption } from 'echarts'
+import { tryOnUnmounted, useBreakpoints, useDebounceFn, breakpointsTailwind } from '@vueuse/core'
+import echarts from '@/utils/lib/echarts';
 import useTimeoutFn from '@/hooks/core/useTimeout'
 import useEventListener from '@/hooks/event/useEventListener'
 
