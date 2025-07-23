@@ -1,4 +1,5 @@
-import { computed, nextTick, Ref, unref, watch } from 'vue'
+import type { Ref } from 'vue';
+import { computed, nextTick, unref, watch } from 'vue'
 import echarts from '@/utils/lib/echarts';
 import { tryOnUnmounted, useBreakpoints, useDebounceFn, breakpointsTailwind } from '@vueuse/core'
 import { ref } from 'vue'
