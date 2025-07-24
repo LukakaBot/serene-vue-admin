@@ -13,7 +13,7 @@ export interface SearchItem {
   /** 搜索名称 */
   label: string;
   /** 搜索内容 */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   value: any;
   /** 配置选项内容 */
   options?: SelectOption;

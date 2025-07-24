@@ -3,7 +3,7 @@ import { tryOnUnmounted } from '@vueuse/core'
 import { isFunction } from '@/utils/is'
 
 declare type TimeoutHandle = ReturnType<typeof setTimeout>
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 declare interface Fn<T = any, R = T> {
   (...arg: T[]): R
 }
@@ -13,7 +13,7 @@ declare interface Fn<T = any, R = T> {
  * @param wait 等待时间
  * @param native 是否立即执行
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 function useTimeoutFn(handle: Fn<any>, wait: number, native = false) {
   if (!isFunction(handle)) {
     throw new Error('handle is not Function!')

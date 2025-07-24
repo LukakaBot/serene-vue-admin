@@ -4,7 +4,7 @@ import { useDebounceFn, useThrottleFn } from '@vueuse/core'
 
 type RemoveEventFn = () => void
 export interface UseEventParams {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   el?: Element | Ref<Element | undefined> | Window | any
   name: string
   listener: EventListener
