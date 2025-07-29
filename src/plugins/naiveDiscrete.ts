@@ -1,7 +1,7 @@
 import { createDiscreteApi } from 'naive-ui'
 
 /** 全局属性挂载 */
-export function setupNaiveDiscrete() {
+function setupNaiveDiscrete() {
   const { message, loadingBar } = createDiscreteApi(['message', 'loadingBar']);
 
   // 消息提示
@@ -9,3 +9,5 @@ export function setupNaiveDiscrete() {
   // 加载条
   window.$loadingBar = loadingBar;
 }
+
+export default setupNaiveDiscrete;

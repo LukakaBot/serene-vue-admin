@@ -18,6 +18,7 @@ declare module 'vue' {
     BaseSearch: typeof import('./../components/BaseSearch/index.vue')['default']
     BaseTable: typeof import('./../components/BaseTable/index.vue')['default']
     BaseTitle: typeof import('./../components/BaseTitle/index.vue')['default']
+    Battery: typeof import('./../components/Battery/index.vue')['default']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']
     NButton: typeof import('naive-ui')['NButton']

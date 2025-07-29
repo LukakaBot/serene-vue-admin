@@ -2,18 +2,17 @@ import { createApp } from 'vue';
 import TlbsMap from 'tlbs-map-vue';
 import 'virtual:svg-icons-register';
 import App from './App.vue';
-import AppLoading from './layouts/AppLoading/AppLoading.vue';
+import LoadingApp from './layouts/LoadingApp/LoadingApp.vue';
 import './styles/index';
-import { setupStore } from '@/store/index';
-import { setupNaiveDiscrete } from '@/plugins/naiveDiscrete';
+import { setupStore } from '@/store';
+import { setupNaiveDiscrete, setupBucket } from '@/plugins';
 import { setupDirectives } from './directives';
-import { setupBucket } from '@/plugins/bucket';
 import router, { setupRouter } from '@/router';
 
 async function mountApp() {
-  const appLoading = createApp(AppLoading);
+  const loadingApp = createApp(LoadingApp);
 
-  appLoading.mount('#app-loading');
+  loadingApp.mount('#app-loading');
 
   const app = createApp(App);
 
@@ -31,7 +30,7 @@ async function mountApp() {
 
   await router.isReady();
 
-  appLoading.unmount();
+  loadingApp.unmount();
 
   app.mount('#app');
 }
