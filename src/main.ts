@@ -5,7 +5,7 @@ import App from './App.vue';
 import LoadingApp from './layouts/LoadingApp/LoadingApp.vue';
 import './styles/index';
 import { setupStore } from '@/store';
-import { setupNaiveDiscrete, setupBucket } from '@/plugins';
+import setupPlugins from '@/plugins';
 import { setupDirectives } from './directives';
 import router, { setupRouter } from '@/router';
 
@@ -18,11 +18,9 @@ async function mountApp() {
 
   setupStore(app);
 
-  setupNaiveDiscrete();
-
   setupDirectives(app);
 
-  setupBucket();
+  setupPlugins();
 
   app.use(TlbsMap);
 
