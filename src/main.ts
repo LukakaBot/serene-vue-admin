@@ -4,7 +4,7 @@ import 'virtual:svg-icons-register';
 import App from './App.vue';
 import LoadingApp from './layouts/LoadingApp/LoadingApp.vue';
 import './styles/index';
-import { setupStore } from '@/store';
+import setupStore from '@/store';
 import setupPlugins from '@/plugins';
 import { setupDirectives } from './directives';
 import router, { setupRouter } from '@/router';
