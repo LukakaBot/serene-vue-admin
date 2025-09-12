@@ -1,14 +1,16 @@
 {
   "name": "serene-admin",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint-staged": "vue-tsc && lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
@@ -29,16 +31,19 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^5.3.0",
     "@eslint/js": "^9.28.0",
     "@iconify/vue": "^4.3.0",
     "@types/mockjs": "^1.0.10",
     "@types/node": "^20.19.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "@unocss/eslint-plugin": "^66.5.1",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vitejs/plugin-vue-jsx": "^4.2.0",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^8.57.1",
+    "eslint-plugin-format": "^1.0.1",
     "eslint-plugin-vue": "^9.33.0",
     "lint-staged": "^15.5.2",
     "naive-ui": "^2.41.1",
