@@ -20,7 +20,8 @@
     },
     "resolveJsonModule": true,
     "types": [
-      "naive-ui/volar"
+      "naive-ui/volar",
+      "vue-macros/macros-global"
     ],
     "allowImportingTsExtensions": true,
     /* Linting */

@@ -41,6 +41,7 @@
     "@unocss/eslint-plugin": "^66.5.1",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vitejs/plugin-vue-jsx": "^4.2.0",
+    "@vue-macros/eslint-config": "3.0.0-beta.23",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^8.57.1",
     "eslint-plugin-format": "^1.0.1",
