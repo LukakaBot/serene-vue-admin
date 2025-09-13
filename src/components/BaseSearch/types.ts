@@ -1,9 +1,9 @@
-import type { SelectOption } from 'naive-ui';
-import type { IsDateDisabled } from 'naive-ui/es/date-picker/src/interface';
+import type { SelectOption } from "naive-ui";
+import type { IsDateDisabled } from "naive-ui/es/date-picker/src/interface";
 
 export type SearchParams = Record<string, string | null | number>;
 
-export type SearchType = 'select' | 'date' | 'daterange' | 'text';
+export type SearchType = "select" | "date" | "daterange" | "text";
 
 export interface SearchItem {
   /** 搜索类型 */
@@ -13,7 +13,7 @@ export interface SearchItem {
   /** 搜索名称 */
   label: string;
   /** 搜索内容 */
-  /* eslint-disable  @typescript-eslint/no-explicit-any */
+  /* eslint-disable  ts/no-explicit-any */
   value: any;
   /** 配置选项内容 */
   options?: SelectOption;

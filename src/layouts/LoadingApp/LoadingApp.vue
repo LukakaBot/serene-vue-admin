@@ -1,18 +1,18 @@
+<script setup lang="ts">
+</script>
+
 <template>
-  <div class="flex flex-col justify-center items-center fixed left-0 top-0 w-full h-full">
+  <div class="fixed left-0 top-0 h-full w-full flex flex-col items-center justify-center">
     <div class="sk-chase">
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot" />
+      <div class="sk-chase-dot" />
+      <div class="sk-chase-dot" />
+      <div class="sk-chase-dot" />
+      <div class="sk-chase-dot" />
+      <div class="sk-chase-dot" />
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-</script>
 
 <style scoped>
 .sk-chase {
@@ -28,7 +28,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  animation: sk-chase-dot 2.0s infinite ease-in-out both;
+  animation: sk-chase-dot 2s infinite ease-in-out both;
 }
 
 .sk-chase-dot:before {
@@ -38,7 +38,7 @@
   height: 25%;
   background-color: #000;
   border-radius: 100%;
-  animation: sk-chase-dot-before 2.0s infinite ease-in-out both;
+  animation: sk-chase-dot-before 2s infinite ease-in-out both;
 }
 
 .sk-chase-dot:nth-child(1) {
@@ -46,7 +46,7 @@
 }
 
 .sk-chase-dot:nth-child(2) {
-  animation-delay: -1.0s;
+  animation-delay: -1s;
 }
 
 .sk-chase-dot:nth-child(3) {
@@ -70,7 +70,7 @@
 }
 
 .sk-chase-dot:nth-child(2):before {
-  animation-delay: -1.0s;
+  animation-delay: -1s;
 }
 
 .sk-chase-dot:nth-child(3):before {
@@ -96,7 +96,6 @@
 }
 
 @keyframes sk-chase-dot {
-
   80%,
   100% {
     transform: rotate(360deg);
@@ -110,7 +109,7 @@
 
   100%,
   0% {
-    transform: scale(1.0);
+    transform: scale(1);
   }
 }
 </style>

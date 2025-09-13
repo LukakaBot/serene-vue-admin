@@ -1,8 +1,13 @@
-import axios from 'axios';
-import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
-import type { ResponseContent } from './types';
+import type {
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
+import type { ResponseContent } from "./types";
+import axios from "axios";
 
-const { VITE_SERVICE_URL, VITE_SERVICE_PORT, VITE_SERVICE_PREFIX } = import.meta.env;
+const { VITE_SERVICE_URL, VITE_SERVICE_PORT, VITE_SERVICE_PREFIX } = import.meta
+  .env;
 
 const SERVICE_PORT = `${VITE_SERVICE_PORT ? `:${VITE_SERVICE_PORT}` : ""}`;
 
@@ -20,8 +25,8 @@ request.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
-)
+  },
+);
 
 // 响应拦截器
 request.interceptors.response.use(
@@ -38,8 +43,7 @@ request.interceptors.response.use(
   (error) => {
     window.$message?.error(error);
     return Promise.reject(error);
-  }
-)
-
+  },
+);
 
 export default request;

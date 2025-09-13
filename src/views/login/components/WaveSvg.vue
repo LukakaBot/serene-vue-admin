@@ -60,7 +60,7 @@ defineRender(() => (
       </g>
     </svg>
   </div>
-));
+))
 </script>
 
 <style scoped>

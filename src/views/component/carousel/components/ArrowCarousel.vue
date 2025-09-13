@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <n-card>
     <template #header>
@@ -11,10 +15,6 @@
     </n-carousel>
   </n-card>
 </template>
-
-<script setup lang="ts">
-
-</script>
 
 <style scoped>
 .carousel-img {

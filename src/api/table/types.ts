@@ -13,4 +13,4 @@ export interface TableDataPageContent {
   time: string;
   no: number;
   status: boolean;
-};
+}

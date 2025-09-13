@@ -5,7 +5,7 @@ declare namespace AppRoute {
      * 权限名称
      */
     name: string;
-  };
+  }
 
   interface Meta {
     title?: string;
@@ -15,9 +15,9 @@ declare namespace AppRoute {
      * 按钮权限列表
      */
     auths?: Auth[];
-  };
+  }
 
-  type RouteRecordRaw = import('vue-router').RouteRecordRaw & {
+  type RouteRecordRaw = import("vue-router").RouteRecordRaw & {
     /**
      * 路由名称
      */
@@ -26,6 +26,5 @@ declare namespace AppRoute {
      * 路由元信息
      */
     meta: Meta;
-  }
+  };
 }
-

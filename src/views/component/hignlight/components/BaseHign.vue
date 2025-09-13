@@ -1,3 +1,12 @@
+<script setup lang="ts">
+interface Props {
+  text: string
+  patterns: string[]
+}
+
+defineProps<Props>()
+</script>
+
 <template>
   <n-card :segmented="{ content: true }" size="small">
     <template #header>
@@ -6,14 +15,5 @@
     <n-highlight class="whitespace-pre-wrap" :text="text" :patterns="patterns" />
   </n-card>
 </template>
-
-<script setup lang="ts">
-type Props = {
-  text: string;
-  patterns: string[];
-};
-
-defineProps<Props>();
-</script>
 
 <style scoped></style>

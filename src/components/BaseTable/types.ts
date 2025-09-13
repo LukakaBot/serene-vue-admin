@@ -1,18 +1,22 @@
-import type { TableColumn, InternalRowData, RowData } from 'naive-ui/es/data-table/src/interface';
-import type { BaseButton } from '../BaseButtonGroup/types';
+import type {
+  InternalRowData,
+  RowData,
+  TableColumn,
+} from "naive-ui/es/data-table/src/interface";
+import type { BaseButton } from "../BaseButtonGroup/types";
 
 export interface SearchParams {
   page?: number;
   pageSize?: number;
   total?: number;
   [key: string]: string | number | null | undefined;
-};
+}
 
 export type Operations = Operation[];
 
-export interface Operation extends Omit<BaseButton, 'disabled'> {
+export interface Operation extends Omit<BaseButton, "disabled"> {
   disabled?: (row: RowData, index: number) => boolean;
-};
+}
 
 export type BaseTableColumns<T = InternalRowData> = BaseTableColumn<T>[];
 

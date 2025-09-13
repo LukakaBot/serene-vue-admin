@@ -1,16 +1,16 @@
 <script setup lang="tsx">
-import type { VNode } from "vue";
-import { Transition } from "vue";
-import type { RouteLocationNormalizedLoaded } from "vue-router";
-import { RouterView } from "vue-router";
-import type { WatermarkProps } from "naive-ui";
-import { useRouteStore, useConfigStore } from "@/store";
+import type { WatermarkProps } from 'naive-ui'
+import type { VNode } from 'vue'
+import type { RouteLocationNormalizedLoaded } from 'vue-router'
+import { Transition } from 'vue'
+import { RouterView } from 'vue-router'
+import { useConfigStore, useRouteStore } from '@/store'
 
-const routeStore = useRouteStore();
+const routeStore = useRouteStore()
 
-const configStore = useConfigStore();
+const configStore = useConfigStore()
 
-const showWatermark = computed(() => configStore.showWatermark);
+const showWatermark = computed(() => configStore.showWatermark)
 
 const watermarkProps = computed<WatermarkProps>(() => {
   return {
@@ -24,8 +24,8 @@ const watermarkProps = computed<WatermarkProps>(() => {
     xOffset: 12,
     yOffset: 60,
     rotate: -15,
-  };
-});
+  }
+})
 
 defineRender(() => (
   <RouterView>
@@ -34,8 +34,8 @@ defineRender(() => (
         Component,
         route,
       }: {
-        Component: VNode;
-        route: RouteLocationNormalizedLoaded;
+        Component: VNode
+        route: RouteLocationNormalizedLoaded
       }) => (
         <>
           {routeStore.isRouteLoaded && (
@@ -48,7 +48,7 @@ defineRender(() => (
       ),
     }}
   </RouterView>
-));
+))
 </script>
 
 <style scoped>

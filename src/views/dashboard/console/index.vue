@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import ChartCard from './components/ChartCard.vue'
+import DataCard from './components/DataCard.vue'
+import NavigationCard from './components/NavigationCard.vue'
+</script>
+
 <template>
   <div class="custom-container">
     <DataCard />
@@ -5,12 +11,6 @@
     <ChartCard />
   </div>
 </template>
-
-<script setup lang="ts">
-import DataCard from './components/DataCard.vue';
-import NavigationCard from './components/NavigationCard.vue';
-import ChartCard from './components/ChartCard.vue';
-</script>
 
 <style scoped>
 .custom-container {

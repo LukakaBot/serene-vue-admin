@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const cacheList = computed(() => [])
+</script>
+
 <template>
   <router-view v-slot="{ Component, route }">
     <transition name="fade" mode="out-in" appear>
@@ -8,9 +12,5 @@
     </transition>
   </router-view>
 </template>
-
-<script lang="ts" setup>
-const cacheList = computed(() => []);
-</script>
 
 <style scoped lang="less"></style>

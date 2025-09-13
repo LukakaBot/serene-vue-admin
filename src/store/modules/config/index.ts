@@ -1,17 +1,17 @@
-import { defineStore } from "pinia";
 import type { ConfigState } from "./types";
+import { defineStore } from "pinia";
 import { useThemeStore } from "../theme";
 
-export const useConfigStore = defineStore('config', {
+export const useConfigStore = defineStore("config", {
   state: (): ConfigState => {
     const themeStore = useThemeStore(); // 引用 themeStore
 
     return {
       showWatermark: true,
-      watermarkContent: 'serene-admin',
+      watermarkContent: "serene-admin",
       isDarkMode: false,
       theme: themeStore.$state,
-    }
+    };
   },
   persist: true,
   actions: {
@@ -27,6 +27,6 @@ export const useConfigStore = defineStore('config', {
      */
     toggleDarkMode() {
       this.isDarkMode = !this.isDarkMode;
-    }
-  }
+    },
+  },
 });

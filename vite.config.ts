@@ -1,18 +1,19 @@
-import { defineConfig, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import VueMacros from 'vue-macros/vite';
-import UnoCSS from 'unocss/vite'
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import path from 'path';
-import vueDevTools from 'vite-plugin-vue-devtools';
-import { viteMockServe } from 'vite-plugin-mock';
+import path from "node:path";
+import process from "node:process";
+import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import UnoCSS from "unocss/vite";
+import AutoImport from "unplugin-auto-import/vite";
+import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import Components from "unplugin-vue-components/vite";
+import { defineConfig, loadEnv } from "vite";
+import { viteMockServe } from "vite-plugin-mock";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import vueDevTools from "vite-plugin-vue-devtools";
+import VueMacros from "vue-macros/vite";
 
 // https://vitejs.dev/config/
-export default defineConfig((({ mode }) => {
+export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
@@ -26,38 +27,45 @@ export default defineConfig((({ mode }) => {
       }),
       UnoCSS(),
       AutoImport({
-        dts: 'src/typings/auto-import.d.ts',
+        dts: "src/typings/auto-import.d.ts",
         imports: [
-          'vue',
-          'vue-router',
-          'pinia',
-          { 'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'] },
+          "vue",
+          "vue-router",
+          "pinia",
+          {
+            "naive-ui": [
+              "useDialog",
+              "useMessage",
+              "useNotification",
+              "useLoadingBar",
+            ],
+          },
         ],
         resolvers: [],
         eslintrc: {
           enabled: true,
-          filepath: './.eslintrc-auto-import.json',
+          filepath: "./.eslintrc-auto-import.json",
           globalsPropValue: true,
         },
       }),
       Components({
-        dts: 'src/typings/components.d.ts',
+        dts: "src/typings/components.d.ts",
         resolvers: [NaiveUiResolver()],
       }),
       createSvgIconsPlugin({
-        iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
-        symbolId: 'svg-[name]',
+        iconDirs: [path.resolve(process.cwd(), "src/assets/svg")],
+        symbolId: "svg-[name]",
       }),
       vueDevTools(),
       viteMockServe({
-        mockPath: 'mock',
+        mockPath: "mock",
         enable: true,
       }),
     ],
     resolve: {
       alias: {
-        '@': '/src'
-      }
+        "@": "/src",
+      },
     },
     server: {
       port: 9000,
@@ -67,6 +75,6 @@ export default defineConfig((({ mode }) => {
       //     changeOrigin: true,
       //   },
       // },
-    }
+    },
   };
-}))
+});

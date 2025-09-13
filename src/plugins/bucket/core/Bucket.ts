@@ -1,9 +1,9 @@
-
 class Bucket {
   private storage: Storage;
 
-  constructor(storageType: 'localStorage' | 'sessionStorage' = 'localStorage') {
-    this.storage = storageType === 'localStorage' ? localStorage : sessionStorage;
+  constructor(storageType: "localStorage" | "sessionStorage" = "localStorage") {
+    this.storage =
+      storageType === "localStorage" ? localStorage : sessionStorage;
   }
 
   /** 设置缓存 */
@@ -31,5 +31,3 @@ class Bucket {
 }
 
 export default Bucket;
-
-

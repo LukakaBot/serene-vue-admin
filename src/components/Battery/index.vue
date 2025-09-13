@@ -1,14 +1,7 @@
-<template>
-  <div class="battery" :style="batteryStyle">
-    <div class="battery-bar" :style="batteryBarStyle"></div>
-    <div class="battery-text" v-show="showText">{{ quantity }}%</div>
-  </div>
-</template>
-
 <script setup lang="tsx">
-import type { CSSProperties } from 'vue';
-import type { BatteryProps } from './types';
-import { isNumber } from '@/utils/is';
+import type { CSSProperties } from 'vue'
+import type { BatteryProps } from './types'
+import { isNumber } from '@/utils/is'
 
 const props = withDefaults(defineProps<BatteryProps>(), {
   showText: true,
@@ -16,40 +9,40 @@ const props = withDefaults(defineProps<BatteryProps>(), {
   normalColor: '#4CAF50',
   lowColor: '#FF5722',
   lowThreshold: 20,
-});
+})
 
 /** 修正电量（确保0-100） */
-const clampedPercentage = computed(() => Math.max(0, Math.min(props.quantity, 100)));
+const clampedPercentage = computed(() => Math.max(0, Math.min(props.quantity, 100)))
 
 /** 电池尺寸（处理数字/字符串） */
 const batterySize = computed(() =>
-  isNumber(props.size) ? `${props.size}px` : props.size
-);
+  isNumber(props.size) ? `${props.size}px` : props.size,
+)
 
 /** 电量条宽度（百分比） */
-const barWidth = computed(() => `${clampedPercentage.value}%`);
+const barWidth = computed(() => `${clampedPercentage.value}%`)
 
 /** 低电量状态：是否低于阈值 */
 const isLowBattery = computed(() =>
-  clampedPercentage.value < props.lowThreshold
-);
+  clampedPercentage.value < props.lowThreshold,
+)
 
 /** 电量填充颜色：根据状态切换（正常/低电量） */
 const fillColor = computed(() =>
-  isLowBattery.value ? props.lowColor : props.normalColor
-);
+  isLowBattery.value ? props.lowColor : props.normalColor,
+)
 
 /** 电池高度（比例为宽度的1/2，保持协调） */
 const batteryHeight = computed(() => {
-  const width = parseInt(batterySize.value, 10);
-  return `${width / 2}px`;
-});
+  const width = Number.parseInt(batterySize.value, 10)
+  return `${width / 2}px`
+})
 
 const batteryStyle = computed<CSSProperties>(() => {
-  const width = parseInt(batterySize.value, 10);
-  const height = parseInt(batteryHeight.value, 10);
-  const bumpWidth = width / 15; // 凸起宽度（占电池宽度的1/15）
-  const bumpHeight = height / 2; // 凸起高度（占电池高度的1/2）
+  const width = Number.parseInt(batterySize.value, 10)
+  const height = Number.parseInt(batteryHeight.value, 10)
+  const bumpWidth = width / 15 // 凸起宽度（占电池宽度的1/15）
+  const bumpHeight = height / 2 // 凸起高度（占电池高度的1/2）
 
   return {
     '--battery-width': batterySize.value,
@@ -59,7 +52,7 @@ const batteryStyle = computed<CSSProperties>(() => {
     '--battery-bump-right': `-${bumpWidth + 2}px`, // 凸起向右偏移
     '--battery-text-font-size': `${height / 2}px`, // 文本大小（占电池高度的1/2）
   }
-});
+})
 
 /** 电量条样式 */
 const batteryBarStyle = computed<CSSProperties>(() => ({
@@ -67,6 +60,15 @@ const batteryBarStyle = computed<CSSProperties>(() => ({
   backgroundColor: fillColor.value,
 }))
 </script>
+
+<template>
+  <div class="battery" :style="batteryStyle">
+    <div class="battery-bar" :style="batteryBarStyle" />
+    <div v-show="showText" class="battery-text">
+      {{ quantity }}%
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .battery {

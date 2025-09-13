@@ -1,8 +1,8 @@
-import { createDiscreteApi } from 'naive-ui'
+import { createDiscreteApi } from "naive-ui";
 
 /** 全局属性挂载 */
 function setupNaiveDiscrete() {
-  const { message, loadingBar } = createDiscreteApi(['message', 'loadingBar']);
+  const { message, loadingBar } = createDiscreteApi(["message", "loadingBar"]);
 
   // 消息提示
   window.$message = message;

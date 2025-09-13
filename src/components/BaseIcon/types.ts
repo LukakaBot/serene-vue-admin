@@ -5,4 +5,4 @@ export interface BaseIconProps {
   color?: string;
   /** 图标大小 */
   size?: number;
-};
+}

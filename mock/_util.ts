@@ -1,16 +1,23 @@
-import Mock from 'mockjs';
+/* eslint-disable  ts/no-explicit-any */
 
-export function resultSuccess(result, { message = 'ok' } = {}) {
+import Mock from "mockjs";
+
+export function resultSuccess(result, { message = "ok" } = {}) {
   return Mock.mock({
     code: 200,
     result,
     message,
-    type: 'success',
+    type: "success",
   });
 }
 
-export function resultPageSuccess<T = any>(page: number, pageSize: number, data: T[], { message = 'ok' } = {}) {
-  const pageData = pagination(page, pageSize, data);  
+export function resultPageSuccess<T = any>(
+  page: number,
+  pageSize: number,
+  data: T[],
+  { message = "ok" } = {},
+) {
+  const pageData = pagination(page, pageSize, data);
 
   return {
     ...resultSuccess({
@@ -23,16 +30,23 @@ export function resultPageSuccess<T = any>(page: number, pageSize: number, data:
   };
 }
 
-export function resultError(message = 'Request failed', { code = -1, result = null } = {}) {
+export function resultError(
+  message = "Request failed",
+  { code = -1, result = null } = {},
+) {
   return {
     code,
     result,
     message,
-    type: 'error',
+    type: "error",
   };
 }
 
-export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]): T[] {
+export function pagination<T = any>(
+  pageNo: number,
+  pageSize: number,
+  array: T[],
+): T[] {
   const offset = (pageNo - 1) * Number(pageSize);
   const ret =
     offset + Number(pageSize) >= array.length
@@ -42,7 +56,7 @@ export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]
 }
 
 /**
- * @param {Number} times 回调函数需要执行的次数
+ * @param {number} times 回调函数需要执行的次数
  * @param {Function} callback 回调函数
  */
 export function doCustomTimes(times: number, callback: any) {
@@ -63,6 +77,8 @@ export interface requestParams {
  * @description 本函数用于从request数据中获取token，请根据项目的实际情况修改
  *
  */
-export function getRequestToken({ headers }: requestParams): string | undefined {
+export function getRequestToken({
+  headers,
+}: requestParams): string | undefined {
   return headers?.token;
 }

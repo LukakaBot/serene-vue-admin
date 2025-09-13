@@ -1,9 +1,9 @@
-import type { CSSProperties } from 'vue';
 import type {
   IDomEditor,
   IEditorConfig,
   IToolbarConfig,
-} from '@wangeditor/editor';
+} from "@wangeditor/editor";
+import type { CSSProperties } from "vue";
 
 export interface BaseRichEditorProps {
   value: string;
@@ -14,13 +14,13 @@ export interface BaseRichEditorProps {
   bodyStyle?: CSSProperties;
   /** 编辑器样式 */
   editorStyle?: CSSProperties;
-  mode: 'simple' | 'default';
+  mode: "simple" | "default";
   /** 工具栏配置 */
   toolbarConfig: Partial<IToolbarConfig>;
   /** 编辑器配置 */
   editorConfig: Partial<IEditorConfig>;
   /** 编辑器内容变化时触发 */
-  'onUpdate:value'?: (value: string) => void;
+  "onUpdate:value"?: (value: string) => void;
   /** 编辑器内容变化时触发 */
   onUpdateValue?: (value: string) => void;
   /** 编辑器创建完毕时触发 */

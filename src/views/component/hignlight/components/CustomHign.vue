@@ -1,24 +1,15 @@
-<template>
-  <n-card :segmented="{ content: true }" size="small">
-    <template #header>
-      <BaseTitle title="样式" />
-    </template>
-    <n-highlight class="whitespace-pre-wrap" :text="text" :patterns="patterns" :highlight-style="highlightStyle" />
-  </n-card>
-</template>
-
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
-import { useThemeVars } from 'naive-ui/es';
+import type { CSSProperties } from 'vue'
+import { useThemeVars } from 'naive-ui/es'
 
-type Props = {
-  text: string;
-  patterns: string[];
-};
+interface Props {
+  text: string
+  patterns: string[]
+}
 
-defineProps<Props>();
+defineProps<Props>()
 
-const themeVars = useThemeVars();
+const themeVars = useThemeVars()
 
 const highlightStyle: CSSProperties = {
   margin: '0 6px',
@@ -28,7 +19,16 @@ const highlightStyle: CSSProperties = {
   color: themeVars.value.baseColor,
   background: themeVars.value.primaryColor,
   transition: `all .3s ${themeVars.value.cubicBezierEaseInOut}`,
-};
+}
 </script>
+
+<template>
+  <n-card :segmented="{ content: true }" size="small">
+    <template #header>
+      <BaseTitle title="样式" />
+    </template>
+    <n-highlight class="whitespace-pre-wrap" :text="text" :patterns="patterns" :highlight-style="highlightStyle" />
+  </n-card>
+</template>
 
 <style scoped></style>

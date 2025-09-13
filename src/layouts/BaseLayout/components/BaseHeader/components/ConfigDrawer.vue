@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { useConfigStore } from '@/store'
+import { renderIcon } from '@/utils/tools'
+
+const configStore = useConfigStore()
+
+const show = ref(false)
+
+function openDrawer() {
+  show.value = true
+}
+
+function closeDrawer() {
+  show.value = false
+}
+
+defineExpose({ openDrawer, closeDrawer })
+</script>
+
 <template>
   <n-drawer v-model:show="show" :width="350">
     <n-drawer-content title="系统配置">
@@ -12,8 +31,12 @@
             <template #unchecked-icon>
               <component :is="renderIcon({ name: 'mage:sun' })" />
             </template>
-            <template #checked> dark </template>
-            <template #unchecked> light </template>
+            <template #checked>
+              dark
+            </template>
+            <template #unchecked>
+              light
+            </template>
           </n-switch>
         </n-space>
 
@@ -30,24 +53,5 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script setup lang="ts">
-import { useConfigStore } from '@/store';
-import { renderIcon } from '@/utils/tools';
-
-const configStore = useConfigStore();
-
-const show = ref(false);
-
-function openDrawer() {
-  show.value = true;
-}
-
-function closeDrawer() {
-  show.value = false;
-}
-
-defineExpose({ openDrawer, closeDrawer });
-</script>
 
 <style scoped></style>

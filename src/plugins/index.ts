@@ -1,5 +1,5 @@
-import setupBucket from './bucket';
-import setupNaiveDiscrete from './naiveDiscrete';
+import setupBucket from "./bucket";
+import setupNaiveDiscrete from "./naiveDiscrete";
 
 function setupPlugins() {
   setupBucket();

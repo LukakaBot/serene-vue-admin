@@ -1,6 +1,6 @@
-import type { GlobalThemeOverrides } from 'naive-ui';
+import type { GlobalThemeOverrides } from "naive-ui";
 
 export interface ThemeState {
-    /** 应用主题风格 */
-    appTheme: GlobalThemeOverrides;
-};
+  /** 应用主题风格 */
+  appTheme: GlobalThemeOverrides;
+}

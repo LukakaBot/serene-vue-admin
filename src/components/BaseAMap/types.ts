@@ -1,4 +1,4 @@
-export type MarkerItem = {
+export interface MarkerItem {
   /** 标记点id */
   id: string;
   /** 纬度 */
@@ -21,15 +21,15 @@ export type MarkerItem = {
   clusterId?: number;
   /** 是否参与点聚合 */
   joinCluster: boolean;
-};
+}
 
-export type LayerItem = {
+export interface LayerItem {
   icon: string;
   label: string;
   isActive: boolean;
-};
+}
 
-export type ToolItem = {
+export interface ToolItem {
   icon: string;
   label: string;
-};
+}

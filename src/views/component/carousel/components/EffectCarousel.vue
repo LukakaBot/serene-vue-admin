@@ -1,3 +1,11 @@
+<script setup lang="ts">
+const effects = ['slide', 'fade', 'card']
+
+const myEffect = ref<'slide' | 'fade' | 'card'>('slide')
+
+const isCard = computed(() => myEffect.value === 'card')
+</script>
+
 <template>
   <n-card>
     <template #header>
@@ -10,8 +18,10 @@
             {{ effect }}
           </n-radio-button>
         </n-radio-group>
-        <n-carousel :key="myEffect" :effect="myEffect" :centered-slides="isCard" :slides-per-view="isCard ? 'auto' : 1"
-          draggable style="height: 240px">
+        <n-carousel
+          :key="myEffect" :effect="myEffect" :centered-slides="isCard" :slides-per-view="isCard ? 'auto' : 1"
+          draggable style="height: 240px"
+        >
           <n-carousel-item :style="{ width: isCard ? '60%' : '100%' }">
             <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg">
           </n-carousel-item>
@@ -29,14 +39,6 @@
     </template>
   </n-card>
 </template>
-
-<script setup lang="ts">
-const effects = ['slide', 'fade', 'card'];
-
-const myEffect = ref<'slide' | 'fade' | 'card'>('slide');
-
-const isCard = computed(() => myEffect.value === 'card');
-</script>
 
 <style scoped>
 .carousel-img {
