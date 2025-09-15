@@ -14,7 +14,11 @@
     },
     "resolveJsonModule": true,
     "typeRoots": ["node_modules", "src/types"],
-    "types": ["naive-ui/volar", "vue-macros/macros-global"],
+    "types": [
+      "naive-ui/volar",
+      "vue-macros/macros-global",
+      "vite-plugin-svg-icons/client"
+    ],
     "allowImportingTsExtensions": true,
     /* Linting */
     "strict": true,
