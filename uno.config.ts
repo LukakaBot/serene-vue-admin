@@ -1,13 +1,13 @@
 import {
   defineConfig,
-  presetUno,
+  presetAttributify,
+  presetIcons,
+  presetWind3,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
 
 export default defineConfig({
-  presets: [presetUno()],
-  transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: {
     'base-container':
       'flex flex-col gap-10px mx-2.5 mb-2.5 p-2.5 h-[calc(100%-20px)] bg-[var(--n-color)] border-rd-1 overflow-y-auto transition duration-300 ease-[var(--n-bezier)]',
@@ -16,4 +16,6 @@ export default defineConfig({
     'bottom-tag-title':
       'inline-block relative text-xl font-bold z-0 after:content-[""] after:absolute after:bottom-0 after:left-0 after:h-2 after:w-full after:bg-[var(--primary-color)] after:-z-1',
   },
+  presets: [presetIcons(), presetWind3(), presetAttributify()],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
 })
