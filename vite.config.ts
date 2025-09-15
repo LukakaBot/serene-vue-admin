@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
       }),
       UnoCSS(),
       AutoImport({
-        dts: 'src/typings/auto-import.d.ts',
+        dts: 'src/types/auto-import.d.ts',
         imports: [
           'vue',
           'vue-router',
@@ -49,7 +49,7 @@ export default defineConfig(({ mode }) => {
         },
       }),
       Components({
-        dts: 'src/typings/components.d.ts',
+        dts: 'src/types/components.d.ts',
         resolvers: [NaiveUiResolver()],
       }),
       createSvgIconsPlugin({
