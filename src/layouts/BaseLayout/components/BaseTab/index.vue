@@ -28,10 +28,31 @@ const menuOptions = computed<DropdownOption[]>(() => {
   const isDisabled = tabList.value.length <= 1
 
   return [
-    { key: '1', label: '刷新当前', icon: () => renderIcon({ name: 'mdi:refresh', size: 20 }) },
-    { key: '2', label: `关闭当前`, disabled: isDisabled, icon: () => renderIcon({ name: 'mdi:close', size: 20 }) },
-    { key: '3', label: '关闭其他', disabled: isDisabled, icon: () => renderIcon({ name: 'material-symbols:swap-horiz-rounded', size: 20 }) },
-    { key: '4', label: '关闭全部', disabled: isDisabled, icon: () => renderIcon({ name: 'material-symbols:eco-outline-rounded', size: 20 }) },
+    {
+      key: '1',
+      label: '刷新当前',
+      icon: () => renderIcon({ name: 'mdi:refresh', size: 20 }),
+    },
+    {
+      key: '2',
+      label: '关闭当前',
+      disabled: isDisabled,
+      icon: () => renderIcon({ name: 'mdi:close', size: 20 }),
+    },
+    {
+      key: '3',
+      label: '关闭其他',
+      disabled: isDisabled,
+      icon: () =>
+        renderIcon({ name: 'material-symbols:swap-horiz-rounded', size: 20 }),
+    },
+    {
+      key: '4',
+      label: '关闭全部',
+      disabled: isDisabled,
+      icon: () =>
+        renderIcon({ name: 'material-symbols:eco-outline-rounded', size: 20 }),
+    },
   ]
 })
 
@@ -48,8 +69,7 @@ const sideMenuPosition = reactive({ x: 0, y: 0 })
 
 /** 跳转页面 */
 function handleSkipPage(tab: RouteLocationNormalizedLoaded) {
-  if (checkActiveTab(tab))
-    return
+  if (checkActiveTab(tab)) return
   router.push(tab)
 }
 
@@ -71,7 +91,7 @@ function closeTab(e: Event, tab: RouteLocationNormalizedLoaded) {
 
 function handleSelectMenu(key: string) {
   const tab = rightClickTab.value || route
-  const actions: Record<string, (() => void | Promise<void>)> = {
+  const actions: Record<string, () => void | Promise<void>> = {
     1: () => routeStore.reloadPage(tab), // 刷新当前
     2: () => tabStore.closeCurrentTab(tab), // 关闭当前
     3: () => tabStore.closeOtherTab(tab), // 关闭其他
@@ -79,8 +99,7 @@ function handleSelectMenu(key: string) {
   }
 
   const action = actions[key]
-  if (!action)
-    throw new Error('unknown operation')
+  if (!action) throw new Error('unknown operation')
 
   action() // 执行对应的操作
   handleCloseSideMenu()
@@ -128,28 +147,42 @@ defineRender(() => (
       <VueDraggable
         class="tab-scroll"
         modelValue={tabStore.tabList}
-        {...{ 'onUpdate:modelValue': (value: RouteLocationNormalizedLoaded[]) => tabStore.tabList = value }}
+        {...{
+          'onUpdate:modelValue': (value: RouteLocationNormalizedLoaded[]) =>
+            (tabStore.tabList = value),
+        }}
       >
-        {
-          tabList.value.map(tab => (
-            <div
-              key={tab.fullPath}
-              onContextmenu={event => handleContextMenu(event, tab)}
+        {tabList.value.map((tab) => (
+          <div
+            key={tab.fullPath}
+            onContextmenu={(event) => handleContextMenu(event, tab)}
+          >
+            <NButton
+              iconPlacement="right"
+              color={
+                checkActiveTab(tab)
+                  ? themeVars.value.primaryColor
+                  : themeVars.value.cardColor
+              }
+              textColor={
+                checkActiveTab(tab)
+                  ? themeVars.value.cardColor
+                  : themeVars.value.textColor1
+              }
+              onClick={() => handleSkipPage(tab)}
             >
-              <NButton
-                iconPlacement="right"
-                color={checkActiveTab(tab) ? themeVars.value.primaryColor : themeVars.value.cardColor}
-                textColor={checkActiveTab(tab) ? themeVars.value.cardColor : themeVars.value.textColor1}
-                onClick={() => handleSkipPage(tab)}
-              >
-                {{
-                  default: () => tab.name,
-                  icon: () => h(BaseIcon, { name: 'mdi:close', size: 18, onClick: (event: Event) => closeTab(event, tab) }),
-                }}
-              </NButton>
-            </div>
-          ))
-        }
+              {{
+                default: () => tab.name,
+                icon: () =>
+                  h(BaseIcon, {
+                    name: 'mdi:close',
+                    size: 18,
+                    onClick: (event: Event) => closeTab(event, tab),
+                  }),
+              }}
+            </NButton>
+          </div>
+        ))}
       </VueDraggable>
     </NScrollbar>
     <NDropdown
@@ -160,7 +193,12 @@ defineRender(() => (
     >
       <NButton
         quaternary
-        renderIcon={() => renderIcon({ name: 'fluent-emoji-high-contrast:partying-face', size: 20 })}
+        renderIcon={() =>
+          renderIcon({
+            name: 'fluent-emoji-high-contrast:partying-face',
+            size: 20,
+          })
+        }
       />
     </NDropdown>
     <NDropdown
