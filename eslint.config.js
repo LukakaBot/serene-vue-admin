@@ -1,5 +1,5 @@
-import antfu from "@antfu/eslint-config";
-import vueMacros from "@vue-macros/eslint-config";
+import antfu from '@antfu/eslint-config'
+import vueMacros from '@vue-macros/eslint-config'
 
 export default antfu(
   {
@@ -11,7 +11,7 @@ export default antfu(
   {
     rules: {
       ...vueMacros.rules,
-      "ts/no-explicit-any": "error",
+      'ts/no-explicit-any': 'error',
     },
   },
-);
+)

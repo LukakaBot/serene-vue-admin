@@ -1,35 +1,35 @@
 export interface MarkerItem {
   /** 标记点id */
-  id: string;
+  id: string
   /** 纬度 */
-  latitude: number;
+  latitude: number
   /** 经度 */
-  longitude: number;
+  longitude: number
   /** 标注点名 */
-  title?: string;
+  title?: string
   /** 图标路径 */
-  iconPath?: string;
+  iconPath?: string
   /** 旋转角度 */
-  rotate?: number;
+  rotate?: number
   /** 标注的透明度 */
-  alpha?: number;
+  alpha?: number
   /** 标注图标宽度 */
-  width?: number;
+  width?: number
   /** 标注图标高度 */
-  height?: number;
+  height?: number
   /** 自定义点聚合簇效果时使用 */
-  clusterId?: number;
+  clusterId?: number
   /** 是否参与点聚合 */
-  joinCluster: boolean;
+  joinCluster: boolean
 }
 
 export interface LayerItem {
-  icon: string;
-  label: string;
-  isActive: boolean;
+  icon: string
+  label: string
+  isActive: boolean
 }
 
 export interface ToolItem {
-  icon: string;
-  label: string;
+  icon: string
+  label: string
 }

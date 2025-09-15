@@ -1,8 +1,8 @@
-import Bucket from "./core/Bucket";
+import Bucket from './core/Bucket'
 
 function setupBucket() {
-  const storageType = import.meta.env.VITE_STORAGE_TYPE;
-  window.$bucket = new Bucket(storageType);
+  const storageType = import.meta.env.VITE_STORAGE_TYPE
+  window.$bucket = new Bucket(storageType)
 }
 
-export default setupBucket;
+export default setupBucket

@@ -1,11 +1,11 @@
 function useLoading(initValue: boolean = false) {
-  const loading = ref(initValue);
+  const loading = ref(initValue)
 
   function setLoading(value: boolean) {
-    loading.value = value;
+    loading.value = value
   }
 
-  return [loading, setLoading] as const;
+  return [loading, setLoading] as const
 }
 
-export default useLoading;
+export default useLoading

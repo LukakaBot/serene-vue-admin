@@ -1,20 +1,20 @@
-import type { CSSProperties } from "vue";
+import type { CSSProperties } from 'vue'
 
 export interface BaseTitleProps {
   /**
    * 标题
    */
-  title: string;
+  title: string
   /**
    * 标题样式
    */
-  titleStyle?: CSSProperties;
+  titleStyle?: CSSProperties
   /**
    * 是否显示 tag
    */
-  showTag?: boolean;
+  showTag?: boolean
   /**
    * tag 方向
    */
-  tagDirection?: "left" | "bottom";
+  tagDirection?: 'left' | 'bottom'
 }

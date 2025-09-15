@@ -1,36 +1,36 @@
-import TlbsMap from "tlbs-map-vue";
-import { createApp } from "vue";
-import setupPlugins from "@/plugins";
-import router, { setupRouter } from "@/router";
-import setupStore from "@/store";
-import App from "./App.vue";
-import { setupDirectives } from "./directives";
-import LoadingApp from "./layouts/LoadingApp/LoadingApp.vue";
-import "virtual:svg-icons-register";
-import "./styles/index";
+import TlbsMap from 'tlbs-map-vue'
+import { createApp } from 'vue'
+import setupPlugins from '@/plugins'
+import router, { setupRouter } from '@/router'
+import setupStore from '@/store'
+import App from './App.vue'
+import { setupDirectives } from './directives'
+import LoadingApp from './layouts/LoadingApp/LoadingApp.vue'
+import 'virtual:svg-icons-register'
+import './styles/index'
 
 async function mountApp() {
-  const loadingApp = createApp(LoadingApp);
+  const loadingApp = createApp(LoadingApp)
 
-  loadingApp.mount("#app-loading");
+  loadingApp.mount('#app-loading')
 
-  const app = createApp(App);
+  const app = createApp(App)
 
-  setupStore(app);
+  setupStore(app)
 
-  setupDirectives(app);
+  setupDirectives(app)
 
-  setupPlugins();
+  setupPlugins()
 
-  app.use(TlbsMap);
+  app.use(TlbsMap)
 
-  setupRouter(app);
+  setupRouter(app)
 
-  await router.isReady();
+  await router.isReady()
 
-  loadingApp.unmount();
+  loadingApp.unmount()
 
-  app.mount("#app");
+  app.mount('#app')
 }
 
-mountApp();
+mountApp()

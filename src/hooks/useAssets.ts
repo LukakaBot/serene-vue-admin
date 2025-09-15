@@ -6,14 +6,14 @@ function useAssets() {
    */
   const getImageUrl = (name: string) => {
     // 是否为SVG文件
-    const isSvg = name.endsWith(".svg");
+    const isSvg = name.endsWith('.svg')
     // 根据文件类型选择目录
-    const directory = isSvg ? "svg" : "image";
+    const directory = isSvg ? 'svg' : 'image'
     // 构造并返回完整的资源URL
-    return new URL(`/src/assets/${directory}/${name}`, import.meta.url).href;
-  };
+    return new URL(`/src/assets/${directory}/${name}`, import.meta.url).href
+  }
 
-  return { getImageUrl };
+  return { getImageUrl }
 }
 
-export default useAssets;
+export default useAssets

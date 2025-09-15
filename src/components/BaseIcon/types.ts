@@ -1,8 +1,8 @@
 export interface BaseIconProps {
   /** 图标名称 */
-  name: string;
+  name: string
   /** 图标颜色 */
-  color?: string;
+  color?: string
   /** 图标大小 */
-  size?: number;
+  size?: number
 }

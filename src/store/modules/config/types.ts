@@ -1,21 +1,21 @@
-import type { ThemeState } from "../theme/types";
+import type { ThemeState } from '../theme/types'
 
 export interface ConfigState {
   /** ----- 水印 ----- */
   /**
    * 是否显示水印
    */
-  showWatermark: boolean;
+  showWatermark: boolean
   /**
    * 水印内容
    */
-  watermarkContent: string;
+  watermarkContent: string
   /**
    * 暗黑模式
    */
-  isDarkMode: boolean;
+  isDarkMode: boolean
   /**
    * 主题
    */
-  theme: ThemeState;
+  theme: ThemeState
 }

@@ -1,17 +1,17 @@
-import type { Ref } from "vue";
-import { useDebounceFn, useThrottleFn } from "@vueuse/core";
-import { ref, unref, watch } from "vue";
+import type { Ref } from 'vue'
+import { useDebounceFn, useThrottleFn } from '@vueuse/core'
+import { ref, unref, watch } from 'vue'
 
-type RemoveEventFn = () => void;
+type RemoveEventFn = () => void
 export interface UseEventParams {
   /* eslint-disable-next-line  ts/no-explicit-any */
-  el?: Element | Ref<Element | undefined> | Window | any;
-  name: string;
-  listener: EventListener;
-  options?: boolean | AddEventListenerOptions;
-  autoRemove?: boolean;
-  isDebounce?: boolean;
-  wait?: number;
+  el?: Element | Ref<Element | undefined> | Window | any
+  name: string
+  listener: EventListener
+  options?: boolean | AddEventListenerOptions
+  autoRemove?: boolean
+  isDebounce?: boolean
+  wait?: number
 }
 
 function useEventListener({
@@ -23,48 +23,48 @@ function useEventListener({
   isDebounce = true,
   wait = 80,
 }: UseEventParams): {
-  removeEvent: RemoveEventFn;
+  removeEvent: RemoveEventFn
 } {
-  let remove: RemoveEventFn = () => {};
+  let remove: RemoveEventFn = () => {}
   // 是否添加listener
-  const isAddRef = ref(false);
+  const isAddRef = ref(false)
 
   if (el) {
-    const element = ref(el as Element) as Ref<Element>;
+    const element = ref(el as Element) as Ref<Element>
     // 防抖 / 节流
     const handler = isDebounce
       ? useDebounceFn(listener, wait)
-      : useThrottleFn(listener, wait);
-    const realHandler = wait ? handler : listener;
+      : useThrottleFn(listener, wait)
+    const realHandler = wait ? handler : listener
     // 移除
     const removeEventListener = (e: Element) => {
-      isAddRef.value = true;
-      e.removeEventListener(name, realHandler, options);
-    };
+      isAddRef.value = true
+      e.removeEventListener(name, realHandler, options)
+    }
     // 添加
     const addEventListener = (e: Element) =>
-      e.addEventListener(name, realHandler, options);
+      e.addEventListener(name, realHandler, options)
 
     const removeWatch = watch(
       element,
       (value, _oldValue, onCleanUp) => {
         if (value) {
-          !unref(isAddRef) && addEventListener(value);
+          !unref(isAddRef) && addEventListener(value)
           onCleanUp(() => {
-            autoRemove && removeEventListener(value);
-          });
+            autoRemove && removeEventListener(value)
+          })
         }
       },
       { immediate: true },
-    );
+    )
 
     remove = () => {
-      removeEventListener(element.value);
-      removeWatch();
-    };
+      removeEventListener(element.value)
+      removeWatch()
+    }
   }
 
-  return { removeEvent: remove };
+  return { removeEvent: remove }
 }
 
-export default useEventListener;
+export default useEventListener

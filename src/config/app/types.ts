@@ -3,7 +3,7 @@ export interface GlobalConfig {
   /**
    * 标题
    */
-  title: string;
+  title: string
   /**
    * 路由配置
    */
@@ -11,14 +11,14 @@ export interface GlobalConfig {
     /**
      * 路由模式
      */
-    mode: "hash" | "history";
-  };
+    mode: 'hash' | 'history'
+  }
   /**
    * 路由白名单
    */
-  routeWhitelist: string[];
+  routeWhitelist: string[]
   /**
    * 默认路径
    */
-  defaultRoutePath: string;
+  defaultRoutePath: string
 }

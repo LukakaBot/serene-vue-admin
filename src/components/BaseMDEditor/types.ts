@@ -1,13 +1,13 @@
-import type { ToolbarNames } from "md-editor-v3";
+import type { ToolbarNames } from 'md-editor-v3'
 
 export interface BaseMDEditorProps {
-  value: string;
+  'value': string
   /** 是否展示预览 */
-  preview?: boolean;
+  'preview'?: boolean
   /** 工具栏 */
-  toolbars?: ToolbarNames[];
+  'toolbars'?: ToolbarNames[]
   /** 内容更新时触发 */
-  "onUpdate:value"?: (value: string) => void;
+  'onUpdate:value'?: (value: string) => void
   /** 内容更新时触发 */
-  onUpdateValue?: (value: string) => void;
+  'onUpdateValue'?: (value: string) => void
 }

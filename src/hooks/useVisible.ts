@@ -1,15 +1,15 @@
 function useVisible(initValue: boolean = false) {
-  const show = ref(initValue);
+  const show = ref(initValue)
 
   function openModal() {
-    show.value = true;
+    show.value = true
   }
 
   function closeModal() {
-    show.value = false;
+    show.value = false
   }
 
-  return [show, openModal, closeModal] as const;
+  return [show, openModal, closeModal] as const
 }
 
-export default useVisible;
+export default useVisible
