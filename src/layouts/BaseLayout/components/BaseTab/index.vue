@@ -69,7 +69,8 @@ const sideMenuPosition = reactive({ x: 0, y: 0 })
 
 /** 跳转页面 */
 function handleSkipPage(tab: RouteLocationNormalizedLoaded) {
-  if (checkActiveTab(tab)) return
+  if (checkActiveTab(tab))
+    return
   router.push(tab)
 }
 
@@ -99,7 +100,8 @@ function handleSelectMenu(key: string) {
   }
 
   const action = actions[key]
-  if (!action) throw new Error('unknown operation')
+  if (!action)
+    throw new Error('unknown operation')
 
   action() // 执行对应的操作
   handleCloseSideMenu()
@@ -152,10 +154,10 @@ defineRender(() => (
             (tabStore.tabList = value),
         }}
       >
-        {tabList.value.map((tab) => (
+        {tabList.value.map(tab => (
           <div
             key={tab.fullPath}
-            onContextmenu={(event) => handleContextMenu(event, tab)}
+            onContextmenu={event => handleContextMenu(event, tab)}
           >
             <NButton
               iconPlacement="right"
@@ -197,8 +199,7 @@ defineRender(() => (
           renderIcon({
             name: 'fluent-emoji-high-contrast:partying-face',
             size: 20,
-          })
-        }
+          })}
       />
     </NDropdown>
     <NDropdown

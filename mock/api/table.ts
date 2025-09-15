@@ -9,19 +9,19 @@ function tableList(pageSize) {
   const result: any[] = []
   doCustomTimes(pageSize, () => {
     result.push({
-      id: '@integer(10,999999)',
-      beginTime: '@datetime',
-      endTime: '@datetime',
-      address: '@county(true)',
-      name: '@cname()',
-      avatar: Random.image(
+      'id': '@integer(10,999999)',
+      'beginTime': '@datetime',
+      'endTime': '@datetime',
+      'address': '@county(true)',
+      'name': '@cname()',
+      'avatar': Random.image(
         '400x400',
         Random.color(),
         Random.color(),
         Random.first(),
       ),
-      date: '@datetime',
-      time: "@time('HH:mm')",
+      'date': '@datetime',
+      'time': '@time(\'HH:mm\')',
       'no|100000-10000000': 100000,
       'status|1': [true, false],
     })
