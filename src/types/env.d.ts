@@ -2,7 +2,7 @@ interface ImportMetaEnv {
   /** 高德地图安全码 */
   readonly VITE_APP_MAP_SECURITY_JS_CODE: string
   /** 高德地图key */
-  readonly VITE_APP_MAP_KEY: string
+  readonly VITE_APP_AMAP_KEY: string
   /** 存储类型 */
   readonly VITE_APP_STORAGE_TYPE: 'localStorage' | 'sessionStorage'
   /** 后端服务地址 */

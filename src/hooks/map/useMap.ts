@@ -12,7 +12,7 @@ function useMap(options?: MapOptions) {
 
     const config = Object.assign(
       {
-        key: import.meta.env.VITE_APP_MAP_KEY,
+        key: import.meta.env.VITE_APP_AMAP_KEY,
         version: '2.0',
       },
       options,

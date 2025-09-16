@@ -43,7 +43,7 @@ function initMap() {
   }
 
   const options = {
-    key: import.meta.env.VITE_APP_MAP_KEY,
+    key: import.meta.env.VITE_APP_AMAP_KEY,
     version: '2.0',
   }
 
