@@ -52,7 +52,7 @@ async function handleValidateClick(e: MouseEvent) {
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="行内表单" />
+      <TagTitle title="行内表单" />
     </template>
     <n-space vertical>
       <n-radio-group

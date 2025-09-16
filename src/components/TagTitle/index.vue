@@ -1,7 +1,7 @@
 <script setup lang="tsx">
-import type { BaseTitleProps } from './types'
+import type { TagTitleProps } from './types'
 
-const props = withDefaults(defineProps<BaseTitleProps>(), {
+const props = withDefaults(defineProps<TagTitleProps>(), {
   title: '我是标题',
   titleStyle: () => ({}),
   showTag: true,
@@ -13,12 +13,12 @@ const tagClassName = computed(() =>
     ? 'left-tag-title'
     : 'bottom-tag-title',
 )
-
-defineRender(() => (
-  <div class={tagClassName.value} style={props.titleStyle}>
-    {props.title}
-  </div>
-))
 </script>
+
+<template>
+  <div :class="tagClassName" :style="titleStyle">
+    {{ title }}
+  </div>
+</template>
 
 <style scoped></style>

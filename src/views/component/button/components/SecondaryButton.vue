@@ -9,7 +9,7 @@ function renderButtonIcon() {
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="次要按钮" />
+      <TagTitle title="次要按钮" />
     </template>
     <n-space>
       <n-button strong secondary>
@@ -52,11 +52,41 @@ function renderButtonIcon() {
         Error
       </n-button>
       <n-button strong secondary circle :render-icon="renderButtonIcon" />
-      <n-button strong secondary circle type="primary" :render-icon="renderButtonIcon" />
-      <n-button strong secondary circle type="info" :render-icon="renderButtonIcon" />
-      <n-button strong secondary circle type="success" :render-icon="renderButtonIcon" />
-      <n-button strong secondary circle type="warning" :render-icon="renderButtonIcon" />
-      <n-button strong secondary circle type="error" :render-icon="renderButtonIcon" />
+      <n-button
+        strong
+        secondary
+        circle
+        type="primary"
+        :render-icon="renderButtonIcon"
+      />
+      <n-button
+        strong
+        secondary
+        circle
+        type="info"
+        :render-icon="renderButtonIcon"
+      />
+      <n-button
+        strong
+        secondary
+        circle
+        type="success"
+        :render-icon="renderButtonIcon"
+      />
+      <n-button
+        strong
+        secondary
+        circle
+        type="warning"
+        :render-icon="renderButtonIcon"
+      />
+      <n-button
+        strong
+        secondary
+        circle
+        type="error"
+        :render-icon="renderButtonIcon"
+      />
     </n-space>
   </n-card>
 </template>

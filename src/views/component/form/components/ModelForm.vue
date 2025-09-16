@@ -7,7 +7,7 @@ const formModalRef = ref<InstanceType<typeof FormModal>>()
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="弹窗表单" />
+      <TagTitle title="弹窗表单" />
     </template>
     <n-space>
       <n-button @click="formModalRef?.openModal">

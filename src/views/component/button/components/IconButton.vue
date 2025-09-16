@@ -9,13 +9,18 @@ function renderButtonIcon() {
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="图标" />
+      <TagTitle title="图标" />
     </template>
     <n-space>
       <n-button secondary strong :render-icon="renderButtonIcon">
         +100 元
       </n-button>
-      <n-button icon-placement="right" secondary strong :render-icon="renderButtonIcon">
+      <n-button
+        icon-placement="right"
+        secondary
+        strong
+        :render-icon="renderButtonIcon"
+      >
         +100 元
       </n-button>
     </n-space>

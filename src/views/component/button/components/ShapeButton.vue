@@ -9,7 +9,7 @@ function renderButtonIcon() {
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="形状" />
+      <TagTitle title="形状" />
     </template>
     <n-space>
       <n-button circle :render-icon="renderButtonIcon" />

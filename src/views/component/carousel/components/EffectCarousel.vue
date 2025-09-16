@@ -9,30 +9,50 @@ const isCard = computed(() => myEffect.value === 'card')
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="过渡效果" />
+      <TagTitle title="过渡效果" />
     </template>
     <template #default>
       <n-space vertical>
         <n-radio-group v-model:value="myEffect" style="margin-bottom: 10px">
-          <n-radio-button v-for="effect in effects" :key="effect" :value="effect">
+          <n-radio-button
+            v-for="effect in effects"
+            :key="effect"
+            :value="effect"
+          >
             {{ effect }}
           </n-radio-button>
         </n-radio-group>
         <n-carousel
-          :key="myEffect" :effect="myEffect" :centered-slides="isCard" :slides-per-view="isCard ? 'auto' : 1"
-          draggable style="height: 240px"
+          :key="myEffect"
+          :effect="myEffect"
+          :centered-slides="isCard"
+          :slides-per-view="isCard ? 'auto' : 1"
+          draggable
+          style="height: 240px"
         >
           <n-carousel-item :style="{ width: isCard ? '60%' : '100%' }">
-            <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg">
+            <img
+              class="carousel-img"
+              src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+            >
           </n-carousel-item>
           <n-carousel-item :style="{ width: isCard ? '60%' : '100%' }">
-            <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg">
+            <img
+              class="carousel-img"
+              src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
+            >
           </n-carousel-item>
           <n-carousel-item :style="{ width: isCard ? '60%' : '100%' }">
-            <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg">
+            <img
+              class="carousel-img"
+              src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
+            >
           </n-carousel-item>
           <n-carousel-item :style="{ width: isCard ? '60%' : '100%' }">
-            <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg">
+            <img
+              class="carousel-img"
+              src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+            >
           </n-carousel-item>
         </n-carousel>
       </n-space>

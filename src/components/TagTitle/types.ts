@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'vue'
 
-export interface BaseTitleProps {
+export interface TagTitleProps {
   /**
    * 标题
    */

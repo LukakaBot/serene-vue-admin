@@ -9,7 +9,7 @@ function renderButtonIcon() {
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="文本按钮" />
+      <TagTitle title="文本按钮" />
     </template>
     <n-button text :render-icon="renderButtonIcon">
       那车头依然吐着烟

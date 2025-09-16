@@ -1,10 +1,9 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="基础" />
+      <TagTitle title="基础" />
     </template>
     <n-space>
       <n-button>Default</n-button>

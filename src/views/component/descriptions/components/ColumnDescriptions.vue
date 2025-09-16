@@ -2,7 +2,7 @@
 import type { BaseDescription } from '@/components/BaseDescriptions/types'
 import { NCard } from 'naive-ui'
 import BaseDescriptions from '@/components/BaseDescriptions/index.vue'
-import BaseTitle from '@/components/BaseTitle/index.vue'
+import TagTitle from '@/components/TagTitle/index.vue'
 
 const list: BaseDescription[] = [
   { text: '早餐', field: 'breakfast' },
@@ -23,7 +23,7 @@ const data = {
 defineRender(() => (
   <NCard>
     {{
-      header: () => <BaseTitle title="列数" />,
+      header: () => <TagTitle title="列数" />,
       default: () => <BaseDescriptions list={list} data={data} column={2} />,
     }}
   </NCard>

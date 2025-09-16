@@ -16,7 +16,7 @@ onMounted(() => init())
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="hook" />
+      <TagTitle title="hook" />
     </template>
     <div ref="mapRef" class="h-400px" />
   </n-card>

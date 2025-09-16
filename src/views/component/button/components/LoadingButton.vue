@@ -17,7 +17,7 @@ function renderButtonIcon() {
 <template>
   <n-card>
     <template #header>
-      <BaseTitle title="加载中" />
+      <TagTitle title="加载中" />
     </template>
     <n-space>
       <n-button
