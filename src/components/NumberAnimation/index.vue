@@ -1,4 +1,6 @@
 <script setup lang="tsx">
+import { isNumber } from '@/utils/is'
+
 interface Props {
   prefix?: string
   suffix?: string
@@ -14,20 +16,20 @@ const props = withDefaults(defineProps<Props>(), {
 const attrs = useAttrs()
 
 const bindStyle = computed(() => ({
-  fontSize: props.size,
+  fontSize: isNumber(props.size) ? `${props.size}px` : props.size,
 }))
 
 const isRenderPrefix = computed(() => !!props.prefix)
 
 const isRenderSuffix = computed(() => !!props.suffix)
-
-defineRender(() => (
-  <div style={bindStyle.value}>
-    <span v-if={isRenderPrefix.value}>{props.prefix}</span>
-    <n-number-animation {...attrs} showSeparator={props.showSeparator} />
-    <span v-if={isRenderSuffix.value}>{props.suffix}</span>
-  </div>
-))
 </script>
+
+<template>
+  <div :style="bindStyle">
+    <span v-if="isRenderPrefix">{{ prefix }}</span>
+    <n-number-animation v-bind="attrs" :show-separator="showSeparator" />
+    <span v-if="isRenderSuffix">{{ suffix }}</span>
+  </div>
+</template>
 
 <style scoped></style>
