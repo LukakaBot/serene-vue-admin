@@ -1,4 +1,4 @@
-import type { SelectOption } from 'naive-ui'
+import type { SelectGroupOption, SelectOption } from 'naive-ui'
 import type { IsDateDisabled } from 'naive-ui/es/date-picker/src/interface'
 
 export type SearchParams = Record<string, string | null | number>
@@ -12,11 +12,11 @@ export interface SearchItem {
   key: string
   /** 搜索名称 */
   label: string
-  /** 搜索内容 */
   /* eslint-disable  ts/no-explicit-any */
+  /** 搜索内容 */
   value: any
   /** 配置选项内容 */
-  options?: SelectOption
+  options?: Array<SelectOption | SelectGroupOption>
   /** 选项 label 的字段名 */
   labelField?: string
   /** 选项 value 的字段名 */
