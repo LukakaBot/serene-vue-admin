@@ -47,7 +47,7 @@ interface Props {
   'onUpdate:checkedRowKeys'?: (keys: DataTableRowKey[]) => void
   'onUpdateCheckedRowKeys'?: (keys: DataTableRowKey[]) => void
   /** 表格操作按钮点击时触发 */
-  'onOperate'?: (label: string, row: any, index: number) => void
+  'onAction'?: (label: string, row: RowData, index: number) => void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -75,7 +75,7 @@ const paginationOptions = computed<PaginationProps>(() => {
     page,
     pageSize,
     itemCount,
-    pageSizes: [10, 20, 30, 40, 50],
+    pageSizes: [10, 30, 50, 100, 200],
     showQuickJumper: true,
     showSizePicker: true,
     prefix: ({ itemCount }) => `共 ${itemCount} 条`,
@@ -137,8 +137,7 @@ function handleUpdatePageSize(size: number) {
 /** 计算表格宽度 */
 function calculateTableWidth(acc: number, cur: BaseTableColumn): number {
   const childrenColumnWidth = cur.children?.reduce(calculateTableWidth, 0) ?? 0
-  const columnWidth
-    = !cur.children?.length && cur.width ? Number(cur.width) : 0
+  const columnWidth = !cur.children?.length && cur.width ? Number(cur.width) : 0
 
   return acc + childrenColumnWidth + columnWidth
 }
@@ -149,7 +148,7 @@ function renderOperationColumnButtons(
   row: RowData,
   index: number,
 ) {
-  const { onOperate } = props
+  const { onAction } = props
   return operations.map((operation) => {
     const props: ButtonProps = {
       size: 'small',
@@ -158,7 +157,7 @@ function renderOperationColumnButtons(
       renderIcon: operation.icon
         ? () => renderIcon({ name: operation.icon as string })
         : undefined,
-      onClick: () => onOperate?.(operation.text, row, index),
+      onClick: () => onAction?.(operation.text, row, index),
     }
     const render = renderButton(props, () => operation.text)
 
@@ -211,27 +210,28 @@ function renderOperationColumn(operations: Operations): BaseTableColumns {
 
   return [newOperationColumn]
 }
-
-defineRender(() => (
-  <NDataTable
-    class="flex-1"
-    columns={tableColumns.value}
-    checkedRowKeys={props.checkedRowKeys}
-    data={props.data}
-    scrollX={scrollX.value}
-    pagination={pagination.value}
-    singleLine={false}
-    loading={props.loading}
-    maxHeight={props.maxHeight}
-    flexHeight={true}
-    remote={true}
-    striped={true}
-    rowKey={props.rowKey}
-    onUpdateCheckedRowKeys={handleUpdateCheckedRowKeys}
-    onUpdatePage={handleUpdatePage}
-    onUpdatePageSize={handleUpdatePageSize}
-  />
-))
 </script>
+
+<template>
+  <NDataTable
+    flex="1"
+    class="flex-1"
+    :columns="tableColumns"
+    :checked-row-keys="checkedRowKeys"
+    :data="data"
+    :scroll-x="scrollX"
+    :pagination="pagination"
+    :single-line="false"
+    :loading="loading"
+    :max-height="maxHeight"
+    :flex-height="true"
+    remote
+    striped
+    :row-key="rowKey"
+    :on-update-checked-row-keys="handleUpdateCheckedRowKeys"
+    :on-update-page="handleUpdatePage"
+    :on-update-page-size="handleUpdatePageSize"
+  />
+</template>
 
 <style scoped></style>
