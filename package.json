@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "pnpm lint:fix && vite build",
+    "build": "vue-tsc && pnpm lint:fix && vite build",
     "preview": "vite preview",
     "prepare": "husky",
     "lint": "eslint",
@@ -59,7 +59,8 @@
   "lint-staged": {
     "*.{vue,js,ts,jsx,tsx}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --fix",
+      "vue-tsc"
     ],
     "*.{css,scss,less,styl,html,md}": [
       "prettier --write"
