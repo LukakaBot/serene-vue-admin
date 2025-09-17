@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import AMapLoader from '@amap/amap-jsapi-loader'
 
@@ -27,12 +27,6 @@ const props = withDefaults(defineProps<Props>(), {
   zoom: 13,
   showLogo: true,
 })
-
-// interface Emits {
-//   (event: 'complete', map: AMap.Map): void
-// }
-
-// const emits = defineEmits<Emits>();
 
 /** 地图实例 */
 const map = shallowRef<AMap.Map | null>(null)
@@ -82,16 +76,15 @@ onUnmounted(() => {
 })
 
 defineExpose({ map })
+</script>
 
-defineRender(() => (
+<template>
   <div
     id="container"
-    class={hiddenMapLogoClassName.value}
-    style={mapContainerStyle.value}
-  >
-  </div>
-))
-</script>
+    :class="hiddenMapLogoClassName"
+    :style="mapContainerStyle"
+  />
+</template>
 
 <style lang="scss" scoped>
 .amap-logo-hidden {

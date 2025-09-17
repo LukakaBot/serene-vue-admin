@@ -7,7 +7,7 @@ import WaveSvg from './WaveSvg.vue'
 <template>
   <div>
     <WaveSvg />
-    <div absolute left-50% top-50% rounded-3 -translate-50%>
+    <div class="left-50% top-50% -translate-50%" absolute rounded-3>
       <LoginForm />
     </div>
   </div>

@@ -1,8 +1,5 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import type { WatermarkProps } from 'naive-ui'
-import type { VNode } from 'vue'
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
-import { Transition } from 'vue'
 import { RouterView } from 'vue-router'
 import { useConfigStore, useRouteStore } from '@/store'
 
@@ -26,30 +23,21 @@ const watermarkProps = computed<WatermarkProps>(() => {
     rotate: -15,
   }
 })
-
-defineRender(() => (
-  <RouterView>
-    {{
-      default: ({
-        Component,
-        route,
-      }: {
-        Component: VNode
-        route: RouteLocationNormalizedLoaded
-      }) => (
-        <>
-          {routeStore.isRouteLoaded && (
-            <Transition name="slide-fade" mode="out-in" appear={true}>
-              {h(Component, { key: route.fullPath })}
-            </Transition>
-          )}
-          {showWatermark.value && <n-watermark {...watermarkProps.value} />}
-        </>
-      ),
-    }}
-  </RouterView>
-))
 </script>
+
+<template>
+  <RouterView v-slot="{ Component, route }">
+    <Transition
+      v-if="routeStore.isRouteLoaded"
+      name="slide-fade"
+      mode="out-in"
+      appear
+    >
+      <component :is="Component" :key="route.fullPath" />
+    </Transition>
+    <n-watermark v-if="showWatermark" v-bind="watermarkProps" />
+  </RouterView>
+</template>
 
 <style scoped>
 .slide-fade-enter-active {

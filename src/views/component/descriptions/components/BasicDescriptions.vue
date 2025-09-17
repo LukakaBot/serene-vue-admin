@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import type { BaseDescription } from '@/components/BaseDescriptions/types'
 import { NCard } from 'naive-ui'
 import BaseDescriptions from '@/components/BaseDescriptions/index.vue'
@@ -15,15 +15,15 @@ const data = {
   lunch: '香蕉',
   dinner: '橘子',
 }
-
-defineRender(() => (
-  <NCard>
-    {{
-      header: () => <TagTitle title="基础" />,
-      default: () => <BaseDescriptions list={list} data={data} />,
-    }}
-  </NCard>
-))
 </script>
+
+<template>
+  <NCard>
+    <template #header>
+      <TagTitle title="基础" />
+    </template>
+    <BaseDescriptions :list="list" :data="data" />
+  </NCard>
+</template>
 
 <style scoped></style>

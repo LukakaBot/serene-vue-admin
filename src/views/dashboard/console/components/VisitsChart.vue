@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useECharts } from '@/hooks'
 
 interface Props {
@@ -87,14 +87,12 @@ function init() {
 }
 
 onMounted(() => init())
-
-defineRender(() => {
-  return (
-    <div class="h-400px">
-      <div ref="chartRef" class="h-400px"></div>
-    </div>
-  )
-})
 </script>
+
+<template>
+  <div h="400px">
+    <div ref="chartRef" h="400px" />
+  </div>
+</template>
 
 <style scoped></style>

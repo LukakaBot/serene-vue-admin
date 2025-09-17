@@ -1,25 +1,22 @@
-<script setup lang="tsx">
-import type { BaseProviderSlots } from './types'
+<script setup lang="ts">
 import {
   NDialogProvider,
   NMessageProvider,
   NModalProvider,
   NNotificationProvider,
 } from 'naive-ui'
+</script>
 
-const slots = defineSlots<BaseProviderSlots>()
-
-defineRender(() => (
+<template>
   <NModalProvider>
     <NDialogProvider>
       <NMessageProvider>
         <NNotificationProvider>
-          {{ default: slots.default }}
+          <slot />
         </NNotificationProvider>
       </NMessageProvider>
     </NDialogProvider>
   </NModalProvider>
-))
-</script>
+</template>
 
 <style scoped></style>

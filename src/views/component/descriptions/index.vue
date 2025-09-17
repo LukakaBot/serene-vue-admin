@@ -1,13 +1,13 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import BasicDescriptions from './components/BasicDescriptions.vue'
 import ColumnDescriptions from './components/ColumnDescriptions.vue'
+</script>
 
-defineRender(() => (
+<template>
   <div class="base-container">
     <BasicDescriptions />
     <ColumnDescriptions />
   </div>
-))
-</script>
+</template>
 
 <style scoped></style>

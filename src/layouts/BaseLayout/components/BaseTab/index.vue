@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import type { DropdownOption } from 'naive-ui'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { NButton, NDropdown, NScrollbar, useThemeVars } from 'naive-ui'
@@ -137,83 +137,71 @@ watch(
     const currentRoute = routeStore.currentRoute
     routeStore.addCacheRoute(currentRoute)
     tabStore.addTab(currentRoute)
-
     activeTabPath.value = routeStore.currentRoute.fullPath
   },
   { immediate: true, deep: true },
 )
+</script>
 
-defineRender(() => (
+<template>
   <div class="tab-view">
-    <NScrollbar xScrollable={true}>
-      <VueDraggable
-        class="tab-scroll"
-        modelValue={tabStore.tabList}
-        {...{
-          'onUpdate:modelValue': (value: RouteLocationNormalizedLoaded[]) =>
-            (tabStore.tabList = value),
-        }}
-      >
-        {tabList.value.map(tab => (
-          <div
-            key={tab.fullPath}
-            onContextmenu={event => handleContextMenu(event, tab)}
+    <NScrollbar x-scrollable>
+      <VueDraggable v-model="tabStore.tabList" class="tab-scroll">
+        <div
+          v-for="tab in tabList"
+          :key="tab.fullPath"
+          @contextmenu="(event) => handleContextMenu(event, tab)"
+        >
+          <NButton
+            icon-placement="right"
+            :color="
+              checkActiveTab(tab) ? themeVars.primaryColor : themeVars.cardColor
+            "
+            :text-color="
+              checkActiveTab(tab) ? themeVars.cardColor : themeVars.textColor1
+            "
+            @click="() => handleSkipPage(tab)"
           >
-            <NButton
-              iconPlacement="right"
-              color={
-                checkActiveTab(tab)
-                  ? themeVars.value.primaryColor
-                  : themeVars.value.cardColor
-              }
-              textColor={
-                checkActiveTab(tab)
-                  ? themeVars.value.cardColor
-                  : themeVars.value.textColor1
-              }
-              onClick={() => handleSkipPage(tab)}
-            >
-              {{
-                default: () => tab.name,
-                icon: () =>
-                  h(BaseIcon, {
-                    name: 'mdi:close',
-                    size: 18,
-                    onClick: (event: Event) => closeTab(event, tab),
-                  }),
-              }}
-            </NButton>
-          </div>
-        ))}
+            <template #icon>
+              <BaseIcon
+                name="mdi:close"
+                :size="18"
+                @click="(e: Event) => closeTab(e, tab)"
+              />
+            </template>
+            {{ tab.name }}
+          </NButton>
+        </div>
       </VueDraggable>
     </NScrollbar>
     <NDropdown
       trigger="click"
       placement="bottom-end"
-      options={menuOptions.value}
-      onSelect={handleSelectMenu}
+      :options="menuOptions"
+      @select="handleSelectMenu"
     >
       <NButton
         quaternary
-        renderIcon={() =>
-          renderIcon({
-            name: 'fluent-emoji-high-contrast:partying-face',
-            size: 20,
-          })}
+        :render-icon="
+          () =>
+            renderIcon({
+              name: 'fluent-emoji-high-contrast:partying-face',
+              size: 20,
+            })
+        "
       />
     </NDropdown>
     <NDropdown
-      show={showSideMenu.value}
-      x={sideMenuPosition.x}
-      y={sideMenuPosition.y}
+      :show="showSideMenu"
+      :x="sideMenuPosition.x"
+      :y="sideMenuPosition.y"
       placement="bottom-start"
-      options={menuOptions.value}
-      onSelect={handleSelectMenu}
-      onClickoutside={handleCloseSideMenu}
+      :options="menuOptions"
+      @select="handleSelectMenu"
+      @clickoutside="handleCloseSideMenu"
     />
   </div>
-))
-</script>
+</template>
 
 <style lang="scss" scoped>
 .tab-view {
