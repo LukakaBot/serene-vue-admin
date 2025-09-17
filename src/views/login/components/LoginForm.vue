@@ -1,10 +1,10 @@
 <script setup lang="tsx">
 import type { FormInst, FormItemRule, FormRules } from 'naive-ui'
+import type AuthCaptcha from './AuthCaptcha.vue'
 import type { UserTokenAccountParams } from '@/api/users/types'
 import { useLoading } from '@/hooks'
 import router from '@/router'
 import { useUserStore } from '@/store/index'
-import AuthCaptcha from './AuthCaptcha.vue'
 
 type AccountFormData = UserTokenAccountParams & {
   /** 验证码 */
@@ -76,28 +76,31 @@ function init() {
 }
 
 onMounted(() => init())
+</script>
 
-defineRender(() => (
+<template>
   <n-card>
-    <div class="mb-20px text-center text-26px font-bold">账号密码登录</div>
+    <div mb5 text-center text-size-2xl font-bold>
+      账号密码登录
+    </div>
     <n-form
-      ref={formRef}
-      model={accountFormData.value}
-      rules={rules}
-      label-width={70}
+      ref="formRef"
+      :model="accountFormData"
+      :rules="rules"
+      :label-width="70"
       label-placement="left"
       require-mark-placement="left"
       size="large"
     >
       <n-form-item label="用户名" path="username">
         <n-input
-          v-model:value={accountFormData.value.username}
+          v-model:value="accountFormData.username"
           placeholder="请输入用户名"
         />
       </n-form-item>
       <n-form-item label="密码" path="password">
         <n-input
-          v-model:value={accountFormData.value.password}
+          v-model:value="accountFormData.password"
           placeholder="请输入密码"
           type="password"
         />
@@ -105,20 +108,19 @@ defineRender(() => (
       <n-form-item label="验证码" path="code">
         <n-space>
           <n-input
-            v-model:value={accountFormData.value.code}
+            v-model:value="accountFormData.code"
             placeholder="请输入验证码"
           />
-          <AuthCaptcha ref={authCaptchaRef} width={100} height={40} />
+          <AuthCaptcha ref="authCaptchaRef" :width="100" :height="40" />
         </n-space>
       </n-form-item>
     </n-form>
-    <div class="mt-10px text-center">
-      <n-button strong secondary loading={loading.value} onClick={handleSubmit}>
+    <div mt3 text-center>
+      <n-button strong secondary :loading="loading" @click="handleSubmit">
         登录
       </n-button>
     </div>
   </n-card>
-))
-</script>
+</template>
 
 <style scoped></style>
