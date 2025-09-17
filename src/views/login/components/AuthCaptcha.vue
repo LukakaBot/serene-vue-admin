@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 interface Props {
   /** 验证码宽度 */
   width?: number
@@ -24,8 +24,7 @@ function generateRandomNumber(min: number, max: number) {
 }
 
 function generateRandomText() {
-  const chars
-    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let text = ''
   for (let i = 0; i < 4; i++) {
     text += chars.charAt(Math.floor(Math.random() * chars.length))
@@ -120,16 +119,16 @@ function checkCaptcha(value: string) {
 onMounted(() => init())
 
 defineExpose({ checkCaptcha })
+</script>
 
-defineRender(() => (
+<template>
   <canvas
     id="canvas"
-    class="rounded"
-    width={props.width}
-    height={props.height}
-    onClick={drawCaptcha}
+    rounded
+    :width="width"
+    :height="height"
+    @click="drawCaptcha"
   />
-))
-</script>
+</template>
 
 <style scoped></style>
