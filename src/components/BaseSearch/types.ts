@@ -16,7 +16,7 @@ export interface SearchItem {
   /** 搜索内容 */
   value: any
   /** 配置选项内容 */
-  options?: Array<SelectOption | SelectGroupOption>
+  options?: (SelectOption | SelectGroupOption)[]
   /** 选项 label 的字段名 */
   labelField?: string
   /** 选项 value 的字段名 */
