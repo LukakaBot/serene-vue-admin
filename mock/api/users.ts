@@ -15,7 +15,7 @@ const menus = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: '/layouts/BaseLayout/BaseLayout.vue',
+    component: '/layouts/AppLayout/index.vue',
     redirect: '/dashboard/console',
     meta: { icon: 'ant-design:dashboard-outlined' },
     children: [
@@ -30,7 +30,7 @@ const menus = [
   {
     path: '/component',
     name: '组件',
-    component: '/layouts/BaseLayout/BaseLayout.vue',
+    component: '/layouts/AppLayout/index.vue',
     redirect: '/component/button',
     meta: { icon: 'mdi:widgets-outline' },
     children: [
@@ -75,7 +75,7 @@ const menus = [
   {
     path: '/map',
     name: '地图',
-    component: '/layouts/BaseLayout/BaseLayout.vue',
+    component: '/layouts/AppLayout/index.vue',
     redirect: '/map/amap',
     meta: { icon: 'mdi:compass' },
     children: [
@@ -96,7 +96,7 @@ const menus = [
   {
     path: '/system',
     name: '系统管理',
-    component: '/layouts/BaseLayout/BaseLayout.vue',
+    component: '/layouts/AppLayout/index.vue',
     redirect: '/system/users',
     meta: { icon: 'ant-design:setting-outlined' },
     children: [

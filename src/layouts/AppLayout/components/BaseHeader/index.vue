@@ -56,8 +56,16 @@ function renderConfigIcon() {
         <n-flex>
           <!-- <div class="flex items-center"> -->
           <template v-for="(operation, index) in operations" :key="index">
-            <n-dropdown v-if="operation.type === 'dropdown'" trigger="click" :options="operation.options">
-              <n-button text :render-icon="operation.icon" @click="operation?.props?.onClick">
+            <n-dropdown
+              v-if="operation.type === 'dropdown'"
+              trigger="click"
+              :options="operation.options"
+            >
+              <n-button
+                text
+                :render-icon="operation.icon"
+                @click="operation?.props?.onClick"
+              >
                 <component :is="operation.render" v-if="operation.render" />
                 <div v-else>
                   {{ operation.label }}

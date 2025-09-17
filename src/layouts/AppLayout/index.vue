@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useConfigStore } from '@/store'
 import BaseContent from './components/BaseContent/index.vue'
 import BaseHeader from './components/BaseHeader/index.vue'
@@ -11,13 +11,13 @@ const isDarkMode = computed(() => configStore.isDarkMode)
 </script>
 
 <template>
-  <n-layout class="layout-demo h-100vh" has-sider>
+  <n-layout has-sider h-screen>
     <BaseSider />
     <n-layout>
-      <main class="h-full flex flex-col overflow-hidden">
+      <main h-full flex flex-col overflow-hidden>
         <BaseHeader />
         <n-layout-content :class="{ 'bg-#eceef0': !isDarkMode }">
-          <n-el class="h-full flex flex-col overflow-hidden">
+          <n-el h-full flex flex-col overflow-hidden>
             <BaseTab />
             <BaseContent />
           </n-el>
@@ -27,4 +27,4 @@ const isDarkMode = computed(() => configStore.isDarkMode)
   </n-layout>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
