@@ -1,5 +1,4 @@
-<script setup lang="tsx">
-defineRender(() => (
+<template>
   <div class="svg">
     <svg
       class="waves"
@@ -15,53 +14,52 @@ defineRender(() => (
       </defs>
       <g class="parallax">
         <use
-          xlinkHref="#gentle-wave"
+          xlink:href="#gentle-wave"
           x="48"
           y="0"
           fill="rgba(255,255,255,0.8"
         />
         <use
-          xlinkHref="#gentle-wave"
+          xlink:href="#gentle-wave"
           x="48"
           y="1"
           fill="rgba(255,255,255,0.7"
         />
         <use
-          xlinkHref="#gentle-wave"
+          xlink:href="#gentle-wave"
           x="48"
           y="2"
           fill="rgba(255,255,255,0.6)"
         />
         <use
-          xlinkHref="#gentle-wave"
+          xlink:href="#gentle-wave"
           x="48"
           y="3"
           fill="rgba(255,255,255,0.5)"
         />
         <use
-          xlinkHref="#gentle-wave"
+          xlink:href="#gentle-wave"
           x="48"
           y="4"
           fill="rgba(255,255,255,0.4)"
         />
         <use
-          xlinkHref="#gentle-wave"
+          xlink:href="#gentle-wave"
           x="48"
           y="5"
           fill="rgba(255,255,255,0.3)"
         />
         <use
-          xlinkHref="#gentle-wave"
+          xlink:href="#gentle-wave"
           x="48"
           y="6"
           fill="rgba(255,255,255,0.2)"
         />
-        <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
+        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
       </g>
     </svg>
   </div>
-))
-</script>
+</template>
 
 <style scoped>
 .svg {
