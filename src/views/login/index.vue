@@ -1,13 +1,13 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import LoginBox from './components/LoginBox.vue'
 import ToolBox from './components/ToolBox.vue'
+</script>
 
-defineRender(() => (
-  <div class="relative h-100vh">
+<template>
+  <div relative h-screen>
     <ToolBox />
     <LoginBox />
   </div>
-))
-</script>
+</template>
 
 <style scoped></style>

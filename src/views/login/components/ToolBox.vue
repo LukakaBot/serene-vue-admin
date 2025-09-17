@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useThemeVars } from 'naive-ui'
 import { useConfigStore } from '@/store'
 import { renderIcon } from '@/utils/tools'
@@ -12,18 +12,18 @@ const isDarkMode = computed(() => configStore.isDarkMode)
 function renderDarkThemeIcon() {
   return renderIcon({ name: `${isDarkMode.value ? 'mage:sun' : 'mage:moon'}` })
 }
+</script>
 
-defineRender(() => (
-  <n-flex class="absolute right-10px top-10px">
+<template>
+  <n-flex absolute right-3 top-3>
     <n-button
       strong
-      color={themeVars.value.baseColor}
-      text-color={themeVars.value.textColor1}
-      render-icon={renderDarkThemeIcon}
-      onClick={configStore.toggleDarkMode}
+      :color="themeVars.baseColor"
+      :text-color="themeVars.textColor1"
+      :render-icon="renderDarkThemeIcon"
+      @click="configStore.toggleDarkMode"
     />
   </n-flex>
-))
-</script>
+</template>
 
 <style scoped></style>

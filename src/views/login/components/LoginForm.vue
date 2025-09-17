@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import type { FormInst, FormItemRule, FormRules } from 'naive-ui'
 import type AuthCaptcha from './AuthCaptcha.vue'
 import type { UserTokenAccountParams } from '@/api/users/types'
