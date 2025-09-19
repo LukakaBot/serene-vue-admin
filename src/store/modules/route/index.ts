@@ -80,7 +80,7 @@ export const useRouteStore = defineStore('route', {
         await nextTick()
         setTimeout(() => {
           this.isRouteLoaded = true
-        }, 400) // 这 400ms 是为了等待 router-view 动画播放完毕，不然会看到页面闪动
+        }, 400) // 等待 router-view 动画播放完毕，否则会看到页面闪动
       }
     },
   },

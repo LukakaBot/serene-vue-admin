@@ -27,13 +27,12 @@ const watermarkProps = computed<WatermarkProps>(() => {
 
 <template>
   <RouterView v-slot="{ Component, route }">
-    <Transition
-      v-if="routeStore.isRouteLoaded"
-      name="slide-fade"
-      mode="out-in"
-      appear
-    >
-      <component :is="Component" :key="route.fullPath" />
+    <Transition name="slide-fade" mode="out-in" appear>
+      <component
+        :is="Component"
+        v-if="routeStore.isRouteLoaded"
+        :key="route.fullPath"
+      />
     </Transition>
     <n-watermark v-if="showWatermark" v-bind="watermarkProps" />
   </RouterView>
@@ -41,11 +40,10 @@ const watermarkProps = computed<WatermarkProps>(() => {
 
 <style scoped>
 .slide-fade-enter-active {
-  transition: all 0.4s ease-out;
+  transition: all 0.6s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .slide-fade-leave-active {
-  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,
