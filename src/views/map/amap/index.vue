@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import AMapComponent from './components/AMapComponent.vue'
-import AMapHook from './components/AMapHook.vue'
+import CompMap from './components/CompMap.vue'
+import HookMap from './components/HookMap.vue'
 </script>
 
 <template>
   <div class="base-container">
-    <AMapComponent />
-    <AMapHook />
+    <CompMap />
+    <HookMap />
   </div>
 </template>
 
