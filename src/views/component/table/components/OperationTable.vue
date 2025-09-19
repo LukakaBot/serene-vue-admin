@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { InternalRowData } from 'naive-ui/es/data-table/src/interface'
-import type { BaseTableColumn, Operations } from '@/components/BaseTable/types'
+import type {
+  AppTableColumn,
+  Operations,
+} from '@/components/base/AppTable/types'
 import { NAvatar, NTag } from 'naive-ui'
 import { fetchTableDataPage } from '@/api/table/index.ts'
 import { useLoading } from '@/hooks'
@@ -16,7 +19,7 @@ const searchParams = ref({
 /* eslint-disable-next-line  ts/no-explicit-any */
 const tableData = ref<any>([])
 
-const columns: BaseTableColumn[] = [
+const columns: AppTableColumn[] = [
   {
     title: 'id',
     align: 'center',
@@ -159,7 +162,7 @@ onMounted(() => init())
 </script>
 
 <template>
-  <BaseTable
+  <AppTable
     :search-params="searchParams"
     :columns="columns"
     :data="tableData"

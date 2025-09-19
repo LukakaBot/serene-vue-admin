@@ -130,7 +130,7 @@ defineExpose({ openModal, closeModal })
 </script>
 
 <template>
-  <BaseModal
+  <AppModal
     :show="show"
     :title="modalTitle"
     draggable
@@ -177,7 +177,7 @@ defineExpose({ openModal, closeModal })
         />
       </n-form-item>
     </n-form>
-  </BaseModal>
+  </AppModal>
 </template>
 
 <style scoped></style>

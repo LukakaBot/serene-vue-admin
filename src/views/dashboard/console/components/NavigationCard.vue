@@ -118,7 +118,7 @@ onMounted(() => init())
             <div v-else class="cursor-pointer">
               <p class="flex justify-center">
                 <span>
-                  <BaseIcon
+                  <AppIcon
                     :name="item.icon"
                     :color="item.color"
                     :size="item.size"

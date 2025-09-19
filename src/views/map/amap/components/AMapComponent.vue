@@ -6,7 +6,7 @@
       <TagTitle title="组件" />
     </template>
     <div class="h-400px">
-      <BaseAMap />
+      <AMap />
     </div>
   </n-card>
 </template>

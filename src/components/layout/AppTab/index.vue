@@ -4,7 +4,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { NButton, NDropdown, NScrollbar, useThemeVars } from 'naive-ui'
 import { VueDraggable } from 'vue-draggable-plus'
 import { useRoute, useRouter } from 'vue-router'
-import BaseIcon from '@/components/BaseIcon/index.vue'
+import AppIcon from '@/components/base/AppIcon/index.vue'
 import { useRouteStore, useTabStore } from '@/store'
 import { renderIcon } from '@/utils/tools/index'
 
@@ -163,7 +163,7 @@ watch(
             @click="() => handleSkipPage(tab)"
           >
             <template #icon>
-              <BaseIcon
+              <AppIcon
                 name="mdi:close"
                 :size="18"
                 @click="(e: Event) => closeTab(e, tab)"

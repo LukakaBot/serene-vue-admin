@@ -2,7 +2,7 @@
 import type { MenuOption } from 'naive-ui'
 import type { RouteRecordRaw } from 'vue-router'
 import { RouterLink } from 'vue-router'
-import BaseIcon from '@/components/BaseIcon/index.vue'
+import AppIcon from '@/components/base/AppIcon/index.vue'
 import { useRouteStore } from '@/store'
 
 /** 路由信息商店 */
@@ -41,7 +41,7 @@ function renderMenu(route: RouteRecordRaw): MenuOption {
 
   const link = () => h(RouterLink, { to: path }, () => `${name}`)
   const icon = meta?.icon
-    ? () => h(BaseIcon, { name: meta.icon!, size: 22 })
+    ? () => h(AppIcon, { name: meta.icon!, size: 22 })
     : undefined
 
   return {
@@ -76,7 +76,7 @@ const menus = computed(() => filterRoutes.value.map(renderMenu))
       class="m-8px h-32px flex items-center justify-center gap-x-5px overflow-hidden bg-#ccc"
     >
       <span v-if="isRenderTitle" class="whitespace-nowrap break-all">Serene Admin</span>
-      <BaseIcon v-else name="logos:vue" :size="22" />
+      <AppIcon v-else name="logos:vue" :size="22" />
     </div>
     <n-menu
       :value="currentRoute"

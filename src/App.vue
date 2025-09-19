@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { darkTheme, dateZhCN, NConfigProvider, zhCN } from 'naive-ui'
 import { RouterView } from 'vue-router'
-import BaseProvider from '@/components/BaseProvider/index.vue'
+import AppProvider from '@/components/base/AppProvider/index.vue'
 import { useConfigStore, useThemeStore } from './store'
 
 const configStore = useConfigStore()
@@ -18,9 +18,9 @@ const theme = computed(() => (configStore.isDarkMode ? darkTheme : undefined))
     :locale="zhCN"
     :date-locale="dateZhCN"
   >
-    <BaseProvider>
+    <AppProvider>
       <RouterView />
-    </BaseProvider>
+    </AppProvider>
   </NConfigProvider>
 </template>
 

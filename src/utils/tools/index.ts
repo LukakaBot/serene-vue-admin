@@ -1,8 +1,8 @@
 import type { ButtonProps } from 'naive-ui'
 import type { Slot } from 'vue'
-import type { BaseIconProps } from '@/components/BaseIcon/types'
+import type { AppIconProps } from '@/components/base/AppIcon/types'
 import { NButton } from 'naive-ui'
-import BaseIcon from '@/components/BaseIcon/index.vue'
+import AppIcon from '@/components/base/AppIcon/index.vue'
 
 interface FormatNumberWithThousandOpts extends Intl.NumberFormatOptions {
   locale: Intl.LocalesArgument
@@ -35,8 +35,8 @@ export function lighten(color: string, amount: number) {
   )}${addLight(color.substring(4, 6), amount)}`
 }
 
-export function renderIcon(props: BaseIconProps) {
-  return h(BaseIcon, props)
+export function renderIcon(props: AppIconProps) {
+  return h(AppIcon, props)
 }
 
 export function renderButton(

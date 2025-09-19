@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DataTableRowKey } from 'naive-ui'
 import type { InternalRowData } from 'naive-ui/es/data-table/src/interface'
-import type { BaseTableColumn } from '@/components/BaseTable/types'
+import type { AppTableColumn } from '@/components/base/AppTable/types'
 import { NAvatar, NTag } from 'naive-ui'
 import { fetchTableDataPage } from '@/api/table/index.ts'
 import { useLoading } from '@/hooks'
@@ -19,7 +19,7 @@ const checkedRowKeys = ref<DataTableRowKey[]>([])
 /* eslint-disable-next-line  ts/no-explicit-any */
 const tableData = ref<any>([])
 
-const columns: BaseTableColumn[] = [
+const columns: AppTableColumn[] = [
   { type: 'selection', key: 'selection', width: 60, fixed: 'left' },
   {
     title: 'id',
@@ -147,7 +147,7 @@ onMounted(() => init())
 </script>
 
 <template>
-  <BaseTable
+  <AppTable
     :search-params="searchParams"
     :columns="columns"
     :data="tableData"

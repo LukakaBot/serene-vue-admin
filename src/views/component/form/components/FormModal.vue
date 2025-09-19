@@ -67,7 +67,7 @@ defineExpose({ openModal, closeModal })
 </script>
 
 <template>
-  <BaseModal
+  <AppModal
     :show="show"
     title="新增表单"
     :body-style="bodyStyle"
@@ -97,7 +97,7 @@ defineExpose({ openModal, closeModal })
         <n-input v-model:value="formData.phone" placeholder="请输入电话号码" />
       </n-form-item>
     </n-form>
-  </BaseModal>
+  </AppModal>
 </template>
 
 <style scoped></style>

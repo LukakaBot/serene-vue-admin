@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import type { BaseDescription } from '@/components/BaseDescriptions/types'
+import type { AppDescription } from '@/components/base/AppDescriptions/types'
 import { NCard } from 'naive-ui'
-import BaseDescriptions from '@/components/BaseDescriptions/index.vue'
-import TagTitle from '@/components/TagTitle/index.vue'
 
-const list: BaseDescription[] = [
+const list: AppDescription[] = [
   { text: '早餐', field: 'breakfast' },
   { text: '午餐', field: 'lunch' },
   { text: '晚餐', field: 'dinner' },
@@ -22,7 +20,7 @@ const data = {
     <template #header>
       <TagTitle title="基础" />
     </template>
-    <BaseDescriptions :list="list" :data="data" />
+    <AppDescription :list="list" :data="data" />
   </NCard>
 </template>
 

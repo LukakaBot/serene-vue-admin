@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import type { DataTableRowKey, TagProps } from 'naive-ui'
 import type { UserPageContent } from '@/api/users/types'
-import type { BaseButton } from '@/components/BaseButtonGroup/types'
-import type { SearchItem, SearchParams } from '@/components/BaseSearch/types'
-import type { BaseTableColumn, Operations } from '@/components/BaseTable/types'
+import type { AppButtonProps } from '@/components/base/AppButtonGroup/types'
+import type {
+  SearchItem,
+  SearchParams,
+} from '@/components/base/AppSearch/types'
+import type {
+  AppTableColumn,
+  Operations,
+} from '@/components/base/AppTable/types'
 import { NAvatar, NTag } from 'naive-ui'
 import { fetchUserPage } from '@/api/users/index'
 import { useLoading } from '@/hooks'
@@ -34,7 +40,7 @@ function handleSearch(params: SearchParams) {
   getTableData()
 }
 
-const btnList: BaseButton[] = [
+const btnList: AppButtonProps[] = [
   { type: 'primary', text: '新增', icon: 'ep:plus', auth: true },
   { type: 'error', text: '批量删除', icon: 'ep:delete', auth: true },
 ]
@@ -70,7 +76,7 @@ const selectRow = ref<UserPageContent | null>(null)
 
 const tableData = ref<UserPageContent[]>([])
 
-const columns: BaseTableColumn<UserPageContent>[] = [
+const columns: AppTableColumn<UserPageContent>[] = [
   { type: 'selection', key: 'selection', fixed: 'left' },
   {
     title: '序号',
@@ -221,12 +227,9 @@ onMounted(() => init())
 
 <template>
   <div class="base-container">
-    <BaseSearch
-      :list="searchList"
-      @update:search="handleSearch"
-    />
-    <BaseButtonGroup :list="btnList" @click="handleClickButtonGroup" />
-    <BaseTable
+    <AppSearch :list="searchList" @update:search="handleSearch" />
+    <AppButtonGroup :list="btnList" @click="handleClickButtonGroup" />
+    <AppTable
       :search-params="searchParams"
       :columns="columns"
       :data="tableData"
